@@ -1,0 +1,20 @@
+{
+  "name": "cumcm-team",
+  "interface": {
+    "displayName": "数模团队插件"
+  },
+  "plugins": [
+    {
+      "name": "cumcm-rigorous-workflow",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cumcm-rigorous-workflow"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education"
+    }
+  ]
+}
