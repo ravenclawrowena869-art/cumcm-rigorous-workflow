@@ -1,0 +1,8 @@
+interface:
+  display_name: 严谨数模工作流
+  short_description: CUMCM 拆题、建模、验证、交付与赛时协作工作流
+  default_prompt: 使用 $cumcm-rigorous-workflow 审查这道数模题，给出可验证的模型链、任务分工和交付门槛。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  allow_implicit_invocation: true

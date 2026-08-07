@@ -1,0 +1,22 @@
+{
+  "name": "cumcm-rigorous-workflow",
+  "version": "0.1.0",
+  "description": "Evidence-driven workflow for CUMCM and similar mathematical-modeling competitions.",
+  "author": {
+    "name": "陈宇晴"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "严谨数模工作流",
+    "shortDescription": "CUMCM 拆题、建模、验证、协作与交付工作流",
+    "longDescription": "以题目契约、数据审计、简单基线、模型比较、约束复核和证据链一致性为核心，支持数模竞赛的团队分工、代码验收、论文审查与最终提交检查。",
+    "developerName": "陈宇晴",
+    "category": "Education",
+    "capabilities": ["Analysis", "Planning", "Review"],
+    "defaultPrompt": [
+      "审查这道数模题，给出可验证的模型链和交付门槛。",
+      "验收队友的建模成果，找出高风险假设和约束漏洞。",
+      "按比赛剩余时间安排三人分工和阶段冻结节点。"
+    ]
+  }
+}
