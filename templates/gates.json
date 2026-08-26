@@ -1,0 +1,44 @@
+{
+  "version": "2.0",
+  "gates": {
+    "G0_problem_contract": [
+      "official_requirements_extracted",
+      "data_dictionary_complete",
+      "question_dependency_graph_confirmed",
+      "first_route_review_complete",
+      "dynamic_owners_assigned",
+      "interface_draft_created",
+      "paper_outline_created"
+    ],
+    "G1_runnable_mainline": [
+      "each_question_has_baseline",
+      "each_question_has_runnable_mainline",
+      "mock_or_real_interface_available",
+      "paper_pipeline_started",
+      "figure_registry_initialized"
+    ],
+    "G2_validation": [
+      "technical_pass",
+      "mathematical_pass",
+      "hard_constraints_zero_violation",
+      "metrics_recomputed",
+      "interfaces_stable"
+    ],
+    "G3_freeze": [
+      "clean_replay_pass",
+      "manifest_created",
+      "source_of_truth_declared",
+      "paper_handoff_created",
+      "paper_metrics_created",
+      "figure_data_source_locked"
+    ],
+    "G4_submission": [
+      "paper_pass",
+      "paper_numbers_checked",
+      "figures_checked",
+      "page_limit_checked",
+      "ai_disclosure_checked",
+      "final_files_reopened_after_upload"
+    ]
+  }
+}

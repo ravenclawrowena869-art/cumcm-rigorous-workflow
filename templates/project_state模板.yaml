@@ -1,0 +1,75 @@
+competition:
+  name: ""
+  start_time: ""
+  deadline: ""
+
+roles:
+  paper_lead:
+    primary: "CYQ"
+    deputy: "FYQ"
+  technical_lead:
+    primary: "FYQ"
+    deputy: "XXT"
+  mathematical_lead:
+    primary: "XXT"
+    deputy: "FYQ"
+
+global:
+  current_phase: "P0"
+  route_review_completed: false
+  interface_lock_target_hour: 10
+  model_change_ban: false
+  paper_pipeline_started: false
+  paper_locked: false
+
+agents:
+  primary_coding_agent: ""
+  secondary_coding_agent: ""
+  failover_tested: false
+
+modules:
+  q1:
+    owner: ""
+    technical_reviewer: ""
+    mathematical_reviewer: ""
+    state: "IDEA"
+    version: ""
+    source_of_truth: ""
+    interface_version: ""
+    blocked_by: []
+  q2:
+    owner: ""
+    technical_reviewer: ""
+    mathematical_reviewer: ""
+    state: "IDEA"
+    version: ""
+    source_of_truth: ""
+    interface_version: ""
+    blocked_by: []
+  q3:
+    owner: ""
+    technical_reviewer: ""
+    mathematical_reviewer: ""
+    state: "IDEA"
+    version: ""
+    source_of_truth: ""
+    interface_version: ""
+    blocked_by: []
+  q4:
+    owner: ""
+    technical_reviewer: ""
+    mathematical_reviewer: ""
+    state: "IDEA"
+    version: ""
+    source_of_truth: ""
+    interface_version: ""
+    blocked_by: []
+
+paper:
+  current_version: ""
+  page_count: null
+  figure_registry_status: "IDEA"
+  abstract_status: "SKELETON"
+
+submission:
+  gate_passed: false
