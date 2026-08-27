@@ -1,0 +1,13 @@
+# Python bytecode and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+
+# Ephemeral competition run outputs (keep the directory itself)
+competition/runs/*
+!competition/runs/.gitkeep

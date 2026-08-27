@@ -1,0 +1,41 @@
+competition:
+  name: ""
+  start_time: ""
+  deadline: ""
+
+roles:
+  paper_lead:
+    primary: "CYQ"
+    deputy: "FYQ"
+  technical_lead:
+    primary: "FYQ"
+    deputy: "XXT"
+  mathematical_lead:
+    primary: "XXT"
+    deputy: "FYQ"
+
+global:
+  current_phase: "P0_problem_reading_and_route_review"
+  route_review_completed: false
+  interface_lock_target_hour: 10
+  model_change_ban: false
+  paper_pipeline_started: false
+  paper_locked: false
+
+agents:
+  primary_coding_agent: ""
+  secondary_coding_agent: ""
+  failover_tested: false
+
+# Add one mapping per actual subquestion or module. Owner and reviewers remain
+# blank until the first route review assigns them.
+modules: []
+
+paper:
+  current_version: ""
+  page_count: null
+  figure_registry_status: "IDEA"
+  abstract_status: "SKELETON"
+
+submission:
+  gate_passed: false
