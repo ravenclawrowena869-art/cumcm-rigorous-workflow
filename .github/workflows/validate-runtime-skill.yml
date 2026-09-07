@@ -1,0 +1,43 @@
+name: validate-runtime-skill
+
+on:
+  push:
+    branches:
+      - main
+      - feat/v2.1-orchestrator-paper-gates
+  pull_request:
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Unit contract tests
+        run: python -m unittest tests.test_runtime_skill_contract -v
+
+      - name: Validate canonical runtime contract
+        run: python tools/validate_runtime_skill.py
+
+      - name: Build Runtime Lite
+        run: python tools/build_runtime_skill.py
+
+      - name: Validate built Runtime Lite
+        run: python tools/validate_runtime_skill.py dist/cumcm-rigorous-workflow-runtime-lite
+
+      - name: Scan Runtime Lite for forbidden corpus binaries
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          root = Path('dist/cumcm-rigorous-workflow-runtime-lite')
+          forbidden = {'.pdf', '.png', '.jpg', '.jpeg'}
+          bad = [str(p) for p in root.rglob('*') if p.is_file() and p.suffix.lower() in forbidden]
+          print(bad)
+          raise SystemExit(bool(bad))
+          PY
