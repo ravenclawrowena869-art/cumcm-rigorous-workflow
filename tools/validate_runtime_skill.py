@@ -43,6 +43,12 @@ def validate(root: Path) -> list[str]:
     skill_dir = root / "skills" / "cumcm-rigorous-workflow"
     profile_dir = skill_dir / "profiles"
 
+    # Repository-maintenance checks and Runtime Lite checks overlap, but a built
+    # Runtime Lite deliberately does not include repo-only files such as
+    # .gitignore or tools/. Detect canonical-repo mode by the validator source
+    # itself rather than requiring those maintenance files inside the runtime.
+    canonical_repo_mode = (root / "tools" / "validate_runtime_skill.py").exists()
+
     expected_profiles = {f"{role}.md" for role in ROLE_IDS}
     actual_profiles = {p.name for p in profile_dir.glob("*.md")} if profile_dir.exists() else set()
     if actual_profiles != expected_profiles:
@@ -74,8 +80,9 @@ def validate(root: Path) -> list[str]:
     if bad:
         errors.append(f"runtime skill contains forbidden binary corpus: {bad}")
 
-    gitignore = _read(root / ".gitignore")
-    _require_tokens(errors, ".gitignore", gitignore, (".cumcm-agent.local.yaml", "dist/"))
+    if canonical_repo_mode:
+        gitignore = _read(root / ".gitignore")
+        _require_tokens(errors, ".gitignore", gitignore, (".cumcm-agent.local.yaml", "dist/"))
 
     state = _read(root / "templates" / "project_state模板.yaml")
     _require_tokens(
