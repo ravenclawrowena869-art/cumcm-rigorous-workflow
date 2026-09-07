@@ -27,9 +27,30 @@
 - Figure Registry；
 - Git commit / PR。
 
+## CORE-MATH-AUTH-001 Mathematical Veto
+
+FYQ 负责统一技术路线、版本和集成，XXT 负责 Mathematical Gate。以下任一问题一旦被证实，XXT 有正式否决权，`mathematical_pass=false`，模块不得进入 Freeze：
+
+- objective definition / objective direction 错误；
+- hard constraint 缺失、写错或实现未保持；
+- 单位、量纲、时间尺度或统计口径不一致；
+- 正式候选解不可行或存在未解释的 hard violation；
+- 正式指标、成本、收益、碳排、概率等 accounting / metric 口径错误；
+- surrogate / proxy 与正式目标或正式决策严重失真，足以改变可行性、方案排序或论文核心 Claim。
+
+XXT 的 veto 是数学裁决，不等于 XXT 接管 Git、版本或长期维护第二套主模型。修复仍由 FYQ 统一集成；若问题影响已冻结结果，XXT 可以要求 `P0 REOPEN`。
+
 ## CORE-FREEZE-001 Freeze 边界
 
-`FROZEN` 模型或结果只有出现 P0 问题时才允许重开，例如题意、硬约束、正式指标、数字、复现或官方合规错误。重开必须建立新版本并重跑依赖 Gate。
+`FROZEN` 模型或结果只有出现 P0 问题时才允许重开，例如题意、hard constraints、正式指标/accounting、单位量纲、数学可行性、复现、material surrogate fidelity 或官方合规错误。重开必须建立新版本并重跑依赖 Gate。
+
+“最小修改”“不推翻主线”等专项 authority 不能阻止已证实的数学 P0 重开；它们只限制非 P0 的范围扩张。
+
+## CORE-FREEZE-002 Validation 是 Freeze 的硬前置
+
+`G3_FREEZE` 只能在当前版本 `G2_VALIDATION=PASS` 后进入。最新 Mathematical Review 必须是当前 Source of Truth / 当前 commit 对应的有效 PASS，且不存在未清除的 Mathematical Veto / `P0 REOPEN`。
+
+FYQ 可以管理 Freeze，但不得通过手工修改 state、manifest、Handoff 或换命名空间绕过 Mathematical PASS、独立复算、hard-constraint replay 或 Evidence Gate。任何影响目标、约束、单位、指标口径、surrogate fidelity 的代码/配置改动都会使旧 Mathematical PASS 失效，必须重新 Review。
 
 ## CORE-EVIDENCE-001 Evidence before claims
 
@@ -39,17 +60,34 @@
 
 跨问依赖先冻结字段、单位、粒度、版本与失败行为；允许 Mock 解耦开发。下游不得偷偷使用真实应用时不可获得的未来值或未冻结结果。
 
+## CORE-DYNAMIC-001 动态约束必须全过程 replay
+
+对 SOC、库存、状态变量、轨迹、累计预算/排放、ODE/PDE 状态、安全距离、滚动容量等 path-dependent / stateful hard constraints，validator 必须检查完整时间、空间或迭代轨迹，而不是只看终端状态。
+
+至少记录：
+
+- `max_violation`；
+- 发生位置 `argmax_location`（时段/区域/实体/迭代）；
+- terminal violation（适用时）；
+- 状态递推/守恒残差（适用时）。
+
+若模型没有动态约束，可显式标记 `NOT_APPLICABLE`；不能用“最终状态合法”替代全过程 Mathematical PASS。
+
 ## CORE-ROBUST-001 稳定性、敏感性、鲁棒性分开验证
 
 按模型结构选择实验，不机械统一做 ±10%。关键结论应尽量给出稳定范围、敏感方向和失效边界。若预测、排序、聚类或简化模型作为下游决策 proxy，必须做 full replay 检查其真实决策收益。
 
+若 full replay 显示 surrogate / proxy 的失真足以改变正式可行性、正式方案排序或核心 Claim，则视为 Mathematical P0；若不影响正式结论，才允许降级为初始化、筛选或加速工具并带 limitation 使用。
+
 ## CORE-OPT-001 优化质量等级
 
-- `FEASIBLE`：全部硬约束通过；
-- `COMPETITIVE`：同口径下稳定优于合理 baseline；
-- `NEAR-OPTIMAL`：另外有 exact anchor、bound、gap、强基线或其他最优性证据。
+- `FEASIBLE`：全部 hard constraints 通过，正式目标与核心指标已独立复算；
+- `COMPETITIVE`：同一数据、口径和约束下，稳定优于至少一个合理 baseline，并通过与算法结构匹配的顺序/初值/随机性检查；
+- `NEAR-OPTIMAL`：在 `COMPETITIVE` 基础上，另有可量化的最优性证据支持剩余 gap 足够小，例如 exact anchor、valid bound、MIP gap、relaxation gap、small-scale truth 或等价 certificate。
 
-只满足约束不得写成“最优”。
+强 baseline 本身只能支持 `COMPETITIVE`，不能单独证明 `NEAR-OPTIMAL`。只满足约束不得写成“最优”。
+
+exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算预算条件触发：若只声称 `FEASIBLE`，不得为了形式完整机械增加大型 exact 求解；若声称 near-optimal，必须有与该 Claim 匹配的最优性证据。
 
 ## CORE-AI-001 AI 使用记录真实
 
