@@ -123,14 +123,14 @@ class RuntimeSkillContractTests(unittest.TestCase):
     def test_runtime_builder_produces_lite_package(self):
         with tempfile.TemporaryDirectory() as tmp:
             target = Path(tmp) / "runtime"
-            proc = subprocess.run(
+            build = subprocess.run(
                 [sys.executable, str(ROOT / "tools" / "build_runtime_skill.py"), str(target)],
                 cwd=ROOT,
                 text=True,
                 capture_output=True,
                 check=False,
             )
-            self.assertEqual(proc.returncode, 0, msg=proc.stdout + proc.stderr)
+            self.assertEqual(build.returncode, 0, msg=build.stdout + build.stderr)
             for rel in (
                 "SKILL.md",
                 "skills/cumcm-rigorous-workflow/core/SHARED_CORE.md",
@@ -144,6 +144,15 @@ class RuntimeSkillContractTests(unittest.TestCase):
             forbidden = {".pdf", ".png", ".jpg", ".jpeg"}
             bad = [p for p in target.rglob("*") if p.is_file() and p.suffix.lower() in forbidden]
             self.assertEqual(bad, [])
+
+            validate = subprocess.run(
+                [sys.executable, str(ROOT / "tools" / "validate_runtime_skill.py"), str(target)],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(validate.returncode, 0, msg=validate.stdout + validate.stderr)
 
 
 if __name__ == "__main__":
