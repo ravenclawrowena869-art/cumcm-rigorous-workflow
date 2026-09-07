@@ -1,5 +1,11 @@
 {
   "version": "2.1",
+  "gate_dependencies": {
+    "G1_runnable_mainline": ["G0_problem_contract"],
+    "G2_validation": ["G1_runnable_mainline"],
+    "G3_freeze": ["G2_validation"],
+    "G4_submission": ["G3_freeze"]
+  },
   "gates": {
     "G0_problem_contract": [
       "official_requirements_extracted",
@@ -20,12 +26,17 @@
     "G2_validation": [
       "technical_pass",
       "mathematical_pass",
+      "mathematical_veto_clear",
       "hard_constraints_zero_violation",
+      "dynamic_constraints_full_replay_or_not_applicable",
       "metrics_recomputed",
+      "surrogate_full_replay_or_not_applicable",
       "interfaces_stable",
       "evidence_sufficiency_pass"
     ],
     "G3_freeze": [
+      "g2_validation_pass",
+      "current_mathematical_review_matches_source_of_truth",
       "clean_replay_pass",
       "manifest_created",
       "source_of_truth_declared",
