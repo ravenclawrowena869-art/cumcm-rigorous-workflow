@@ -23,7 +23,7 @@
 
 ### FEASIBLE
 
-全部 hard constraints 通过，目标与核心指标已独立复算。
+全部 hard constraints 通过，目标与核心指标已独立复算。若存在动态/path-dependent hard constraints，还必须完成全过程 replay。
 
 ### COMPETITIVE
 
@@ -31,9 +31,11 @@
 
 ### NEAR-OPTIMAL
 
-在 COMPETITIVE 基础上，还有 exact anchor、下/上界、MIP gap、松弛界或其他可信最优性证据支持剩余 gap 足够小。
+在 COMPETITIVE 基础上，还有 exact anchor、下/上界、MIP gap、松弛界、small-scale truth 或其他可信最优性证据支持剩余 gap 足够小。
 
-禁止把 `FEASIBLE` 直接写成“最优”。
+强 baseline 本身只能支持 COMPETITIVE，不能单独证明 NEAR-OPTIMAL。禁止把 `FEASIBLE` 直接写成“最优”。
+
+exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算预算条件触发：如果只声明 FEASIBLE，不为形式完整机械增加大型 exact 求解；如果声称 near-optimal，必须给出与该 Claim 匹配的最优性证据。
 
 ## 三、按模型类型检查
 
@@ -66,6 +68,19 @@
 - 对容量、功率、预算、权重、阈值等关键参数做改参数→重新求解；
 - 储能等双参数设备如果结果依赖容量与功率，应优先形成容量×功率 sensitivity surface，而非只改一个参数。
 
+### 动态、状态空间与路径依赖模型
+
+凡 hard constraint 依赖完整轨迹而不是单一终值，例如 SOC、库存、温度、水位、速度/加速度、动态安全距离、累计预算/排放、ODE/PDE 状态、滚动容量等：
+
+- validator 必须逐时段/逐空间点/逐迭代 replay；
+- 至少报告 `max_violation`；
+- 至少报告发生位置 `argmax_location`；
+- 适用时单独报告 terminal violation；
+- 对状态递推或守恒式报告最大残差；
+- 只检查最终状态，不得 Mathematical PASS。
+
+没有动态约束的模型可明确标记 `NOT_APPLICABLE`。
+
 ### 交替迭代与多目标模型
 
 - 经验调整比例、步长、惩罚权重和终止阈值必须有参数扫描或来源依据；
@@ -78,13 +93,15 @@
 
 ## 四、Surrogate / Proxy Fidelity
 
-预测误差、TOPSIS 得分、聚类标签、简化成本、coarse simulator 等如果只是下游决策 proxy，必须做 full replay。
+预测输出、TOPSIS 得分、聚类标签、简化成本、coarse simulator 等如果只是下游决策 proxy，必须做 full replay。
 
 建议记录：
 
 `candidate, surrogate_score, true_decision_score, surrogate_rank, true_rank, rank_change`
 
-若排序明显改变，proxy 权限降为初始化/筛选工具，并补入遗漏的主要机制。
+若 full replay 显示 proxy 的失真足以改变正式可行性、正式方案排序或核心 Claim，则触发 `MATHEMATICAL_P0`，XXT 可以要求重开 FROZEN；不得仅以“降级为筛选工具”掩盖已经受影响的正式结果。
+
+只有在失真不影响正式结论时，proxy 才可降为初始化/筛选/加速工具，并在 limitation 中说明。
 
 ## 五、不可行性诊断
 
@@ -105,7 +122,7 @@
 - 简单均值预测：检查时序突变适配能力；
 - 经验预测区间：量化 downstream protection；
 - 顺序启发式：做输入重排敏感性；
-- 启发式/多策略：尽量给 exact/MILP anchor；
+- 启发式/多策略：在 Claim 需要且计算可承受时给 exact/MILP anchor；
 - 区域独立求解：检查互联 counterfactual 或明确限制；
 - 固定储能硬件：做容量/功率参数扫描；
 - 固定经验阈值：做阈值扫描；
@@ -121,4 +138,5 @@
 
 - `EVIDENCE PASS`：主要结论均有可追溯证据；
 - `PASS WITH LIMITATION`：主线可用，论文主动限定边界；
-- `FAIL / ADD EXPERIMENT`：缺关键 baseline、稳定性、敏感性、counterfactual、anchor 或不可行诊断，不得进入完整 Paper Handoff。
+- `FAIL / ADD EXPERIMENT`：缺关键 baseline、稳定性、敏感性、counterfactual、anchor 或不可行诊断，不得进入完整 Paper Handoff；
+- `MATHEMATICAL_P0`：目标、hard constraints、单位/量纲、可行性、正式指标/accounting 或 material surrogate fidelity 出现致命错误，禁止 Freeze，并进入 P0 reopen 流程。
