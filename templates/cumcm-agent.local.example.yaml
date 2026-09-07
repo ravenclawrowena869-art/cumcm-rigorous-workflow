@@ -1,0 +1,10 @@
+# Copy this file to repository root as .cumcm-agent.local.yaml
+# The copied file is ignored by Git.
+
+active_role: FYQ_TECHNICAL_ORCHESTRATOR
+human_owner: FYQ
+
+# Allowed active_role values:
+# FYQ_TECHNICAL_ORCHESTRATOR
+# XXT_MATHEMATICAL
+# CYQ_PAPER
