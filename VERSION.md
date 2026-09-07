@@ -1,6 +1,14 @@
-# Version 2.0 — Parallel Team Architecture
+# Version 2.1 — Paper Evidence Gates
 
-## 核心升级
+## v2.1 核心升级
+
+- 新增根目录 `SKILL.md`，允许将仓库作为可安装的数模工作流 Skill 使用；
+- 新增模型证据充分性 Gate，要求基线、最优值锚点、稳定性、敏感性、鲁棒性和不可行诊断；
+- 新增逐问写作与算法呈现 Gate，强制本问概述、场景化模型引出和题目特定伪代码/流程；
+- AI 在缺少真实步骤、实验或冻结来源时必须阻断定稿；
+- Paper Handoff、AI Prompt、Submission Gate 与复盘清单同步升级。
+
+## v2.0 保留架构
 
 v2.0 从“流程规范”升级为“三条长期并行生产线”。
 
