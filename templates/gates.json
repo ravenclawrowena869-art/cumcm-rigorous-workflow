@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "gates": {
     "G0_problem_contract": [
       "official_requirements_extracted",
@@ -22,7 +22,8 @@
       "mathematical_pass",
       "hard_constraints_zero_violation",
       "metrics_recomputed",
-      "interfaces_stable"
+      "interfaces_stable",
+      "evidence_sufficiency_pass"
     ],
     "G3_freeze": [
       "clean_replay_pass",
@@ -30,14 +31,18 @@
       "source_of_truth_declared",
       "paper_handoff_created",
       "paper_metrics_created",
-      "figure_data_source_locked"
+      "figure_data_source_locked",
+      "robustness_plan_resolved"
     ],
     "G4_submission": [
       "paper_pass",
       "paper_numbers_checked",
       "figures_checked",
       "page_limit_checked",
+      "task_specific_algorithm_pass",
+      "ai_use_ledger_checked",
       "ai_disclosure_checked",
+      "pdf_layout_checked",
       "final_files_reopened_after_upload"
     ]
   }
