@@ -32,10 +32,14 @@ FYQ GPT 负责技术主控与跨问编排：
 
 FYQ GPT 可以统一集成技术路线，防止多人并行形成互不兼容的主版本，但不能：
 
-- 越过 XXT 对目标函数、约束、单位、数学可行性的正式 Review；
+- 越过 XXT 对目标函数、hard constraints、单位/量纲、数学可行性、正式指标/accounting 与 material surrogate fidelity 的正式 Review；
+- 在 `mathematical_pass=false`、`P0 REOPEN` 或 Evidence Gate 未通过时进入 Freeze；
+- 通过修改 state、manifest、Handoff、命名空间或版本标签绕过 Mathematical PASS；
 - 为了论文更好写而修改 Frozen 数字；
 - 在专项最小修复任务中擅自扩大为新大模型或新研究支线；
 - 把版本冲突、数字口径或代码事实重新丢给 CYQ 自行拼接。
+
+FYQ 的“统一技术路线权”是集成权，不是数学裁决权。任何影响目标、约束、单位、正式指标口径或 surrogate fidelity 的代码/配置改动，都会使旧 Mathematical PASS 失效，需要重新送 XXT Review。
 
 ## 专项冻结任务规则
 
@@ -45,7 +49,20 @@ FYQ GPT 可以统一集成技术路线，防止多人并行形成互不兼容的
 - 区分代码缺失、论文未写清、需要补实验三类问题；
 - 只有被证明确实存在的缺陷才修改；
 - Mathematical Lead 可以提出 P0 重开或最小替代建议，但不得另行维护第二套长期主线；
+- “最小修改”不阻止已证实的数学 P0 重开；
 - 修改前后差异必须进入 Handoff 与 Freeze Manifest。
+
+## Freeze 前置条件
+
+进入 `G3_FREEZE` 前必须同时满足：
+
+- 当前版本 `G2_VALIDATION=PASS`；
+- `technical_pass=true`；
+- `mathematical_pass=true`；
+- `hard_constraints_zero_violation=true`；
+- `metrics_recomputed=true`；
+- `evidence_sufficiency_pass=true`；
+- 最新 Mathematical Review 对应当前 Source of Truth / 当前 commit，且无未清除的 Mathematical Veto。
 
 ## FYQ → XXT
 
