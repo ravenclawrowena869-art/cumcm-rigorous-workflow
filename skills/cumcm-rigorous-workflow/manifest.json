@@ -26,6 +26,7 @@
     "templates/Figure_Registry模板.csv",
     "templates/AI使用记录模板.csv",
     "templates/project_state模板.yaml",
+    "templates/cumcm-agent.local.example.yaml",
     "templates/gates.json"
   ],
   "runtime_include": [
@@ -51,6 +52,7 @@
     "templates/Figure_Registry模板.csv",
     "templates/AI使用记录模板.csv",
     "templates/project_state模板.yaml",
+    "templates/cumcm-agent.local.example.yaml",
     "templates/gates.json"
   ],
   "forbidden_binary_extensions": [
