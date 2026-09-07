@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.2",
   "gates": {
     "G0_problem_contract": [
       "official_requirements_extracted",
@@ -22,7 +22,11 @@
       "mathematical_pass",
       "hard_constraints_zero_violation",
       "metrics_recomputed",
-      "interfaces_stable"
+      "interfaces_stable",
+      "model_evidence_gate_pass",
+      "triggered_gate_list_created",
+      "all_triggered_gates_resolved_or_limited",
+      "red_team_review_completed"
     ],
     "G3_freeze": [
       "clean_replay_pass",
@@ -30,7 +34,9 @@
       "source_of_truth_declared",
       "paper_handoff_created",
       "paper_metrics_created",
-      "figure_data_source_locked"
+      "figure_data_source_locked",
+      "gate_evidence_attached",
+      "blocking_red_team_items_closed"
     ],
     "G4_submission": [
       "paper_pass",
@@ -38,7 +44,40 @@
       "figures_checked",
       "page_limit_checked",
       "ai_disclosure_checked",
-      "final_files_reopened_after_upload"
+      "final_files_reopened_after_upload",
+      "all_triggered_gates_pass_or_have_claim_reduction"
     ]
-  }
+  },
+  "conditional_gate_template": {
+    "gate_id": "",
+    "question": "",
+    "triggered": false,
+    "trigger_reason": "",
+    "owner": "",
+    "reviewer": "",
+    "status": "NOT_TRIGGERED",
+    "criteria": [],
+    "evidence": [],
+    "limitations": [],
+    "waiver": null
+  },
+  "conditional_gate_ids": [
+    "CG1_ASSUMPTION_CHALLENGE",
+    "CG2_PATH_DEPENDENCE",
+    "CG3_OPTIMALITY_ANCHOR",
+    "CG4_FEASIBILITY_MARGIN",
+    "CG5_FEEDBACK_SAFETY",
+    "CG6_DERIVED_SIGNAL_VALIDATION",
+    "CG7_CONVERGENCE_CREDIBILITY",
+    "CG8_BOUNDARY_REGIME",
+    "CG9_COMPARISON_FAIRNESS",
+    "CG10_SCALE_PLAUSIBILITY",
+    "CUSTOM_GATE"
+  ],
+  "allowed_conditional_status": [
+    "NOT_TRIGGERED",
+    "PASS",
+    "PASS_WITH_LIMITATION",
+    "FAIL_REOPEN"
+  ]
 }
