@@ -1,1 +1,1 @@
-time,tool_model,stage,user_task,ai_output_usage,adopted,human_changes,artifact
+time,tool_model,stage,prompt_summary,ai_response_summary,human_verification,team_decision,adopted,human_changes,paper_location,artifact
