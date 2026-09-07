@@ -14,6 +14,14 @@ roles:
     primary: "XXT"
     deputy: "FYQ"
 
+agent_bindings:
+  FYQ:
+    active_role: FYQ_TECHNICAL_ORCHESTRATOR
+  XXT:
+    active_role: XXT_MATHEMATICAL
+  CYQ:
+    active_role: CYQ_PAPER
+
 global:
   current_phase: "P0"
   route_review_completed: false
@@ -21,6 +29,8 @@ global:
   model_change_ban: false
   paper_pipeline_started: false
   paper_locked: false
+  authoritative_source_of_truth: ""
+  authoritative_handoff: ""
 
 agents:
   primary_coding_agent: ""
@@ -35,6 +45,8 @@ modules:
     state: "IDEA"
     version: ""
     source_of_truth: ""
+    authoritative_handoff: ""
+    evidence_gate_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q2:
@@ -44,6 +56,8 @@ modules:
     state: "IDEA"
     version: ""
     source_of_truth: ""
+    authoritative_handoff: ""
+    evidence_gate_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q3:
@@ -53,6 +67,8 @@ modules:
     state: "IDEA"
     version: ""
     source_of_truth: ""
+    authoritative_handoff: ""
+    evidence_gate_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q4:
@@ -62,6 +78,8 @@ modules:
     state: "IDEA"
     version: ""
     source_of_truth: ""
+    authoritative_handoff: ""
+    evidence_gate_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
 
@@ -70,6 +88,8 @@ paper:
   page_count: null
   figure_registry_status: "IDEA"
   abstract_status: "SKELETON"
+  paper_handoff_status: ""
+  evidence_gap_log: ""
 
 submission:
   gate_passed: false
