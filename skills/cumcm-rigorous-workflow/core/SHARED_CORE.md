@@ -33,6 +33,16 @@
 - Figure Registry；
 - Git commit / PR。
 
+## CORE-PARALLEL-001 Parallel-First 三任务书制
+
+每次主控开启新的执行 Wave，必须从**同一个 Frozen Snapshot**同时生成并发出三份独立任务书：FYQ TASK、XXT TASK、CYQ TASK。三个人都必须能够在任务发出后立即开始自己的 Primary Work；不得把“等待本 Wave 另一成员先完成并交包”设计成人员启动前置条件。
+
+每份任务书至少声明：`PARALLEL_START`、`DEPENDENCY_DECOUPLING`、`INTERFACE / MOCK`、`INTEGRATION_STEP`、`SECONDARY_QUEUE`。如果最终确有跨成员依赖，应优先通过冻结 schema、Interface、Mock、Placeholder 或上一版本 Frozen Source 解耦；当前成员先完成可独立部分，真实结果到达后只执行短 Integration Step。
+
+团队**允许 Integration 阶段有依赖，不允许人的启动阶段有依赖**。若 Primary Task 因外部条件或真实不可解耦依赖被阻塞，立即进入预定义 Secondary Queue，禁止纯等待。
+
+只有以下情况可以例外不三路启动：官方或安全条件禁止某角色继续、当前任务对某角色确实 `NOT_APPLICABLE`，或三路并行会直接破坏同一写入资源且无法用分支/接口隔离。例外必须在 Wave manifest 中写明理由，不能用“方便”“等他先做完”作为理由。
+
 ## CORE-MATH-AUTH-001 Mathematical Veto
 
 FYQ 负责统一技术路线、版本和集成，XXT 负责 Mathematical Gate。以下任一问题一旦被证实，XXT 有正式否决权，`mathematical_pass=false`，模块不得进入 Freeze：
