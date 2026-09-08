@@ -63,7 +63,7 @@ def validate(root: Path) -> list[str]:
         errors,
         "dispatcher",
         dispatcher,
-        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md"),
+        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语"),
     )
 
     shared_core = _read(skill_dir / "core" / "SHARED_CORE.md")
@@ -128,6 +128,24 @@ def validate(root: Path) -> list[str]:
             "只检查最终状态，不得 Mathematical PASS",
             "MATHEMATICAL_P0",
             "强 baseline 本身只能支持 COMPETITIVE",
+        ),
+    )
+
+    paper_gate = _read(root / "05_论文与图表" / "05_逐问写作与算法呈现Gate.md")
+    _require_tokens(
+        errors,
+        "paper writing gate",
+        paper_gate,
+        (
+            "前文已经设置“问题分析”",
+            "大标题下短导语",
+            "任务概括 → 核心难点 → 模型选择 → 应用依据",
+            "不得提前写入未冻结结果",
+            "由前述核心难点自然推出",
+            "求解算法与伪代码",
+            "结果及证据",
+            "不能删掉结果解释",
+            "为哪个具体决策、比较或判断提供依据",
         ),
     )
 
@@ -282,8 +300,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.1":
-                errors.append("manifest version must be 2.1.1")
+            if manifest.get("version") != "2.1.2":
+                errors.append("manifest version must be 2.1.2")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
