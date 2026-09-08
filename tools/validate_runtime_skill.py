@@ -63,7 +63,7 @@ def validate(root: Path) -> list[str]:
         errors,
         "dispatcher",
         dispatcher,
-        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语"),
+        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语", "05_参数选择协议.md"),
     )
 
     shared_core = _read(skill_dir / "core" / "SHARED_CORE.md")
@@ -79,12 +79,28 @@ def validate(root: Path) -> list[str]:
             "CORE-FREEZE-002",
             "CORE-DYNAMIC-001",
             "CORE-EVIDENCE-001",
+            "CORE-PARAM-001",
             "CORE-AI-DISCLOSURE-001",
             "CORE-COLLAB-001",
             "material surrogate fidelity",
             "G3_FREEZE",
             "G2_VALIDATION=PASS",
             "AI Disclosure Gate FAIL",
+        ),
+    )
+
+    parameter_protocol = _read(root / "03_建模与代码" / "05_参数选择协议.md")
+    _require_tokens(
+        errors,
+        "parameter selection protocol",
+        parameter_protocol,
+        (
+            "先判断参数的数学身份",
+            "参数依据的优先级",
+            "文献优先寻找，但不是机械硬要求",
+            "粗扫的作用只是探索响应曲线",
+            "自适应",
+            "Parameter Evidence Gate",
         ),
     )
 
@@ -128,6 +144,7 @@ def validate(root: Path) -> list[str]:
             "只检查最终状态，不得 Mathematical PASS",
             "MATHEMATICAL_P0",
             "强 baseline 本身只能支持 COMPETITIVE",
+            "Parameter Evidence",
         ),
     )
 
@@ -300,8 +317,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.2":
-                errors.append("manifest version must be 2.1.2")
+            if manifest.get("version") != "2.1.3":
+                errors.append("manifest version must be 2.1.3")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
