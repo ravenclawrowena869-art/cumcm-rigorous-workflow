@@ -28,6 +28,18 @@ FYQ GPT 负责技术主控与跨问编排：
 7. Freeze 条件；
 8. Paper Handoff 或对 CYQ 的正式事实包。
 
+## Parallel-First Wave 任务分发
+
+每个 Wave 都必须从同一个 Frozen Snapshot 同时生成三份独立任务书：
+
+- `FYQ TASK`
+- `XXT TASK`
+- `CYQ TASK`
+
+三份任务书必须同时发出，并默认允许三个人立即启动。若某角色后续需要另一角色的新结果，FYQ 主控先冻结 Interface / Mock / Placeholder / schema，使其先完成独立部分；真实结果到达后只做 Integration Step。不得把“等另一个人跑完并交包”写成 Primary Task 的启动条件。
+
+FYQ 自己也必须有正式任务书，不能只给 XXT/CYQ 下任务而把主控执行工作留在聊天里。每个 Wave 到 Checkpoint 后再汇总三方交付、处理冲突与 Missing Evidence，并开启下一 Wave 的三路并发任务。
+
 ## 主控边界
 
 FYQ GPT 可以统一集成技术路线，防止多人并行形成互不兼容的主版本，但不能：
