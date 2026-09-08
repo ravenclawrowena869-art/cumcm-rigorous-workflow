@@ -3,9 +3,22 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1 Dispatcher
+# CUMCM Rigorous Workflow v2.1.1 Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
+
+## 0. 每次回答前先调用 Skill
+
+对本项目的每一次实质性回答、审查、分工、建模、编程、论文或图表任务，**每次回答前都必须先调用一次本 Skill**，然后再开始分析或输出。不得以“上一轮已经读过”“当前上下文还记得”为由跳过。
+
+本轮调用至少完成：
+
+1. 读取本 dispatcher；
+2. 读取 Shared Core；
+3. 解析当前 `ACTIVE_ROLE` 并读取对应 Role Profile；
+4. 按任务类型读取直接相关的 canonical Gate / workflow。
+
+若运行平台支持原生 Skill invocation，优先调用 canonical Skill；若只能访问仓库文件，则按上述顺序读取等价文件。无法完成本轮调用时，先明确阻断原因，不得假装已按 Skill 执行。
 
 ## 1. 先读 Shared Core
 

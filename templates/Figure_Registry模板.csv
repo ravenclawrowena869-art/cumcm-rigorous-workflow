@@ -1,1 +1,1 @@
-figure_id,question,type,purpose,claim,data_owner,freeze_version,source_file,script,reviewer,status,layout_risk
+figure_id,question,type,purpose,claim,data_owner,freeze_version,source_file,script,time_scope,window_rule,selection_reason,reviewer,status,layout_risk

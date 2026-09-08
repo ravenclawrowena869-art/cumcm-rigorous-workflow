@@ -1,6 +1,6 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.1",
+  "version": "2.1.1",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",

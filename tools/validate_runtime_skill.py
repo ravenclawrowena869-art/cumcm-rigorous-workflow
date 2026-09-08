@@ -25,6 +25,12 @@ LEDGER_FIELDS = [
     "paper_location",
     "artifact",
 ]
+FIGURE_REQUIRED_FIELDS = {
+    "type",
+    "time_scope",
+    "window_rule",
+    "selection_reason",
+}
 
 
 def _read(path: Path) -> str:
@@ -68,14 +74,17 @@ def validate(root: Path) -> list[str]:
         (
             "CORE-AUTH-001",
             "CORE-MATH-AUTH-001",
+            "CORE-PAPER-AUTH-001",
             "CORE-FREEZE-001",
             "CORE-FREEZE-002",
             "CORE-DYNAMIC-001",
             "CORE-EVIDENCE-001",
+            "CORE-AI-DISCLOSURE-001",
             "CORE-COLLAB-001",
             "material surrogate fidelity",
             "G3_FREEZE",
             "G2_VALIDATION=PASS",
+            "AI Disclosure Gate FAIL",
         ),
     )
 
@@ -154,14 +163,37 @@ def validate(root: Path) -> list[str]:
     )
 
     paper_profile = _read(profile_dir / "CYQ_PAPER.md")
-    _require_tokens(errors, "CYQ profile", paper_profile, ("INCOMPLETE", "缺口清单", "可直接定稿"))
+    _require_tokens(
+        errors,
+        "CYQ profile",
+        paper_profile,
+        (
+            "INCOMPLETE",
+            "缺口清单",
+            "可直接定稿",
+            "技术事实只读",
+            "不得自行修改",
+            "reopen request",
+        ),
+    )
 
     handoff = _read(root / "templates" / "Paper_Handoff模板.md")
     _require_tokens(
         errors,
         "Paper Handoff template",
         handoff,
-        ("本问合同", "本问中心逻辑", "求解与伪代码包", "验证证据", "自然语言初稿", "正式来源", "论文禁区"),
+        (
+            "本问合同",
+            "本问中心逻辑",
+            "关键参数",
+            "求解与伪代码包",
+            "迭代与收敛事实",
+            "核心指标语义",
+            "验证证据",
+            "自然语言初稿",
+            "正式来源",
+            "论文禁区",
+        ),
     )
 
     collaboration = _read(root / "06_协作与交接" / "06_三GPT协作与Skill共同维护.md")
@@ -183,12 +215,41 @@ def validate(root: Path) -> list[str]:
     else:
         errors.append("AI ledger template missing or empty")
 
+    figure_text = _read(root / "templates" / "Figure_Registry模板.csv").strip()
+    if figure_text:
+        try:
+            fields = next(csv.reader(io.StringIO(figure_text)))
+            missing = sorted(FIGURE_REQUIRED_FIELDS - set(fields))
+            if missing:
+                errors.append(f"Figure Registry missing fields: {missing}")
+        except (csv.Error, StopIteration) as exc:
+            errors.append(f"Figure Registry invalid csv: {exc}")
+    else:
+        errors.append("Figure Registry template missing or empty")
+
+    ai_record = _read(root / "07_AI协作" / "03_AI使用记录.md")
+    _require_tokens(
+        errors,
+        "AI disclosure workflow",
+        ai_record,
+        (
+            "AI Disclosure 阻断 Gate",
+            "adopted=yes",
+            "human_verification",
+            "team_decision",
+            "human_changes",
+            "paper_location",
+            "artifact",
+            "AI Disclosure Gate FAIL",
+        ),
+    )
+
     gates_path = root / "templates" / "gates.json"
     if gates_path.exists():
         try:
             gates = json.loads(gates_path.read_text(encoding="utf-8"))
             if gates.get("version") != "2.1":
-                errors.append("gates.json version must be 2.1")
+                errors.append("gates.json schema version must be 2.1")
 
             deps = gates.get("gate_dependencies", {})
             if deps.get("G3_freeze") != ["G2_validation"]:
@@ -200,6 +261,7 @@ def validate(root: Path) -> list[str]:
                 "robustness_plan_resolved",
                 "task_specific_algorithm_pass",
                 "ai_use_ledger_checked",
+                "ai_disclosure_gate_pass",
                 "pdf_layout_checked",
                 "mathematical_veto_clear",
                 "dynamic_constraints_full_replay_or_not_applicable",
@@ -220,8 +282,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1":
-                errors.append("manifest version must be 2.1")
+            if manifest.get("version") != "2.1.1":
+                errors.append("manifest version must be 2.1.1")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")

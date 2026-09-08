@@ -1,6 +1,12 @@
-# Shared Core v2.1
+# Shared Core v2.1.1
 
 本文件对 FYQ、XXT、CYQ 三套 GPT 同时生效。任何 Role Profile 都不得覆盖 Shared Core。
+
+## CORE-INVOKE-001 每次回答前调用 Skill
+
+对本项目的每一次实质性回答、审查、分工、建模、编程、论文或图表任务，**每次回答前必须先调用一次本 Skill**，完成 dispatcher → Shared Core → 当前 `ACTIVE_ROLE` Profile → 相关 canonical Gate/workflow 的本轮加载。
+
+不得以已在上一轮读取过为由跳过，也不得仅凭聊天记忆替代本轮 Skill 调用。若平台支持原生 Skill invocation，优先调用 canonical Skill；若只能读取仓库，则按 dispatcher 规定的最小文件集合完成等价调用。无法完成本轮调用时，应先说明阻断原因，不得声称已按 Skill 执行。
 
 ## CORE-AUTH-001 官方材料最高优先级
 
@@ -39,6 +45,14 @@ FYQ 负责统一技术路线、版本和集成，XXT 负责 Mathematical Gate。
 - surrogate / proxy 与正式目标或正式决策严重失真，足以改变可行性、方案排序或论文核心 Claim。
 
 XXT 的 veto 是数学裁决，不等于 XXT 接管 Git、版本或长期维护第二套主模型。修复仍由 FYQ 统一集成；若问题影响已冻结结果，XXT 可以要求 `P0 REOPEN`。
+
+## CORE-PAPER-AUTH-001 Paper Lead 技术事实只读
+
+CYQ / Paper Lead 对当前 Frozen Source of Truth、Mathematical PASS、正式参数、单位、指标口径和正式数字只读。
+
+CYQ 可以读取、引用、发现冲突、返回 Evidence Gap，并向 FYQ / XXT 发起 `reopen request`；CYQ **不得自行修改**数学模型、目标与 hard constraints、正式数字、冻结参数、单位、技术口径或验证结论。
+
+若论文叙事与技术事实冲突，必须以技术事实为准并停止相关定稿。任何技术事实变更都必须回到对应技术 Owner，重新 Review、重新 Freeze 后再进入论文。
 
 ## CORE-FREEZE-001 Freeze 边界
 
@@ -92,6 +106,20 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 ## CORE-AI-001 AI 使用记录真实
 
 从比赛早期维护 AI Use Ledger。AI 使用说明应如实反映实际参与深度，不以规避 AI 检测为目标。推荐流程：聊天记录 → 知识库 → 团队框架 → 人工重写。
+
+## CORE-AI-DISCLOSURE-001 AI Disclosure 是阻断 Gate
+
+对 `adopted=yes` 且进入论文、正式代码、正式图表或核心结论的 AI 产物，AI Use Ledger 必须填写并可核查：
+
+- `human_verification`；
+- `team_decision`；
+- `human_changes`；
+- `paper_location`；
+- `artifact`。
+
+上述任一必需字段缺失，或 Ledger 与实际 AI 参与程度不一致，则 `AI Disclosure Gate FAIL`，不得进入最终提交状态。`paper_location` 对不进入论文但进入正式代码/图表的产物可写 `NOT_APPLICABLE`，但 `artifact` 必须指向正式载体。
+
+“聊天记录 → 知识库 → 团队框架 → 人工重写”用于人工核验与责任闭环，不得被解释成掩盖或弱化真实 AI 使用。
 
 ## CORE-COLLAB-001 三人共同维护
 
