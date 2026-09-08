@@ -3,7 +3,7 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1.3 Dispatcher
+# CUMCM Rigorous Workflow v2.2-lite Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
 
@@ -53,8 +53,9 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 ## 3. 按任务加载 canonical Gate
 
-- 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`。
-- **参数选取、阈值/权重/步长/每轮调整比例、Top-K、平滑系数、风险参数等调参任务：除 Evidence Gate 外，必须同时读取 `03_建模与代码/05_参数选择协议.md`。**
+- 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`；进入验证阶段时，再读取 `04_验收冻结/06_条件触发Gate与证据协议.md`，先扫描“这个模型最可能怎么翻车”，形成风险假设，再按真实风险决定是否触发额外检查。算法名只能作为线索，不能机械决定 Gate。
+- **参数选取、阈值/权重/步长/每轮调整比例、Top-K、平滑系数、风险参数等调参任务：除 Evidence Gate 外，必须同时读取 `03_建模与代码/05_参数选择协议.md`。** 参数风险若被 Risk Registry 触发，具体证据仍由该协议负责，不复制第二套参数规则。
+- Freeze 前独立审查：按需读取 `07_AI协作/05_Red-Team独立评审协议.md`。Red Team 先自由寻找能削弱核心 Claim 的攻击点，再把已发现的问题归入相应风险 Gate；不得拿 CG1–CG10 当固定题单机械逐项作答。
 - 论文写作、逐问短导语、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
 - 图表：同时读取 `05_论文与图表/02_图表工作流.md`。
 - 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。
@@ -80,4 +81,4 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 ## Completion
 
-一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据后才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel 或聊天规划都不构成完成。
+一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据，已识别的重要风险已经验证或明确限制，且不存在未关闭的 Red-Team 阻断项后，才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel 或聊天规划都不构成完成。
