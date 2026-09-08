@@ -1,5 +1,5 @@
 {
-  "version": "2.1",
+  "version": "2.2-lite",
   "gate_dependencies": {
     "G1_runnable_mainline": ["G0_problem_contract"],
     "G2_validation": ["G1_runnable_mainline"],
@@ -32,11 +32,16 @@
       "metrics_recomputed",
       "surrogate_full_replay_or_not_applicable",
       "interfaces_stable",
-      "evidence_sufficiency_pass"
+      "evidence_sufficiency_pass",
+      "structural_risk_scan_completed",
+      "material_risks_routed_or_not_applicable"
     ],
     "G3_freeze": [
       "g2_validation_pass",
       "current_mathematical_review_matches_source_of_truth",
+      "triggered_risk_checks_resolved_or_claim_limited",
+      "red_team_review_completed",
+      "no_open_blocking_risks",
       "clean_replay_pass",
       "manifest_created",
       "source_of_truth_declared",
