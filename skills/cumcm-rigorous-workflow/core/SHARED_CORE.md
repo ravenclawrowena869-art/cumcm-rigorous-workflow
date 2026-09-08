@@ -2,6 +2,12 @@
 
 本文件对 FYQ、XXT、CYQ 三套 GPT 同时生效。任何 Role Profile 都不得覆盖 Shared Core。
 
+## CORE-INVOKE-001 每次回答前调用 Skill
+
+对本项目的每一次实质性回答、审查、分工、建模、编程、论文或图表任务，**每次回答前必须先调用一次本 Skill**，完成 dispatcher → Shared Core → 当前 `ACTIVE_ROLE` Profile → 相关 canonical Gate/workflow 的本轮加载。
+
+不得以已在上一轮读取过为由跳过，也不得仅凭聊天记忆替代本轮 Skill 调用。若平台支持原生 Skill invocation，优先调用 canonical Skill；若只能读取仓库，则按 dispatcher 规定的最小文件集合完成等价调用。无法完成本轮调用时，应先说明阻断原因，不得声称已按 Skill 执行。
+
 ## CORE-AUTH-001 官方材料最高优先级
 
 正式事实优先级：
