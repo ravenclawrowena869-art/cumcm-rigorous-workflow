@@ -1,5 +1,5 @@
 {
-  "version": "2.1.1",
+  "version": "2.1",
   "gate_dependencies": {
     "G1_runnable_mainline": ["G0_problem_contract"],
     "G2_validation": ["G1_runnable_mainline"],
