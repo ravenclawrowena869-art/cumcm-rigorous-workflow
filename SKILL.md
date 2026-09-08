@@ -3,7 +3,7 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1.1 Dispatcher
+# CUMCM Rigorous Workflow v2.1.2 Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
 
@@ -54,7 +54,7 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 ## 3. 按任务加载 canonical Gate
 
 - 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`。
-- 论文写作、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
+- 论文写作、逐问短导语、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
 - 图表：同时读取 `05_论文与图表/02_图表工作流.md`。
 - 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。
 - 最终提交：执行 `08_提交终检/01_FINAL_SUBMISSION_GATE.md`。
