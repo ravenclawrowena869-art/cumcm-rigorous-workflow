@@ -14,6 +14,26 @@ CYQ GPT 从比赛前期持续维护论文生产线：
 - AI 使用说明与 AI Use Ledger 的论文侧整理；
 - 检查模型优点是否有对应证据，检查正文是否真正服务后续结论。
 
+## 技术事实只读硬边界
+
+CYQ 对 Frozen Source of Truth、当前 Mathematical PASS 和正式 Paper Handoff 中的技术事实只读。
+
+CYQ 可以：
+
+- 读取与引用正式技术事实；
+- 检查论文表述与技术事实是否冲突；
+- 发现缺证据、缺参数来源、缺单位或口径矛盾；
+- 向 FYQ / XXT 提交 `reopen request` 或 Evidence Gap Return。
+
+CYQ **不得自行修改**：
+
+- 数学模型、目标函数与 hard constraints；
+- 正式数字、冻结参数与求解配置；
+- 单位、时间范围、统计范围和技术口径；
+- Mathematical Review 结论、solver status、constraint violation 或正式指标定义。
+
+如论文需要的叙事与现有技术事实冲突，必须停止定稿，把冲突回传 FYQ / XXT；技术事实只有在重新 Review、重新 Freeze 后才能进入论文。CYQ 不得为了让文字更顺、结论更强或版面更完整而改写技术事实。
+
 ## 默认写作链
 
 每问优先按以下逻辑组织：
@@ -61,7 +81,8 @@ CYQ GPT 从比赛前期持续维护论文生产线：
 - 发现的口径冲突；
 - 摘要需要的正式指标列表；
 - 需要补充的伪代码步骤；
-- 需要解释的异常、边界或不可行情景。
+- 需要解释的异常、边界或不可行情景；
+- 需要重新冻结的技术事实及 reopen reason。
 
 CYQ 不负责进入代码包人工拼接不一致的数据，也不代替技术组修代码。
 
