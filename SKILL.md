@@ -53,7 +53,8 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 ## 3. 按任务加载 canonical Gate
 
-- 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`。
+- 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`；进入验证阶段时，再用 `04_验收冻结/06_条件触发Gate与证据协议.md` 判断哪些结构性检查需要额外触发。
+- Freeze 前独立审查：按需读取 `07_AI协作/05_Red-Team独立评审协议.md`，由非 Owner Reviewer 主动寻找能削弱核心 Claim 的问题。
 - 论文写作、逐问短导语、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
 - 图表：同时读取 `05_论文与图表/02_图表工作流.md`。
 - 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。
@@ -79,4 +80,4 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 ## Completion
 
-一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据后才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel 或聊天规划都不构成完成。
+一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据，已触发的 Conditional Gate 已处理，且不存在未关闭的 Red-Team 阻断项后，才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel 或聊天规划都不构成完成。
