@@ -1,5 +1,5 @@
 {
-  "version": "2.1",
+  "version": "2.1.1",
   "gate_dependencies": {
     "G1_runnable_mainline": ["G0_problem_contract"],
     "G2_validation": ["G1_runnable_mainline"],
@@ -53,6 +53,7 @@
       "task_specific_algorithm_pass",
       "ai_use_ledger_checked",
       "ai_disclosure_checked",
+      "ai_disclosure_gate_pass",
       "pdf_layout_checked",
       "final_files_reopened_after_upload"
     ]
