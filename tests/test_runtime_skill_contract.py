@@ -29,6 +29,8 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "XXT_MATHEMATICAL",
             "CYQ_PAPER",
             "role-neutral read-only",
+            "先扫描“这个模型最可能怎么翻车”",
+            "不得拿 CG1–CG10 当固定题单",
         ):
             self.assertIn(token, text)
 
@@ -73,14 +75,36 @@ class RuntimeSkillContractTests(unittest.TestCase):
         ):
             self.assertIn(token, text)
 
-    def test_evidence_gate_requires_dynamic_replay_and_surrogate_p0(self):
+    def test_evidence_gate_requires_dynamic_replay_and_is_not_mechanical(self):
         text = (ROOT / "04_验收冻结" / "05_模型证据充分性Gate.md").read_text(encoding="utf-8")
         for token in (
             "动态、状态空间与路径依赖模型",
             "只检查最终状态，不得 Mathematical PASS",
             "MATHEMATICAL_P0",
             "强 baseline 本身只能支持 COMPETITIVE",
-            "不为形式完整机械增加大型 exact 求解",
+            "模型类型提供“风险线索”，不是固定实验菜单",
+            "不要为了形式完整把所有检查都做一遍",
+        ):
+            self.assertIn(token, text)
+
+    def test_conditional_gate_is_risk_radar_not_algorithm_lookup(self):
+        text = (ROOT / "04_验收冻结" / "06_条件触发Gate与证据协议.md").read_text(encoding="utf-8")
+        for token in (
+            "结构风险雷达",
+            "先找风险，再决定 Gate",
+            "一个模型可以同时命中多个风险",
+            "算法名、模型名和常见例子只是",
+            "CUSTOM_RISK",
+        ):
+            self.assertIn(token, text)
+
+    def test_red_team_attacks_first_and_classifies_second(self):
+        text = (ROOT / "07_AI协作" / "05_Red-Team独立评审协议.md").read_text(encoding="utf-8")
+        for token in (
+            "先自由攻击，再归类",
+            "不是思考上限",
+            "CUSTOM_RISK",
+            "禁止反过来拿 CG1–CG10 当题库逐项凑问题",
         ):
             self.assertIn(token, text)
 
@@ -94,7 +118,7 @@ class RuntimeSkillContractTests(unittest.TestCase):
         self.assertIn(".cumcm-agent.local.yaml", text)
         self.assertIn("dist/", text)
 
-    def test_project_state_has_three_agent_bindings_and_math_provenance(self):
+    def test_project_state_has_three_agent_bindings_math_and_risk_provenance(self):
         text = (ROOT / "templates" / "project_state模板.yaml").read_text(encoding="utf-8")
         for token in (
             "agent_bindings:",
@@ -103,6 +127,11 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "CYQ_PAPER",
             "authoritative_handoff:",
             "evidence_gate_status:",
+            "risk_scan_status:",
+            "risk_registry:",
+            "red_team_status:",
+            "red_team_artifact:",
+            "open_blocking_risks:",
             "mathematical_review_status:",
             "mathematical_review_artifact:",
             "mathematical_review_commit:",
@@ -150,13 +179,18 @@ class RuntimeSkillContractTests(unittest.TestCase):
             ],
         )
 
-    def test_gates_are_v21_and_freeze_depends_on_validation(self):
+    def test_gates_are_v22_lite_and_freeze_depends_on_validation(self):
         data = json.loads((ROOT / "templates" / "gates.json").read_text(encoding="utf-8"))
-        self.assertEqual(data["version"], "2.1")
+        self.assertEqual(data["version"], "2.2-lite")
         self.assertEqual(data["gate_dependencies"]["G3_freeze"], ["G2_validation"])
         all_checks = {item for checks in data.get("gates", {}).values() for item in checks}
         for token in (
             "evidence_sufficiency_pass",
+            "structural_risk_scan_completed",
+            "material_risks_routed_or_not_applicable",
+            "triggered_risk_checks_resolved_or_claim_limited",
+            "red_team_review_completed",
+            "no_open_blocking_risks",
             "robustness_plan_resolved",
             "task_specific_algorithm_pass",
             "ai_use_ledger_checked",
@@ -192,6 +226,8 @@ class RuntimeSkillContractTests(unittest.TestCase):
                 "skills/cumcm-rigorous-workflow/profiles/XXT_MATHEMATICAL.md",
                 "skills/cumcm-rigorous-workflow/profiles/CYQ_PAPER.md",
                 "04_验收冻结/05_模型证据充分性Gate.md",
+                "04_验收冻结/06_条件触发Gate与证据协议.md",
+                "07_AI协作/05_Red-Team独立评审协议.md",
                 "templates/Paper_Handoff模板.md",
             ):
                 self.assertTrue((target / rel).exists(), rel)
