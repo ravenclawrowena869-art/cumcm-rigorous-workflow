@@ -63,7 +63,15 @@ def validate(root: Path) -> list[str]:
         errors,
         "dispatcher",
         dispatcher,
-        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语"),
+        (
+            "ACTIVE_ROLE",
+            *ROLE_IDS,
+            "role-neutral read-only",
+            "SHARED_CORE.md",
+            "逐问短导语",
+            "先扫描“这个模型最可能怎么翻车”",
+            "不得拿 CG1–CG10 当固定题单",
+        ),
     )
 
     shared_core = _read(skill_dir / "core" / "SHARED_CORE.md")
@@ -128,6 +136,35 @@ def validate(root: Path) -> list[str]:
             "只检查最终状态，不得 Mathematical PASS",
             "MATHEMATICAL_P0",
             "强 baseline 本身只能支持 COMPETITIVE",
+            "模型类型提供“风险线索”，不是固定实验菜单",
+            "不要为了形式完整把所有检查都做一遍",
+        ),
+    )
+
+    conditional_gate = _read(root / "04_验收冻结" / "06_条件触发Gate与证据协议.md")
+    _require_tokens(
+        errors,
+        "conditional risk gate",
+        conditional_gate,
+        (
+            "结构风险雷达",
+            "先找风险，再决定 Gate",
+            "算法名、模型名和常见例子只是",
+            "CUSTOM_RISK",
+            "一个模型可以同时命中多个风险",
+        ),
+    )
+
+    red_team = _read(root / "07_AI协作" / "05_Red-Team独立评审协议.md")
+    _require_tokens(
+        errors,
+        "red-team protocol",
+        red_team,
+        (
+            "先自由攻击，再归类",
+            "不是思考上限",
+            "CUSTOM_RISK",
+            "不得拿 CG1–CG10 当固定题单",
         ),
     )
 
@@ -171,6 +208,11 @@ def validate(root: Path) -> list[str]:
             *ROLE_IDS,
             "authoritative_handoff:",
             "evidence_gate_status:",
+            "risk_scan_status:",
+            "risk_registry:",
+            "red_team_status:",
+            "red_team_artifact:",
+            "open_blocking_risks:",
             "mathematical_review_status:",
             "mathematical_review_artifact:",
             "mathematical_review_commit:",
@@ -266,8 +308,8 @@ def validate(root: Path) -> list[str]:
     if gates_path.exists():
         try:
             gates = json.loads(gates_path.read_text(encoding="utf-8"))
-            if gates.get("version") != "2.1":
-                errors.append("gates.json schema version must be 2.1")
+            if gates.get("version") != "2.2-lite":
+                errors.append("gates.json schema version must be 2.2-lite")
 
             deps = gates.get("gate_dependencies", {})
             if deps.get("G3_freeze") != ["G2_validation"]:
@@ -276,6 +318,11 @@ def validate(root: Path) -> list[str]:
             all_checks = {item for checks in gates.get("gates", {}).values() for item in checks}
             for token in (
                 "evidence_sufficiency_pass",
+                "structural_risk_scan_completed",
+                "material_risks_routed_or_not_applicable",
+                "triggered_risk_checks_resolved_or_claim_limited",
+                "red_team_review_completed",
+                "no_open_blocking_risks",
                 "robustness_plan_resolved",
                 "task_specific_algorithm_pass",
                 "ai_use_ledger_checked",
@@ -300,12 +347,19 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.2":
-                errors.append("manifest version must be 2.1.2")
+            if manifest.get("version") != "2.2-lite":
+                errors.append("manifest version must be 2.2-lite")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
-            for rel in manifest.get("runtime_include", []):
+            runtime_include = set(manifest.get("runtime_include", []))
+            for rel in (
+                "04_验收冻结/06_条件触发Gate与证据协议.md",
+                "07_AI协作/05_Red-Team独立评审协议.md",
+            ):
+                if rel not in runtime_include:
+                    errors.append(f"manifest runtime include missing required risk file: {rel}")
+            for rel in runtime_include:
                 if not (root / rel).exists():
                     errors.append(f"manifest runtime include missing: {rel}")
         except json.JSONDecodeError as exc:
