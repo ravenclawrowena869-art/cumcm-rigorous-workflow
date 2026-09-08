@@ -47,6 +47,12 @@ modules:
     source_of_truth: ""
     authoritative_handoff: ""
     evidence_gate_status: "NOT_RUN"
+    mathematical_review_status: "NOT_RUN"
+    mathematical_review_artifact: ""
+    mathematical_review_commit: ""
+    mathematical_veto_clear: false
+    dynamic_constraint_replay_status: "NOT_RUN"
+    surrogate_replay_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q2:
@@ -58,6 +64,12 @@ modules:
     source_of_truth: ""
     authoritative_handoff: ""
     evidence_gate_status: "NOT_RUN"
+    mathematical_review_status: "NOT_RUN"
+    mathematical_review_artifact: ""
+    mathematical_review_commit: ""
+    mathematical_veto_clear: false
+    dynamic_constraint_replay_status: "NOT_RUN"
+    surrogate_replay_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q3:
@@ -69,6 +81,12 @@ modules:
     source_of_truth: ""
     authoritative_handoff: ""
     evidence_gate_status: "NOT_RUN"
+    mathematical_review_status: "NOT_RUN"
+    mathematical_review_artifact: ""
+    mathematical_review_commit: ""
+    mathematical_veto_clear: false
+    dynamic_constraint_replay_status: "NOT_RUN"
+    surrogate_replay_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
   q4:
@@ -80,6 +98,12 @@ modules:
     source_of_truth: ""
     authoritative_handoff: ""
     evidence_gate_status: "NOT_RUN"
+    mathematical_review_status: "NOT_RUN"
+    mathematical_review_artifact: ""
+    mathematical_review_commit: ""
+    mathematical_veto_clear: false
+    dynamic_constraint_replay_status: "NOT_RUN"
+    surrogate_replay_status: "NOT_RUN"
     interface_version: ""
     blocked_by: []
 

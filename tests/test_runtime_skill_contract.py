@@ -32,13 +32,55 @@ class RuntimeSkillContractTests(unittest.TestCase):
         ):
             self.assertIn(token, text)
 
-    def test_shared_core_has_non_overridable_rule_ids(self):
+    def test_shared_core_has_math_authority_and_freeze_prerequisite(self):
         text = (SKILL_DIR / "core" / "SHARED_CORE.md").read_text(encoding="utf-8")
         for token in (
             "CORE-AUTH-001",
+            "CORE-MATH-AUTH-001",
             "CORE-FREEZE-001",
+            "CORE-FREEZE-002",
+            "CORE-DYNAMIC-001",
             "CORE-EVIDENCE-001",
             "CORE-COLLAB-001",
+            "material surrogate fidelity",
+            "G3_FREEZE",
+            "G2_VALIDATION=PASS",
+        ):
+            self.assertIn(token, text)
+
+    def test_xxt_profile_keeps_formal_veto(self):
+        text = (SKILL_DIR / "profiles" / "XXT_MATHEMATICAL.md").read_text(encoding="utf-8")
+        for token in (
+            "Mathematical Veto",
+            "P0 REOPEN",
+            "目标函数",
+            "hard constraint",
+            "单位、量纲",
+            "accounting",
+            "surrogate / proxy",
+            "全过程 replay",
+            "仅适用于 authority 明确指定保留主线",
+        ):
+            self.assertIn(token, text)
+
+    def test_fyq_cannot_bypass_mathematical_pass(self):
+        text = (SKILL_DIR / "profiles" / "FYQ_TECHNICAL_ORCHESTRATOR.md").read_text(encoding="utf-8")
+        for token in (
+            "统一技术路线权",
+            "mathematical_pass=true",
+            "G2_VALIDATION=PASS",
+            "旧 Mathematical PASS 失效",
+        ):
+            self.assertIn(token, text)
+
+    def test_evidence_gate_requires_dynamic_replay_and_surrogate_p0(self):
+        text = (ROOT / "04_验收冻结" / "05_模型证据充分性Gate.md").read_text(encoding="utf-8")
+        for token in (
+            "动态、状态空间与路径依赖模型",
+            "只检查最终状态，不得 Mathematical PASS",
+            "MATHEMATICAL_P0",
+            "强 baseline 本身只能支持 COMPETITIVE",
+            "不为形式完整机械增加大型 exact 求解",
         ):
             self.assertIn(token, text)
 
@@ -52,7 +94,7 @@ class RuntimeSkillContractTests(unittest.TestCase):
         self.assertIn(".cumcm-agent.local.yaml", text)
         self.assertIn("dist/", text)
 
-    def test_project_state_has_three_agent_bindings(self):
+    def test_project_state_has_three_agent_bindings_and_math_provenance(self):
         text = (ROOT / "templates" / "project_state模板.yaml").read_text(encoding="utf-8")
         for token in (
             "agent_bindings:",
@@ -61,6 +103,12 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "CYQ_PAPER",
             "authoritative_handoff:",
             "evidence_gate_status:",
+            "mathematical_review_status:",
+            "mathematical_review_artifact:",
+            "mathematical_review_commit:",
+            "mathematical_veto_clear:",
+            "dynamic_constraint_replay_status:",
+            "surrogate_replay_status:",
         ):
             self.assertIn(token, text)
 
@@ -102,16 +150,22 @@ class RuntimeSkillContractTests(unittest.TestCase):
             ],
         )
 
-    def test_gates_are_v21_and_include_new_checks(self):
+    def test_gates_are_v21_and_freeze_depends_on_validation(self):
         data = json.loads((ROOT / "templates" / "gates.json").read_text(encoding="utf-8"))
         self.assertEqual(data["version"], "2.1")
-        all_checks = {item for checks in data["gates"].values() for item in checks}
+        self.assertEqual(data["gate_dependencies"]["G3_freeze"], ["G2_validation"])
+        all_checks = {item for checks in data.get("gates", {}).values() for item in checks}
         for token in (
             "evidence_sufficiency_pass",
             "robustness_plan_resolved",
             "task_specific_algorithm_pass",
             "ai_use_ledger_checked",
             "pdf_layout_checked",
+            "mathematical_veto_clear",
+            "dynamic_constraints_full_replay_or_not_applicable",
+            "surrogate_full_replay_or_not_applicable",
+            "g2_validation_pass",
+            "current_mathematical_review_matches_source_of_truth",
         ):
             self.assertIn(token, all_checks)
 

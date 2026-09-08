@@ -43,10 +43,6 @@ def validate(root: Path) -> list[str]:
     skill_dir = root / "skills" / "cumcm-rigorous-workflow"
     profile_dir = skill_dir / "profiles"
 
-    # Repository-maintenance checks and Runtime Lite checks overlap, but a built
-    # Runtime Lite deliberately does not include repo-only files such as
-    # .gitignore or tools/. Detect canonical-repo mode by the validator source
-    # itself rather than requiring those maintenance files inside the runtime.
     canonical_repo_mode = (root / "tools" / "validate_runtime_skill.py").exists()
 
     expected_profiles = {f"{role}.md" for role in ROLE_IDS}
@@ -69,7 +65,61 @@ def validate(root: Path) -> list[str]:
         errors,
         "shared core",
         shared_core,
-        ("CORE-AUTH-001", "CORE-FREEZE-001", "CORE-EVIDENCE-001", "CORE-COLLAB-001"),
+        (
+            "CORE-AUTH-001",
+            "CORE-MATH-AUTH-001",
+            "CORE-FREEZE-001",
+            "CORE-FREEZE-002",
+            "CORE-DYNAMIC-001",
+            "CORE-EVIDENCE-001",
+            "CORE-COLLAB-001",
+            "material surrogate fidelity",
+            "G3_FREEZE",
+            "G2_VALIDATION=PASS",
+        ),
+    )
+
+    xxt_profile = _read(profile_dir / "XXT_MATHEMATICAL.md")
+    _require_tokens(
+        errors,
+        "XXT profile",
+        xxt_profile,
+        (
+            "Mathematical Veto",
+            "P0 REOPEN",
+            "目标函数",
+            "hard constraint",
+            "单位、量纲",
+            "accounting",
+            "surrogate / proxy",
+            "全过程 replay",
+        ),
+    )
+
+    fyq_profile = _read(profile_dir / "FYQ_TECHNICAL_ORCHESTRATOR.md")
+    _require_tokens(
+        errors,
+        "FYQ profile",
+        fyq_profile,
+        (
+            "统一技术路线权",
+            "mathematical_pass=true",
+            "G2_VALIDATION=PASS",
+            "旧 Mathematical PASS 失效",
+        ),
+    )
+
+    evidence_gate = _read(root / "04_验收冻结" / "05_模型证据充分性Gate.md")
+    _require_tokens(
+        errors,
+        "evidence gate",
+        evidence_gate,
+        (
+            "动态、状态空间与路径依赖模型",
+            "只检查最终状态，不得 Mathematical PASS",
+            "MATHEMATICAL_P0",
+            "强 baseline 本身只能支持 COMPETITIVE",
+        ),
     )
 
     bad = [
@@ -89,7 +139,18 @@ def validate(root: Path) -> list[str]:
         errors,
         "project_state",
         state,
-        ("agent_bindings:", *ROLE_IDS, "authoritative_handoff:", "evidence_gate_status:"),
+        (
+            "agent_bindings:",
+            *ROLE_IDS,
+            "authoritative_handoff:",
+            "evidence_gate_status:",
+            "mathematical_review_status:",
+            "mathematical_review_artifact:",
+            "mathematical_review_commit:",
+            "mathematical_veto_clear:",
+            "dynamic_constraint_replay_status:",
+            "surrogate_replay_status:",
+        ),
     )
 
     paper_profile = _read(profile_dir / "CYQ_PAPER.md")
@@ -128,6 +189,11 @@ def validate(root: Path) -> list[str]:
             gates = json.loads(gates_path.read_text(encoding="utf-8"))
             if gates.get("version") != "2.1":
                 errors.append("gates.json version must be 2.1")
+
+            deps = gates.get("gate_dependencies", {})
+            if deps.get("G3_freeze") != ["G2_validation"]:
+                errors.append("G3_freeze must depend on G2_validation")
+
             all_checks = {item for checks in gates.get("gates", {}).values() for item in checks}
             for token in (
                 "evidence_sufficiency_pass",
@@ -135,6 +201,11 @@ def validate(root: Path) -> list[str]:
                 "task_specific_algorithm_pass",
                 "ai_use_ledger_checked",
                 "pdf_layout_checked",
+                "mathematical_veto_clear",
+                "dynamic_constraints_full_replay_or_not_applicable",
+                "surrogate_full_replay_or_not_applicable",
+                "g2_validation_pass",
+                "current_mathematical_review_matches_source_of_truth",
             ):
                 if token not in all_checks:
                     errors.append(f"gates.json missing check: {token}")
