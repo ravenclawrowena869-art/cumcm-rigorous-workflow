@@ -1,6 +1,8 @@
-# 模型证据充分性 Gate v2.1
+# 模型证据充分性 Gate v2.2
 
 模型能够运行，只说明进入了验证阶段。进入 Freeze 和 Paper Handoff 前，必须确认结论有足够 evidence。
+
+关键参数的正式选取必须同时遵守 `03_建模与代码/05_参数选择协议.md`。
 
 ## 一、结论—证据表
 
@@ -11,7 +13,7 @@
 | 当前模型优于备选 | 同口径 baseline / challenger |  |  |
 | 算法接近最优 | exact anchor、small-scale truth、bound 或 gap |  |  |
 | 结果稳定 | 多种子、重排、重采样、重复划分 |  |  |
-| 参数选择合理 | 参数来源 + 参数扫描/重求解 |  |  |
+| 参数选择合理 | 参数语义与是否必须固定 + 题面/理论/可比文献/数据先验 + 合理搜索范围 + 参数扫描/重求解或自适应比较 + 选择准则 + 邻域/跨场景复核 |  |  |
 | 模型鲁棒 | 噪声、情景、结构扰动或分布漂移 |  |  |
 | 区间有保护作用 | downstream replay / violation-risk reduction |  |  |
 | 结构假设合理 | counterfactual / idealized bound |  |  |
@@ -56,7 +58,8 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 - 对顺序敏感算法做 permutation/shuffle stress test；
 - 做多随机种子或多起点，报告均值、标准差、最好/最差；
 - 在可计算的小规模或代表性子问题上，用 MILP、DP、枚举、下界或松弛解建立 exact anchor；
-- 不能只比较数套人工预设策略后声称最优。
+- 不能只比较数套人工预设策略后声称最优；
+- Top-K、候选比例、惩罚、步长、调整比例等 materially 影响结果的算法参数，必须通过 Parameter Evidence Gate：先解释参数语义和是否必须固定，再给出可解释搜索范围、参数扫描/重求解或自适应规则及选择依据。
 
 如果主线 authority 已冻结为最小修复，不要求额外建立一套完整竞争主模型；可以用小规模 anchor 或下界完成性能锚定。
 
@@ -66,6 +69,7 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 - 报告 solver status、runtime、gap（适用时）和最大违反量；
 - 对“区域独立”“无互联”“确定性输入”“无限网络”等关键结构假设，建立可实现的 counterfactual、理想上界或限制说明；
 - 对容量、功率、预算、权重、阈值等关键参数做改参数→重新求解；
+- 参数扫描前先给出范围来源；文献只有在参数定义、尺度和作用机制可比时才可用于缩小先验范围，不得把别题中的相似百分比直接移植；
 - 储能等双参数设备如果结果依赖容量与功率，应优先形成容量×功率 sensitivity surface，而非只改一个参数。
 
 ### 动态、状态空间与路径依赖模型
@@ -83,7 +87,9 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 
 ### 交替迭代与多目标模型
 
-- 经验调整比例、步长、惩罚权重和终止阈值必须有参数扫描或来源依据；
+- 经验调整比例、步长、惩罚权重和终止阈值必须有 Parameter Evidence：先判断其数学身份与是否必须固定，再用题面、理论、可比文献、数据或 pilot 缩小合理范围，最后通过重求解、明确选择准则和邻域/跨场景复核确定正式参数；
+- 若参数本质上是更新半径、步长、阻尼或每轮调整比例，必须讨论固定值是否合理；若存在与问题结构匹配的自适应机制，应至少与固定参数基线比较，而不是默认一个常数；
+- 粗粒度扫描只允许用于 screening 和缩小候选区间，不能单独证明“最优参数”；
 - 每轮同时记录正式目标、可行性、服务质量和题目要求的关键指标；
 - 接受条件与停止条件不能只看单一成本改善，如果服务质量是硬约束/接受条件，就必须同步检查；
 - 区分正常收敛、排程不再变化、改善不足、达到迭代上限和子问题不可行；
@@ -125,7 +131,8 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 - 启发式/多策略：在 Claim 需要且计算可承受时给 exact/MILP anchor；
 - 区域独立求解：检查互联 counterfactual 或明确限制；
 - 固定储能硬件：做容量/功率参数扫描；
-- 固定经验阈值：做阈值扫描；
+- 固定经验阈值：先找参数来源和合理范围，再做阈值扫描；
+- 迭代步长/每轮调整比例：先判断是否应固定；若可自适应，比较固定与自适应方案；
 - 交替迭代：终止条件兼顾 QoS 与可行性；
 - 多场景：比较迭代次数和停止原因；
 - 不可行：定量解释边界，而非泛泛归因。
@@ -138,5 +145,5 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 
 - `EVIDENCE PASS`：主要结论均有可追溯证据；
 - `PASS WITH LIMITATION`：主线可用，论文主动限定边界；
-- `FAIL / ADD EXPERIMENT`：缺关键 baseline、稳定性、敏感性、counterfactual、anchor 或不可行诊断，不得进入完整 Paper Handoff；
+- `FAIL / ADD EXPERIMENT`：缺关键 baseline、稳定性、敏感性、参数证据、counterfactual、anchor 或不可行诊断，不得进入完整 Paper Handoff；
 - `MATHEMATICAL_P0`：目标、hard constraints、单位/量纲、可行性、正式指标/accounting 或 material surrogate fidelity 出现致命错误，禁止 Freeze，并进入 P0 reopen 流程。
