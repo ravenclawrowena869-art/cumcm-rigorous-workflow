@@ -1,6 +1,6 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",
@@ -9,6 +9,7 @@
   "canonical_sources": [
     "SKILL.md",
     "AGENTS.md",
+    "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
     "05_论文与图表/01_论文流水线.md",
@@ -37,6 +38,7 @@
     "skills/cumcm-rigorous-workflow/profiles",
     "skills/cumcm-rigorous-workflow/references",
     "skills/cumcm-rigorous-workflow/manifest.json",
+    "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
     "05_论文与图表/01_论文流水线.md",
