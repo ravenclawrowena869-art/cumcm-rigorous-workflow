@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +46,13 @@ class HuggingFaceResearchLaneContractTest(unittest.TestCase):
         self.assertIn("HF Research Lane", text)
         self.assertIn("预训练模型", text)
         self.assertIn("外部公开数据", text)
+
+    def test_runtime_manifest_includes_hf_protocol(self):
+        manifest = json.loads(self.read("skills/cumcm-rigorous-workflow/manifest.json"))
+        rel = "02_开赛与拆题/05_HuggingFace研究资产协议.md"
+        self.assertIn(rel, manifest["canonical_sources"])
+        self.assertIn(rel, manifest["runtime_include"])
+        self.assertEqual(manifest["version"], "2.1.4")
 
 
 if __name__ == "__main__":
