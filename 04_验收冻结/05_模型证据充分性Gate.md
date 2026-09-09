@@ -1,4 +1,4 @@
-# 模型证据充分性 Gate v2.2
+# 模型证据充分性 Gate v2.3
 
 模型能够运行，只说明进入了验证阶段。进入 Freeze 和 Paper Handoff 前，必须确认结论有足够 evidence。
 
@@ -18,6 +18,7 @@
 | 区间有保护作用 | downstream replay / violation-risk reduction |  |  |
 | 结构假设合理 | counterfactual / idealized bound |  |  |
 | 不可行有现实原因 | 最小可达边界、slack、IIS 或 binding constraints |  |  |
+| 外部预训练资产有效 | 资产 provenance + 同口径本题 local benchmark |  |  |
 
 没有证据的结论只能标记待验证，不得改成更肯定的措辞写进论文。
 
@@ -96,6 +97,16 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 - 不同场景记录收敛速度和停止原因；
 - 若声称多目标权衡，至少给出极端点、规范化依据、Pareto/ε-constraint 结果或明确的主目标—约束结构；
 - 不能把事后统计指标写成模型已经优化的目标。
+
+### 外部预训练模型 / Hugging Face 资产
+
+- 任何进入正式候选的 Model / Dataset 必须冻结 `repo_id`、`revision`、license、关键文件 provenance 和本地 wrapper/version；
+- Model Card / Dataset Card 只用于描述资产和外部报告结果，**不得把其中指标直接当成本题 benchmark**；
+- 下载量、likes、trending、Space Demo 或第三方 leaderboard 只能帮助发现候选，不能证明本题适用性；
+- 必须在本题冻结 split、同一评价口径和同一 downstream interface 下重新做 local benchmark / challenger comparison；
+- 外部数据进入模型时，必须检查赛题规则、license、时间泄漏、重复样本与 target leakage；
+- 若 HF 资产只作为 proxy / embedding / screening，继续执行下述 Surrogate / Proxy Fidelity full replay；
+- 远程 Job 不能绕过数据安全、可复现与本地独立复算要求。
 
 ## 四、Surrogate / Proxy Fidelity
 
