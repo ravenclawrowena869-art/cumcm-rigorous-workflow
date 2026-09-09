@@ -317,8 +317,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.3":
-                errors.append("manifest version must be 2.1.3")
+            if manifest.get("version") != "2.1.4":
+                errors.append("manifest version must be 2.1.4")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
