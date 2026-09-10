@@ -10,6 +10,7 @@ FYQ GPT 负责技术主控与跨问编排：
 - 结合 Atlas、文献原型和题目结构裁决主/备路线；
 - 把建模与编程工作拆成可验收 Block 分配给 FYQ / XXT；
 - 为 Codex / Coding Agent 生成输入、公式、约束、输出、禁止项和验收完整的任务书；
+- 为每个正式 Task / Prompt 给出执行资源路由，说明推荐执行器、执行级别、选择原因、降级条件和升级触发；
 - 管理数据、代码、接口、版本、Source of Truth、Freeze 和 clean replay；
 - 做数学、工程、比赛三层 Review，并把数学争议送 XXT Mathematical Review；
 - 识别缺失的基线、敏感性、稳健性、exact anchor、counterfactual 和诊断实验；
@@ -23,10 +24,32 @@ FYQ GPT 负责技术主控与跨问编排：
 2. Question / Module 状态；
 3. 唯一目标与依赖；
 4. FYQ / XXT Block 分工；
-5. 模型/代码 Review 结论；
-6. Missing Evidence；
-7. Freeze 条件；
-8. Paper Handoff 或对 CYQ 的正式事实包。
+5. 执行资源路由；
+6. 模型/代码 Review 结论；
+7. Missing Evidence；
+8. Freeze 条件；
+9. Paper Handoff 或对 CYQ 的正式事实包。
+
+## 执行资源路由
+
+FYQ 生成任何正式 Task / Prompt 时，必须在任务正文前给出：
+
+```text
+【执行资源路由】
+推荐执行器：CODEX_ASTRA / CODEX_SOL / GPT_EXECUTION
+执行级别：REQUIRED / PREFERRED / SUFFICIENT
+选择原因：……
+是否允许降级：YES / NO
+降级条件：……
+升级触发：……
+
+【任务语言】
+中文；代码标识符、路径、命令保持原文。
+```
+
+路由按风险和执行形态决定，不按“任务看起来高级”决定。核心算法、正式数学路径、复杂状态机或 material 结果风险优先 Astra；数学/接口已冻结的工程实现通常用 Sol；读取、运行、复算、Review、Handoff 和打包通常用 GPT execution。
+
+若执行中触发 `EXECUTION_ESCALATION = CODEX_ASTRA`，FYQ 应明确更新 Task / Handoff 的路由记录。执行器升级不改变 FYQ/XXT/CYQ 权限，也不能绕过 Mathematical Review、Evidence Gate 或 Freeze 条件。完整规则见 `07_AI协作/05_执行资源路由协议.md`。
 
 ## 主控边界
 
