@@ -3,7 +3,7 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1.6 Dispatcher
+# CUMCM Rigorous Workflow v2.2.0 Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
 
@@ -54,7 +54,10 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 ## 3. 按任务加载 canonical Gate
 
 - 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`。
+- **模型选择、baseline/challenger 比较、候选路线裁决：同时读取 `02_开赛与拆题/02_模型选择协议.md`；存在多条合理路线时可触发统一口径的小样锦标赛。**
+- **独立验收、红队复算、核心数字复核：读取 `04_验收冻结/01_独立验收协议.md`；头条数字优先使用信息隔离式独立复算。**
 - **参数选取、阈值/权重/步长/每轮调整比例、Top-K、平滑系数、风险参数等调参任务：除 Evidence Gate 外，必须同时读取 `03_建模与代码/05_参数选择协议.md`。**
+- **多 Agent 自动化、子 Agent 编排、checkpoint/resume、自动返工、审稿回流、换版传播或工作流 dry-run：读取 `07_AI协作/05_多Agent验证流水线与回流协议.md`；并按需联读 `00_总览/03_状态机与冻结规则.md`、`04_验收冻结/01_独立验收协议.md`、`04_验收冻结/04_结果来源链.md`。**
 - 论文写作、逐问短导语、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
 - 图表：同时读取 `05_论文与图表/02_图表工作流.md`。
 - 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。
@@ -105,11 +108,15 @@ Hugging Face 的 Model Card、Dataset Card、Space、下载量、趋势或第三
 
 非平凡求解必须有本题专属伪代码或算法流程，写出真实输入、关键变量、候选/循环、hard constraint、接受/停止条件、失败分支与输出复算。
 
+多 Agent 自动流水线可以让不依赖失败模块的任务继续，但**流程继续不等于科学放行**；任何红队未复算、hard constraint 未通过、关键指标不可追溯或 Mathematical Veto 未解除的模块仍不得 Freeze 或进入正式论文结论。
+
 ## 8. Freeze 与共同事实源
 
 正式同步只认：`project_state.yaml`、Task、Interface、Handoff、Frozen Source of Truth、Figure Registry、Git commit / PR。
 
 聊天上下文不能覆盖这些来源。`FROZEN` 内容只有 P0 问题才能重开，并建立新版本后重跑依赖 Gate。
+
+正式结果发生换版时，必须执行 `04_验收冻结/04_结果来源链.md` 的影响传播与旧值残留检查，避免新结果与旧图、旧表、旧摘要或旧下游缓存混用。
 
 ## 9. Runtime Lite
 
@@ -117,4 +124,4 @@ Hugging Face 的 Model Card、Dataset Card、Space、下载量、趋势或第三
 
 ## Completion
 
-一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据后才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel、聊天规划或外部 Model Card 指标都不构成完成。
+一个模块只有在数学、工程、evidence 和论文接口均有可追溯证据后才能进入 FROZEN / PAPER_LOCKED。单次“跑通”、结果 Excel、聊天规划、自动化流水线自己宣称完成或外部 Model Card 指标都不构成完成。

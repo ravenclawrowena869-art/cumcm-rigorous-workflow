@@ -1,4 +1,4 @@
-# 平台无关 Shared Skill 与 Agent 切换 v2.1
+# 平台无关 Shared Skill 与 Agent 切换 v2.2
 
 团队的长期能力必须沉淀在 GitHub repo，而不能只存在某一个 ChatGPT Project、Codex session 或 Claude session 中。
 
@@ -70,7 +70,23 @@ Primary Coding Agent
 
 只把 GitHub URL 发给 AI 但没有实际读取，不等于规则已经生效。
 
-## 5. Runtime Lite
+## 5. 多 Agent 自动流水线的统一入口
+
+如果平台支持一个主 Agent 调用多个子 Agent、并行任务或自动返工，必须额外读取：
+
+`07_AI协作/05_多Agent验证流水线与回流协议.md`
+
+自动化编排只负责“怎么执行”，不能改写“什么算通过”。无论宿主是 ChatGPT、Codex、Claude Code 还是其他 Agent：
+
+- 独立复算继续执行 `04_验收冻结/01_独立验收协议.md`；
+- 模型选择继续执行 `02_开赛与拆题/02_模型选择协议.md`；
+- Freeze 继续受 Mathematical PASS 和模型证据 Gate 约束；
+- 结果变化继续执行 `04_验收冻结/04_结果来源链.md` 的换版影响传播；
+- Agent 超时、重试耗尽或预算不足不得触发科学 Gate 软放行。
+
+运行时的 checkpoint、日志、临时状态只能用于恢复任务，不能覆盖 `project_state.yaml`、Frozen Source of Truth 或 Git commit / PR。
+
+## 6. Runtime Lite
 
 日常 Runtime Skill 只携带：
 - dispatcher；
@@ -83,7 +99,7 @@ Primary Coding Agent
 
 优秀论文 PDF、截图和大型 corpus 外置。Skill 规则更新不要求重新打包几十 MB 原文。
 
-## 6. 三方共同维护
+## 7. 三方共同维护
 
 任何人都可以通过 branch + PR 更新 Skill。正式规则只认 merge 后的 main。重要 Shared Core 改动至少由另一角色 Review，跨角色 Handoff 由输出方与消费方共同 Review。
 

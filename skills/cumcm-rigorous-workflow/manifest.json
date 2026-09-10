@@ -1,6 +1,6 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",
@@ -9,8 +9,12 @@
   "canonical_sources": [
     "SKILL.md",
     "AGENTS.md",
+    "00_总览/03_状态机与冻结规则.md",
+    "02_开赛与拆题/02_模型选择协议.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
+    "04_验收冻结/01_独立验收协议.md",
+    "04_验收冻结/04_结果来源链.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
     "05_论文与图表/01_论文流水线.md",
     "05_论文与图表/02_图表工作流.md",
@@ -21,6 +25,7 @@
     "07_AI协作/02_AI_Prompt模板.md",
     "07_AI协作/03_AI使用记录.md",
     "07_AI协作/04_平台无关Skill与Agent切换.md",
+    "07_AI协作/05_多Agent验证流水线与回流协议.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
     "templates/任务单模板.md",
@@ -29,7 +34,9 @@
     "templates/AI使用记录模板.csv",
     "templates/project_state模板.yaml",
     "templates/cumcm-agent.local.example.yaml",
-    "templates/gates.json"
+    "templates/gates.json",
+    "templates/红队独立复算报告模板.md",
+    "templates/结果换版影响清单模板.md"
   ],
   "runtime_include": [
     "SKILL.md",
@@ -38,8 +45,12 @@
     "skills/cumcm-rigorous-workflow/profiles",
     "skills/cumcm-rigorous-workflow/references",
     "skills/cumcm-rigorous-workflow/manifest.json",
+    "00_总览/03_状态机与冻结规则.md",
+    "02_开赛与拆题/02_模型选择协议.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
+    "04_验收冻结/01_独立验收协议.md",
+    "04_验收冻结/04_结果来源链.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
     "05_论文与图表/01_论文流水线.md",
     "05_论文与图表/02_图表工作流.md",
@@ -49,6 +60,7 @@
     "07_AI协作/02_AI_Prompt模板.md",
     "07_AI协作/03_AI使用记录.md",
     "07_AI协作/04_平台无关Skill与Agent切换.md",
+    "07_AI协作/05_多Agent验证流水线与回流协议.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
     "templates/任务单模板.md",
@@ -57,7 +69,9 @@
     "templates/AI使用记录模板.csv",
     "templates/project_state模板.yaml",
     "templates/cumcm-agent.local.example.yaml",
-    "templates/gates.json"
+    "templates/gates.json",
+    "templates/红队独立复算报告模板.md",
+    "templates/结果换版影响清单模板.md"
   ],
   "forbidden_binary_extensions": [
     ".pdf",

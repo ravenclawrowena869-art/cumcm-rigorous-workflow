@@ -63,7 +63,18 @@ def validate(root: Path) -> list[str]:
         errors,
         "dispatcher",
         dispatcher,
-        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语", "05_参数选择协议.md"),
+        (
+            "ACTIVE_ROLE",
+            *ROLE_IDS,
+            "role-neutral read-only",
+            "SHARED_CORE.md",
+            "逐问短导语",
+            "05_参数选择协议.md",
+            "02_模型选择协议.md",
+            "01_独立验收协议.md",
+            "05_多Agent验证流水线与回流协议.md",
+            "流程继续不等于科学放行",
+        ),
     )
 
     shared_core = _read(skill_dir / "core" / "SHARED_CORE.md")
@@ -101,6 +112,19 @@ def validate(root: Path) -> list[str]:
             "粗扫的作用只是探索响应曲线",
             "自适应",
             "Parameter Evidence Gate",
+        ),
+    )
+
+    model_selection = _read(root / "02_开赛与拆题" / "02_模型选择协议.md")
+    _require_tokens(
+        errors,
+        "model selection protocol",
+        model_selection,
+        (
+            "MODEL-TOURNAMENT-001",
+            "baseline + 1–3 个真正相关候选",
+            "不允许用最终测试集反复选模",
+            "小样胜出只代表“值得进入正式验证”",
         ),
     )
 
@@ -145,6 +169,57 @@ def validate(root: Path) -> list[str]:
             "MATHEMATICAL_P0",
             "强 baseline 本身只能支持 COMPETITIVE",
             "Parameter Evidence",
+        ),
+    )
+
+    independent_validation = _read(root / "04_验收冻结" / "01_独立验收协议.md")
+    _require_tokens(
+        errors,
+        "independent validation",
+        independent_validation,
+        (
+            "REDTEAM-ISOLATION-001",
+            "REDTEAM-DEFINITION-001",
+            "REDTEAM-FROZEN-INPUT-001",
+            "REDTEAM-FAIL-001",
+            "同声明口径复算",
+            "独立口径挑战",
+            "FAIL / REOPEN",
+        ),
+    )
+
+    source_chain = _read(root / "04_验收冻结" / "04_结果来源链.md")
+    _require_tokens(
+        errors,
+        "result source chain",
+        source_chain,
+        (
+            "CHANGESET-001",
+            "CHANGESET-STALE-001",
+            "FROZEN-INPUT-001",
+            "换版影响清单",
+            "旧值残留检查",
+        ),
+    )
+
+    orchestration = _read(root / "07_AI协作" / "05_多Agent验证流水线与回流协议.md")
+    _require_tokens(
+        errors,
+        "multi-agent orchestration",
+        orchestration,
+        (
+            "ORCH-STATE-001",
+            "ORCH-REDTEAM-001",
+            "ORCH-TOURNAMENT-001",
+            "ORCH-CHECKPOINT-001",
+            "ORCH-CHANGESET-001",
+            "ORCH-LEDGER-001",
+            "ORCH-GUARD-001",
+            "ORCH-DRYRUN-001",
+            "ORCH-CONTRACT-001",
+            "ORCH-NO-SOFTPASS-001",
+            "执行编排层",
+            "不得自动 PASS",
         ),
     )
 
@@ -229,6 +304,22 @@ def validate(root: Path) -> list[str]:
             "正式来源",
             "论文禁区",
         ),
+    )
+
+    redteam_template = _read(root / "templates" / "红队独立复算报告模板.md")
+    _require_tokens(
+        errors,
+        "red-team template",
+        redteam_template,
+        ("信息隔离声明", "同声明口径复算", "独立口径挑战", "FAIL / REOPEN"),
+    )
+
+    changeset_template = _read(root / "templates" / "结果换版影响清单模板.md")
+    _require_tokens(
+        errors,
+        "change-set template",
+        changeset_template,
+        ("换版基本信息", "影响传播", "旧值残留检查", "Paper Check"),
     )
 
     collaboration = _read(root / "06_协作与交接" / "06_三GPT协作与Skill共同维护.md")
@@ -317,8 +408,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.4":
-                errors.append("manifest version must be 2.1.4")
+            if manifest.get("version") != "2.2.0":
+                errors.append("manifest version must be 2.2.0")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
