@@ -1,4 +1,31 @@
-# Version 2.1.6 — Repository Write Gate Hardening
+# Version 2.2.0 — Multi-Agent Validation Hardening
+
+## v2.2.0 增量升级
+
+本次升级吸收外部数模自动化流水线中经过实践验证的**工程机制**，但不引入其特定模型、API、并发参数、评分阈值或科学 Gate 软放行规则。
+
+- 新增 `07_AI协作/05_多Agent验证流水线与回流协议.md`：把多 Agent 定位为执行编排层，而不是新的科学裁决层；
+- 新增 `ORCH-STATE-001`：执行状态与科学验证状态分离，允许无依赖任务继续，但 FAIL 不得因重试/超时/预算耗尽自动转 PASS；
+- 新增 `ORCH-REDTEAM-001`：头条数字优先进行信息隔离式红队复算，禁止把“第二个 Agent 阅读原代码后认可”直接称为独立复算；
+- 独立验收增加“同声明口径复算 → 独立口径挑战”，将数值错误和定义/口径差异分开；
+- 随机、Monte Carlo、仿真和合成输入必须冻结 generation method、seed/config 与 SHA256，先做同输入复算再做鲁棒性挑战；
+- 模型选择协议增加 `MODEL-TOURNAMENT-001`：复杂问可用 baseline + 1–3 个候选做统一小样原型，先资格筛查、后同口径比较，结束后收敛为主模型 + 最多一个备选；
+- 新增 checkpoint/resume 规则：恢复前核对 source commit、input manifest/hash 与 materially 影响结果的配置，禁止利用旧 checkpoint 绕过 Gate；
+- 结果来源链增加 `CHANGESET-001`：正式数字变更必须建立换版影响清单，并按 Frozen Output → Paper Metrics → 下游 → 图表 → 正文 → 摘要 → stale-value check 传播；
+- 新增返工台账、变化守卫、结构守卫、生产者—消费者契约核对与工作流 dry-run 场景；
+- 明确 `ORCH-NO-SOFTPASS-001`：红队未复算、hard constraint 未通过、关键指标不可追溯、Agent 失败或预算耗尽均不得自动科学放行；
+- 新增 `templates/红队独立复算报告模板.md` 与 `templates/结果换版影响清单模板.md`；
+- Runtime manifest / Source Index 同步纳入状态机、模型选择、独立验收、结果来源链、多 Agent 协议和新模板。
+
+### 与既有严格规则的冲突处理
+
+本次明确采用更严格方案：
+
+```text
+流程可以降级继续 ≠ 科学结论可以降级转正
+```
+
+如果某模块验证失败，自动化系统可以继续执行不依赖该模块的工作，但该模块仍保持 `FAIL / REOPEN` 或 `MATHEMATICAL_P0`，不得进入 `FROZEN`。最终 Submission Gate 的 hard blockers 仍必须全部清零。
 
 ## v2.1.6 增量升级
 
