@@ -1,4 +1,4 @@
-# Shared Core v2.1.2
+# Shared Core v2.1.3
 
 本文件对 FYQ、XXT、CYQ 三套 GPT 同时生效。任何 Role Profile 都不得覆盖 Shared Core。
 
@@ -128,6 +128,18 @@ exact anchor / bound / MILP benchmark 按 Claim 强度、模型类型和计算�
 上述任一必需字段缺失，或 Ledger 与实际 AI 参与程度不一致，则 `AI Disclosure Gate FAIL`，不得进入最终提交状态。`paper_location` 对不进入论文但进入正式代码/图表的产物可写 `NOT_APPLICABLE`，但 `artifact` 必须指向正式载体。
 
 “聊天记录 → 知识库 → 团队框架 → 人工重写”用于人工核验与责任闭环，不得被解释成掩盖或弱化真实 AI 使用。
+
+## CORE-HF-001 Hugging Face 是条件式研究加速器
+
+Hugging Face 只在任务确实需要 ML / DL / 预训练模型、外部公开数据、论文对应模型/数据/Space 或远程 HF 资产时条件触发。它是研究与工程资产入口，**不得替代本题验证**、官方材料、学术原论文、Frozen Source of Truth、local benchmark、独立复算或 Mathematical Review。
+
+Model Card、Dataset Card、Space、下载量、趋势分数和第三方 benchmark 只能用于发现候选、核对资产信息或形成实现先验。任何进入正式模型、代码、实验、图表或论文结论的 HF 资产必须记录 repo/revision/license/关键文件 provenance，并在本题冻结数据与评价口径下重新验证。
+
+**数据安全：**未经明确批准，禁止把官方赛题附件、团队私有数据、未公开中间结果、含敏感信息或许可不明的数据上传到公开/第三方 Hugging Face Dataset、Space、Job 或其他远程计算。远程 Job 若需读取非公开比赛数据，必须先取得 `DATA_EXTERNAL_COMPUTE_APPROVED=true`。
+
+HF 插件、Hub、Jobs 或网络不可用时，标记 `HF_UNAVAILABLE`，立即回退到原论文 + 学术/Web 检索 + GitHub + 本地 baseline/challenger，不得阻塞比赛主线，也不得降低 Evidence Gate。
+
+详细协议：`02_开赛与拆题/05_HuggingFace研究资产协议.md`。
 
 ## CORE-COLLAB-001 三人共同维护
 
