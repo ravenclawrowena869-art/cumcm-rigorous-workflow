@@ -1,12 +1,17 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.1.4",
+  "version": "2.2.1",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",
     "CYQ_PAPER"
   ],
   "canonical_sources": [
+    "skills/cumcm-rigorous-workflow/roles/controller/ROLE.md",
+    "skills/cumcm-rigorous-workflow/roles/modeling/ROLE.md",
+    "skills/cumcm-rigorous-workflow/roles/paper/ROLE.md",
+    "05_论文与图表/06_动态论文框架.md",
+    "05_论文与图表/07_表达参考.md",
     "SKILL.md",
     "AGENTS.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
@@ -23,6 +28,7 @@
     "07_AI协作/04_平台无关Skill与Agent切换.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
+    "templates/Pre_Paper_Brief模板.md",
     "templates/任务单模板.md",
     "templates/Robustness_Plan模板.md",
     "templates/Figure_Registry模板.csv",
@@ -32,6 +38,9 @@
     "templates/gates.json"
   ],
   "runtime_include": [
+    "skills/cumcm-rigorous-workflow/roles",
+    "05_论文与图表/06_动态论文框架.md",
+    "05_论文与图表/07_表达参考.md",
     "SKILL.md",
     "AGENTS.md",
     "skills/cumcm-rigorous-workflow/core",
@@ -51,6 +60,7 @@
     "07_AI协作/04_平台无关Skill与Agent切换.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
+    "templates/Pre_Paper_Brief模板.md",
     "templates/任务单模板.md",
     "templates/Robustness_Plan模板.md",
     "templates/Figure_Registry模板.csv",

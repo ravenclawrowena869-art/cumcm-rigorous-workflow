@@ -3,7 +3,7 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1.6 Dispatcher
+# CUMCM Rigorous Workflow v2.2.1 Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
 
@@ -15,7 +15,7 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 1. 读取本 dispatcher；
 2. 读取 Shared Core；
-3. 解析当前 `ACTIVE_ROLE` 并读取对应 Role Profile；
+3. 解析当前 `ACTIVE_ROLE`，从角色入口读取对应 Role Profile；
 4. 按任务类型读取直接相关的 canonical Gate / workflow。
 
 若运行平台支持原生 Skill invocation，优先调用 canonical Skill；若只能访问仓库文件，则按上述顺序读取等价文件。无法完成本轮调用时，先明确阻断原因，不得假装已按 Skill 执行。
@@ -26,7 +26,7 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 `skills/cumcm-rigorous-workflow/core/SHARED_CORE.md`
 
-然后读取 `README.md`、当前比赛 `project_state.yaml`（若存在）和与任务直接相关的 workflow / Gate。不要无目的地一次性读取整个仓库。
+然后读取当前比赛 `project_state.yaml`（若存在）。`README.md` 用于初次了解仓库或部署，不是每个任务的必读项。不要把空白比赛模板当成当前比赛状态，不要无目的地一次性读取整个仓库。
 
 ## 2. 解析 ACTIVE_ROLE
 
@@ -43,11 +43,15 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 3. 用户首次启动时声明；
 4. 仍无法确定时，不猜角色。只询问一次，或在不需要角色权限的任务中采用 role-neutral read-only 模式。
 
-解析后加载：
+解析后只进入对应角色文件夹：
 
-- FYQ → `skills/cumcm-rigorous-workflow/profiles/FYQ_TECHNICAL_ORCHESTRATOR.md`
-- XXT → `skills/cumcm-rigorous-workflow/profiles/XXT_MATHEMATICAL.md`
-- CYQ → `skills/cumcm-rigorous-workflow/profiles/CYQ_PAPER.md`
+| ACTIVE_ROLE | 角色入口 | 职责权威文件（原路径保留） |
+|---|---|---|
+| `FYQ_TECHNICAL_ORCHESTRATOR` | [总控入口](skills/cumcm-rigorous-workflow/roles/controller/ROLE.md) | `skills/cumcm-rigorous-workflow/profiles/FYQ_TECHNICAL_ORCHESTRATOR.md` |
+| `XXT_MATHEMATICAL` | [数学建模入口](skills/cumcm-rigorous-workflow/roles/modeling/ROLE.md) | `skills/cumcm-rigorous-workflow/profiles/XXT_MATHEMATICAL.md` |
+| `CYQ_PAPER` | [论文入口](skills/cumcm-rigorous-workflow/roles/paper/ROLE.md) | `skills/cumcm-rigorous-workflow/profiles/CYQ_PAPER.md` |
+
+角色入口负责阅读顺序和任务导航，Profile 仍是职责权威，Shared Core 仍是公共规则唯一来源。不要复制公共规则、建立三个独立 Skill，或加载三个角色的全部任务材料。旧任务直接引用 Profile 时仍有效，再按本节补读相应入口即可。角色名称不改变单问 Owner，也不把 XXT 等同于编程手。
 
 可以为了 Review 阅读其他 Profile，但输出必须以当前主 Profile 的权限和交付格式为准。
 
@@ -57,7 +61,8 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 - **参数选取、阈值/权重/步长/每轮调整比例、Top-K、平滑系数、风险参数等调参任务：除 Evidence Gate 外，必须同时读取 `03_建模与代码/05_参数选择协议.md`。**
 - 论文写作、逐问短导语、润色、审稿：读取 `05_论文与图表/01_论文流水线.md` 与 `05_论文与图表/05_逐问写作与算法呈现Gate.md`。
 - 图表：同时读取 `05_论文与图表/02_图表工作流.md`。
-- 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。
+- 论文框架、队友运行期间的论文工作：读取 [动态论文框架](05_论文与图表/06_动态论文框架.md)，先判断该问是否达到 `TECH_DIRECTION_STABLE`。逐问短导语仍由写作 Gate 规定；[表达参考](05_论文与图表/07_表达参考.md) 仅在需要措辞参考时选读，不是必选词库。
+- 模型到论文交付：使用 `06_协作与交接/05_Paper_Handoff规范.md`。技术方向稳定后使用 `Pre-Paper Brief`，正式数字和结论只使用冻结后的 `Formal Paper Handoff`。
 - 最终提交：执行 `08_提交终检/01_FINAL_SUBMISSION_GATE.md`。
 - **创建、修改、删除 Skill / Workflow / Gate / Profile / Template / README / VERSION 或执行任何 GitHub 仓库写操作：必须先读取 `06_协作与交接/06_三GPT协作与Skill共同维护.md`，并执行 Repository Write Gate。**
 - **ML / DL / 预训练模型、外部公开数据、论文对应 Hugging Face 资产或远程 HF 计算任务：条件触发 `02_开赛与拆题/05_HuggingFace研究资产协议.md` 的 `HF Research Lane`。** 该 Lane 只用于解决已定义的研究缺口，不得作为所有赛题的默认必经步骤。

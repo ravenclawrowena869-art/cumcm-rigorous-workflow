@@ -52,7 +52,6 @@ class HuggingFaceResearchLaneContractTest(unittest.TestCase):
         rel = "02_开赛与拆题/05_HuggingFace研究资产协议.md"
         self.assertIn(rel, manifest["canonical_sources"])
         self.assertIn(rel, manifest["runtime_include"])
-        self.assertEqual(manifest["version"], "2.1.4")
 
 
 if __name__ == "__main__":

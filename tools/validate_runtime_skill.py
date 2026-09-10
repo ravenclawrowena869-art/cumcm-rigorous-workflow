@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -187,6 +188,9 @@ def validate(root: Path) -> list[str]:
             "agent_bindings:",
             *ROLE_IDS,
             "authoritative_handoff:",
+            "technical_direction_status:",
+            "technical_direction_artifact:",
+            "pre_paper_brief:",
             "evidence_gate_status:",
             "mathematical_review_status:",
             "mathematical_review_artifact:",
@@ -194,6 +198,7 @@ def validate(root: Path) -> list[str]:
             "mathematical_veto_clear:",
             "dynamic_constraint_replay_status:",
             "surrogate_replay_status:",
+            "formal_paper_handoff_status:",
         ),
     )
 
@@ -228,6 +233,24 @@ def validate(root: Path) -> list[str]:
             "自然语言初稿",
             "正式来源",
             "论文禁区",
+            "Formal Paper Handoff",
+            "Validation PASS",
+            "FROZEN",
+        ),
+    )
+
+    pre_paper = _read(root / "templates" / "Pre_Paper_Brief模板.md")
+    _require_tokens(
+        errors,
+        "Pre-Paper Brief template",
+        pre_paper,
+        (
+            "Pre-Paper Brief",
+            "TECH_DIRECTION_STABLE",
+            "未冻结声明",
+            "已稳定的技术方向",
+            "图表与证据需求",
+            "待补与禁止定稿",
         ),
     )
 
@@ -317,8 +340,13 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.4":
-                errors.append("manifest version must be 2.1.4")
+            release = re.search(r"^# CUMCM Rigorous Workflow v(\d+\.\d+\.\d+) Dispatcher$", dispatcher, re.M)
+            if release is None or manifest.get("version") != release.group(1):
+                errors.append("manifest version must match dispatcher release")
+            if canonical_repo_mode and release is not None:
+                version_heading = _read(root / "VERSION.md").splitlines()[:1]
+                if not version_heading or not version_heading[0].startswith(f"# Version {release.group(1)} —"):
+                    errors.append("VERSION.md must match dispatcher release")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")

@@ -1,6 +1,24 @@
-# Paper Handoff v2.1
+# 两级论文交接 v2.2
 
-Paper Lead 不负责进入代码包寻找论文事实。每个模块进入 FROZEN 后，Owner 必须提供 Paper Handoff；在此之前，模型应通过 `04_验收冻结/05_模型证据充分性Gate.md`。
+Paper Lead 不负责进入代码包寻找论文事实。技术线按成熟度提供两级交接：达到 `TECH_DIRECTION_STABLE` 后提供 `Pre-Paper Brief`，用于提前搭建题目化方法骨架；通过 Validation 并进入 FROZEN 后提供 `Formal Paper Handoff`，用于正式结果、结论和摘要定稿。
+
+两级交接不能互相替代。`Pre-Paper Brief` 不降低 Mathematical Gate、Evidence Gate 或 Freeze 门槛；未冻结数字、模型优势、稳健性结论和最终推荐不得进入正式正文。旧任务中未标级别的 `Paper Handoff` 一律按 `Formal Paper Handoff` 理解。
+
+## Pre-Paper Brief
+
+只有当前 Task、Handoff 或 `project_state.yaml` 已记录 `TECH_DIRECTION_STABLE`，才能签发。使用[Pre-Paper Brief 模板](../../templates/Pre_Paper_Brief模板.md)，至少交付：
+
+- 本问合同、输入输出和跨问接口；
+- 已稳定的主模型方向、核心变量、objective、hard constraints、information set、粒度和单位；
+- baseline / challenger 主方向、评价指标与 validator/evidence 类型；
+- 题目化方法步骤草案、公式与伪代码槽位；
+- 图表目的、字段需求、待补实验与明确未冻结项。
+
+Paper Lead 可据此写概述、章节逻辑、建模依据、公式/伪代码槽位和比较目的，并提出 Evidence Gap Return；不得把 Brief 中的候选内容写成最终方法，不得写正式数字、效果、最优性、稳定性、鲁棒性或最终推荐。
+
+## Formal Paper Handoff
+
+每个模块在当前版本 `Validation PASS`、Evidence Gate 通过并进入 FROZEN 后，Owner 必须提供 `Formal Paper Handoff`。正式交付使用[Paper Handoff 模板](../../templates/Paper_Handoff模板.md)，并保留以下完整字段。
 
 ## 必填字段
 
@@ -93,7 +111,7 @@ source file / row / column / freeze version / script / hash
 
 Technical Lead 检查来源、版本、脚本和复现；Mathematical Lead 检查公式、伪代码、约束与结论边界；Paper Lead 检查是否足以写出与本题直接相关的正文。
 
-若缺少真实求解步骤、模型选择证据、正式来源或必要稳健性实验，Handoff 状态只能是 `INCOMPLETE`，不得要求 AI 用通用文字补齐。
+若缺少真实求解步骤、模型选择证据、正式来源或必要稳健性实验，`Formal Paper Handoff` 状态只能是 `INCOMPLETE`，不得要求 AI 用通用文字补齐，也不得用 `Pre-Paper Brief` 代替。
 
 ## CYQ 回传缺口
 

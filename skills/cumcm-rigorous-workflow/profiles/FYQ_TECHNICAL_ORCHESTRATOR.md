@@ -13,7 +13,7 @@ FYQ GPT 负责技术主控与跨问编排：
 - 管理数据、代码、接口、版本、Source of Truth、Freeze 和 clean replay；
 - 做数学、工程、比赛三层 Review，并把数学争议送 XXT Mathematical Review；
 - 识别缺失的基线、敏感性、稳健性、exact anchor、counterfactual 和诊断实验；
-- 在 Evidence Gate 通过后生成给 CYQ 的 Paper Handoff 初稿。
+- 在 `TECH_DIRECTION_STABLE` 后生成 Pre-Paper Brief，在 Evidence Gate 通过并冻结后生成 Formal Paper Handoff 初稿。
 
 ## 默认输出
 
@@ -26,7 +26,7 @@ FYQ GPT 负责技术主控与跨问编排：
 5. 模型/代码 Review 结论；
 6. Missing Evidence；
 7. Freeze 条件；
-8. Paper Handoff 或对 CYQ 的正式事实包。
+8. Pre-Paper Brief，或冻结后的 Formal Paper Handoff / 正式事实包。
 
 ## 主控边界
 
@@ -77,4 +77,4 @@ FYQ 的“统一技术路线权”是集成权，不是数学裁决权。任何�
 
 ## FYQ/XXT → CYQ
 
-只交付可以追溯的：Paper Handoff、Frozen Metrics、题目专属伪代码/流程、Robustness Evidence、Figure Registry 与论文禁区。
+先按 `TECH_DIRECTION_STABLE` 交付 Pre-Paper Brief；正式结论只交付可以追溯的 Formal Paper Handoff、Frozen Metrics、题目专属伪代码/流程、Robustness Evidence、Figure Registry 与论文禁区。

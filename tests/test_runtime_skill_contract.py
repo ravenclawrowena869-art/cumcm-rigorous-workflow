@@ -102,6 +102,9 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "XXT_MATHEMATICAL",
             "CYQ_PAPER",
             "authoritative_handoff:",
+            "technical_direction_status:",
+            "technical_direction_artifact:",
+            "pre_paper_brief:",
             "evidence_gate_status:",
             "mathematical_review_status:",
             "mathematical_review_artifact:",
@@ -109,6 +112,7 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "mathematical_veto_clear:",
             "dynamic_constraint_replay_status:",
             "surrogate_replay_status:",
+            "formal_paper_handoff_status:",
         ):
             self.assertIn(token, text)
 
@@ -130,6 +134,14 @@ class RuntimeSkillContractTests(unittest.TestCase):
             "论文禁区",
         ):
             self.assertIn(token, text)
+
+    def test_pre_paper_brief_is_separate_from_formal_handoff(self):
+        brief = (ROOT / "templates" / "Pre_Paper_Brief模板.md").read_text(encoding="utf-8")
+        formal = (ROOT / "templates" / "Paper_Handoff模板.md").read_text(encoding="utf-8")
+        self.assertIn("TECH_DIRECTION_STABLE", brief)
+        self.assertIn("未冻结声明", brief)
+        self.assertIn("Formal Paper Handoff", formal)
+        self.assertIn("FROZEN", formal)
 
     def test_ai_ledger_has_v21_fields(self):
         row = next(csv.reader([(ROOT / "templates" / "AI使用记录模板.csv").read_text(encoding="utf-8").strip()]))
@@ -193,6 +205,7 @@ class RuntimeSkillContractTests(unittest.TestCase):
                 "skills/cumcm-rigorous-workflow/profiles/CYQ_PAPER.md",
                 "04_验收冻结/05_模型证据充分性Gate.md",
                 "templates/Paper_Handoff模板.md",
+                "templates/Pre_Paper_Brief模板.md",
             ):
                 self.assertTrue((target / rel).exists(), rel)
             forbidden = {".pdf", ".png", ".jpg", ".jpeg"}

@@ -9,10 +9,12 @@
 1. `SKILL.md`；
 2. `skills/cumcm-rigorous-workflow/core/SHARED_CORE.md`；
 3. 当前比赛 `project_state.yaml`（若存在）；
-4. 当前 `ACTIVE_ROLE` 对应 Profile；
+4. 当前 `ACTIVE_ROLE` 对应角色入口（见根 `SKILL.md`），再读取入口指定的原 Profile；
 5. 与当前任务直接相关的 workflow / Gate。
 
 不要无目的地一次性读取整个仓库。
+
+三个 `roles/*/ROLE.md` 只允许保留导航、按需阅读顺序和交付入口，不能复制 Shared Core、Profile 或 workflow 的正式规则正文。`core/SHARED_CORE.md` 和原 `profiles/` 仍分别是公共规则与角色职责权威。旧路径不搬迁、不复制公共规则、不新增独立 Skill。以下按主题目录列出检索范围，不代表需要读完整个目录。
 
 ### 团队协作、分工、阶段规划
 
@@ -38,6 +40,8 @@
 
 涉及最终图表时再读取：
 - `05_论文与图表/02_图表工作流.md`
+
+搭框架或规划结果图时，分别追加读取 `05_论文与图表/06_动态论文框架.md` 或 `05_论文与图表/02_图表工作流.md`。`05_论文与图表/07_表达参考.md` 是可完全不用的措辞素材，不设为必读。
 
 ### 数学模型选择、推导、审核
 
@@ -105,7 +109,7 @@ FYQ、XXT、CYQ 的 GPT 都加载同一个 Shared Core。可以读取其他 Prof
 - Interface / Version；
 - Freeze / clean replay；
 - 联合模型技术集成；
-- Missing Evidence 与 Paper Handoff 初稿。
+- Missing Evidence、Pre-Paper Brief 与 Formal Paper Handoff 初稿。
 
 FYQ 负责统一技术集成，但不能越过 XXT 对目标、约束、单位和数学可行性的正式 Review。
 
@@ -269,7 +273,7 @@ CYQ 不默认承担：
 - 图、表、正文重复报同一信息；
 - 没有证据的“显著、稳健、优越”。
 
-模型冻结后优先通过 Paper Handoff 向 CYQ 交付，不要求 Paper Lead 自己进入代码包寻找事实。
+达到 `TECH_DIRECTION_STABLE` 后通过 `Pre-Paper Brief` 让 CYQ 提前搭方法骨架；模型冻结后再通过 `Formal Paper Handoff` 交付正式事实，不要求 Paper Lead 自己进入代码包寻找事实。
 
 ---
 
