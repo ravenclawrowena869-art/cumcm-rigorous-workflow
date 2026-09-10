@@ -9,6 +9,8 @@
   "canonical_sources": [
     "SKILL.md",
     "AGENTS.md",
+    "00_总览/05_赛时加速与流程保真协议.md",
+    "00_总览/06_正赛技术红线速查.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
@@ -38,6 +40,8 @@
     "skills/cumcm-rigorous-workflow/profiles",
     "skills/cumcm-rigorous-workflow/references",
     "skills/cumcm-rigorous-workflow/manifest.json",
+    "00_总览/05_赛时加速与流程保真协议.md",
+    "00_总览/06_正赛技术红线速查.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
     "03_建模与代码/05_参数选择协议.md",
     "04_验收冻结/05_模型证据充分性Gate.md",
