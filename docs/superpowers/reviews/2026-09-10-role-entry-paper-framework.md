@@ -14,13 +14,13 @@ The existing shared core and role profiles already define responsibilities, but 
 
 ## Validation performed
 
-- `python3 -m unittest discover -s tests -v`: 34 tests passed, including the 30 existing tests and four new navigation/release checks.
+- `python3 -m unittest discover -s tests -v`: 36 tests passed, including the existing contract suite and six new navigation/release/behavior checks.
 - `python3 tools/validate_runtime_skill.py .`: PASS.
 - `python3 tools/build_runtime_skill.py`: PASS, 33 runtime files.
 - `python3 tools/validate_runtime_skill.py dist/cumcm-rigorous-workflow-runtime-lite`: PASS.
 - Skill Creator frontmatter validation on the built runtime: PASS.
 - `git diff --check`: PASS.
-- New navigation checks resolve links in source and built runtime, preserve profile bytes in the build, reject a mismatched manifest release, and verify that the runtime has one SKILL.md.
+- New navigation checks resolve links in source and built runtime, preserve profile bytes in the build, reject mismatched manifest and VERSION releases, verify that the runtime has one SKILL.md, and cover the paper-waiting route's no-guess/no-unapproved-run boundaries.
 
 The release validator now compares manifest and dispatcher versions, plus VERSION.md in repository mode, instead of requiring the historical value 2.1.4. Component documents may retain their own older versions when unchanged.
 
