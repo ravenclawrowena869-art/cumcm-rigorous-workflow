@@ -22,7 +22,7 @@ class MultiAgentValidationContractTests(unittest.TestCase):
             "MODEL-TOURNAMENT-001",
             "参赛前资格门",
             "baseline + 1–3 个真正相关候选",
-            "不允许用最终测试集反复选模",
+            "不得反复查看最终测试集来决定主模型",
             "正式主模型仍需经过完整数据",
         ):
             self.assertIn(token, text)
