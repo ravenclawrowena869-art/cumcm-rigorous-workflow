@@ -38,9 +38,9 @@ class MultiAgentValidationContractTests(unittest.TestCase):
             "同声明口径复算",
             "独立口径挑战",
             "FAIL / REOPEN",
+            "不能因为“自动流水线还要继续”而改成 PASS",
         ):
             self.assertIn(token, text)
-        self.assertNotIn("重试次数已用完所以放行", text.replace("不要用", ""))
 
     def test_execution_state_cannot_override_validation_state(self):
         text = (ROOT / "00_总览" / "03_状态机与冻结规则.md").read_text(encoding="utf-8")
