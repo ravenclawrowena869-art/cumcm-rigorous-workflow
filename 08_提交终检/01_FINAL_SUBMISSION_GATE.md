@@ -1,4 +1,4 @@
-# FINAL SUBMISSION GATE v2.1
+# FINAL SUBMISSION GATE v2.2
 
 最终 4–6 小时原则上不再改核心模型。任何未通过项都必须记录 Owner、处理方式和是否阻断提交。
 
@@ -54,17 +54,43 @@
 - [ ] AI 使用说明位置正确；
 - [ ] 附录分页正确。
 
-## F. 附件 / 代码
+## F. Submission Mirror / 附件与代码
 
-- [ ] 文件名正确，ZIP 可打开；
-- [ ] 无临时大文件、敏感绝对路径和错误旧版 FINAL；
+最终提交前建立独立 `submission_mirror/`，其中只保留真正准备提交的论文、支撑材料、源程序、README、必要数据与中间结果。开发目录中的临时文件、旧版 FINAL、调试产物和个人工作文件不得直接混入提交包。
+
+- [ ] Submission Mirror 由当前 Frozen Source of Truth、PAPER_SOURCE 与正式 Figure Registry 构建；
+- [ ] 论文附录中的代码与支撑材料中的正式源程序版本一致；
+- [ ] 文件名正确，ZIP / RAR 可正常打开；
 - [ ] README 可用，核心代码可运行；
-- [ ] Paper Handoff、PAPER_SOURCE 与 Figure Registry 可追溯；
-- [ ] clean replay 与正式数字一致。
+- [ ] 从 Submission Mirror 的最终源程序执行一次 clean replay，正式数字与论文一致；
+- [ ] Paper Handoff、PAPER_SOURCE、Figure Registry 与提交镜像之间可追溯；
+- [ ] 不含临时大文件、调试日志、无关数据、错误旧版 FINAL 或敏感绝对路径。
 
-## G. 最终操作
+### Identity Lint
 
-- [ ] 上传后重新下载检查；
-- [ ] PDF 页数与附件大小确认；
+Submission Mirror 构建后、生成最终压缩包前必须执行匿名信息检查。检查范围包括论文、附录、代码、README、数据表、图表、文件名、文件夹名、日志与可见绝对路径。
+
+- [ ] 不出现姓名、学号、队伍编号、学校名、赛区等可识别身份的信息；
+- [ ] 不出现本机用户名、个人目录、带身份信息的绝对路径；
+- [ ] 不出现以成员姓名/缩写作为提交版文件或目录命名的残留；
+- [ ] 若发现命中项，修复后重新构建 Submission Mirror 并重新 clean replay。
+
+## G. 最终操作与 MD5 Seal
+
+最终候选文件只有在 A–F 全部通过后，才能进入封存流程。
+
+推荐状态机：
+
+`PAPER_LOCKED → SUBMISSION_MIRROR_READY → CLEAN_REPLAY_PASS → IDENTITY_LINT_PASS → FINAL_QA_PASS → MD5_GENERATED → BACKUP_VERIFIED → MD5_SUBMITTED → SEALED → EXACT_FILE_UPLOAD → SUBMISSION_VERIFIED`
+
+- [ ] 最终 PDF 页数、文件大小和支撑材料大小确认；
 - [ ] 人工逐页查看最终 PDF；
+- [ ] 对最终论文和支撑材料生成 MD5 前，再确认当前文件就是唯一 Submission Candidate；
+- [ ] 生成 MD5 后立即制作至少一份字节级一致的备份，并核对备份 MD5；
+- [ ] MD5 提交确认后将对应文件标记为 `SEALED`；
+- [ ] `SEALED` 文件禁止再次打开后保存、编辑、重新导出或重新压缩；
+- [ ] 最终上传必须使用与已提交 MD5 完全一致的封存文件；
+- [ ] 上传完成后确认系统状态与文件信息无误；
 - [ ] 截图保存提交成功页面。
+
+任何在 `SEALED` 后发现的修改需求，都必须视为新 Submission Candidate：重新生成文件、重新检查、重新计算 MD5、重新备份并重新提交 MD5，不得直接覆盖旧封存文件。
