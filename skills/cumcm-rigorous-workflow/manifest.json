@@ -1,12 +1,17 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",
     "CYQ_PAPER"
   ],
   "canonical_sources": [
+    "skills/cumcm-rigorous-workflow/roles/controller/ROLE.md",
+    "skills/cumcm-rigorous-workflow/roles/modeling/ROLE.md",
+    "skills/cumcm-rigorous-workflow/roles/paper/ROLE.md",
+    "05_论文与图表/06_动态论文框架.md",
+    "05_论文与图表/07_表达参考.md",
     "SKILL.md",
     "AGENTS.md",
     "02_开赛与拆题/05_HuggingFace研究资产协议.md",
@@ -32,6 +37,9 @@
     "templates/gates.json"
   ],
   "runtime_include": [
+    "skills/cumcm-rigorous-workflow/roles",
+    "05_论文与图表/06_动态论文框架.md",
+    "05_论文与图表/07_表达参考.md",
     "SKILL.md",
     "AGENTS.md",
     "skills/cumcm-rigorous-workflow/core",

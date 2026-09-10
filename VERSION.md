@@ -1,4 +1,15 @@
-# Version 2.1.6 — Repository Write Gate Hardening
+# Version 2.2.0 — Role Entry Navigation and Paper Framework
+
+## v2.2.0 增量升级
+
+- 在同一 Skill 内新增 controller/modeling/paper 三个角色入口；保留 Shared Core、Profile、workflow 与旧路径，不复制三份公共规则。
+- 保留 FYQ 技术总控、XXT 数学裁决、CYQ 技术事实只读边界；不把角色文件夹当作权限或独立 Skill。
+- 新增动态论文框架：按问判断模型成熟度、保留已认可结构、提前规定图表与证据需求，不以润色替代模型修正。
+- 扩充原逐问概述规则：可预告图表要回答的问题；论证功能不等于固定句数、标题或句式。
+- 新增可完全不用的表达参考；候选强表达不等于已验证主张。
+- 图表工作流补入算法先于效果、分指标对比、收益与代价、参数可比性，以及求解失败/子问题不可行/联合不可行的区分。
+- Runtime manifest 纳入新增文件，检查角色导航和打包后的引用可达性；不更改比赛模型、结果、Gate 状态或角色 ID。
+- 仍按非 main 分支、PR 和所需 Review 发布；本节不代表自动授权合并。
 
 ## v2.1.6 增量升级
 

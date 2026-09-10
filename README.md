@@ -1,4 +1,18 @@
-# 数模比赛全流程工作流 v2.1
+# 数模比赛全流程工作流 v2.2.0
+
+## 从自己的角色开始
+
+先读根 `SKILL.md` 与 Shared Core，按本次 `ACTIVE_ROLE` 进入一个角色入口：
+
+| 角色 | 入口 |
+|---|---|
+| FYQ：技术总控 | [controller/ROLE.md](skills/cumcm-rigorous-workflow/roles/controller/ROLE.md) |
+| XXT：数学建模与验算 | [modeling/ROLE.md](skills/cumcm-rigorous-workflow/roles/modeling/ROLE.md) |
+| CYQ：论文 | [paper/ROLE.md](skills/cumcm-rigorous-workflow/roles/paper/ROLE.md) |
+
+这是一个 Skill 的三个入口，不是三个独立 Skill。公共规则保留在原 Shared Core，职责保留在原 Profile，旧文件和旧任务引用仍有效。角色入口只告诉当前 AI 本次要读哪些材料。
+
+论文框架新增[动态框架规则](05_论文与图表/06_动态论文框架.md)；逐问概述、图表顺序分别并入原写作 Gate、图表工作流；[表达参考](05_论文与图表/07_表达参考.md)可完全不用。未合并的分支仅为修改提案，不对团队自动生效。
 
 这是面向 FYQ、XXT、CYQ 三人协作的数学建模竞赛工作流与 Shared Runtime Skill。当前战略默认主选 2026 CUMCM C 题，同时保留 A-Track 中可迁移的数值与优化验证经验。
 
@@ -287,7 +301,7 @@ Shared Core 改动至少需要另一角色 Review。Paper Handoff 等跨角色�
 - `09_本次比赛复盘/`：华数杯 C 实战经验
 - `10_容灾与应急/`：工具、设备、人员 Plan B
 - `11_题型插件/`：不同题型附加验收
-- `skills/cumcm-rigorous-workflow/`：Runtime Shared Core 与三个 Profile
+- `skills/cumcm-rigorous-workflow/`：Runtime Shared Core、三个角色入口与原 Profile
 - `templates/`：可复制模板
 - `tools/`、`tests/`：Runtime Lite 构建与静态验证
 

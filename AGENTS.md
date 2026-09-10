@@ -9,10 +9,12 @@
 1. `SKILL.md`；
 2. `skills/cumcm-rigorous-workflow/core/SHARED_CORE.md`；
 3. 当前比赛 `project_state.yaml`（若存在）；
-4. 当前 `ACTIVE_ROLE` 对应 Profile；
+4. 当前 `ACTIVE_ROLE` 对应角色入口（见根 `SKILL.md`），再读取入口指定的原 Profile；
 5. 与当前任务直接相关的 workflow / Gate。
 
 不要无目的地一次性读取整个仓库。
+
+三个 `roles/*/ROLE.md` 只提供导航，`core/SHARED_CORE.md` 和原 `profiles/` 仍分别是公共规则与角色职责权威。旧路径不搬迁、不复制公共规则、不新增独立 Skill。以下按主题目录列出检索范围，不代表需要读完整个目录。
 
 ### 团队协作、分工、阶段规划
 
@@ -38,6 +40,8 @@
 
 涉及最终图表时再读取：
 - `05_论文与图表/02_图表工作流.md`
+
+搭框架或规划结果图时，分别追加读取 `05_论文与图表/06_动态论文框架.md` 或 `05_论文与图表/02_图表工作流.md`。`05_论文与图表/07_表达参考.md` 是可完全不用的措辞素材，不设为必读。
 
 ### 数学模型选择、推导、审核
 

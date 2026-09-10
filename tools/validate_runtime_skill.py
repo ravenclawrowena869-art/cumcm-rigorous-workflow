@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -317,8 +318,13 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.4":
-                errors.append("manifest version must be 2.1.4")
+            release = re.search(r"^# CUMCM Rigorous Workflow v(\d+\.\d+\.\d+) Dispatcher$", dispatcher, re.M)
+            if release is None or manifest.get("version") != release.group(1):
+                errors.append("manifest version must match dispatcher release")
+            if canonical_repo_mode and release is not None:
+                version_heading = _read(root / "VERSION.md").splitlines()[:1]
+                if not version_heading or not version_heading[0].startswith(f"# Version {release.group(1)} —"):
+                    errors.append("VERSION.md must match dispatcher release")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
