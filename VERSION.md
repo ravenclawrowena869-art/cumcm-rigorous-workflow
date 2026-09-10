@@ -1,4 +1,14 @@
-# Version 2.1.2 — Paper Section Intro Hardening
+# Version 2.1.5 — Reference Boundary + Submission Hardening
+
+## v2.1.5 增量升级
+
+- 明确外部资料参考边界：允许使用公开论文、教材、算法、标准、公开数据和开源实现形成候选思路与技术先验；
+- 禁止把他人的完整解题思路、整套模型结构、代码、文字、图表或结果直接照搬为本队成果；
+- 借鉴外部模型后必须回到本题 Question Contract，重新确定变量、目标、hard constraints、参数与求解流程，并在本题数据与评价口径下独立求解和验证；
+- 经典模型和通用算法无需为了“看起来不同”而刻意改名或改结构，原创性重点放在本题化建模、独立分析、证据与验证；
+- Final Submission Gate 升级到 v2.2：新增 `submission_mirror/`，要求从最终提交镜像执行 clean replay；
+- 新增 Identity Lint，检查论文、附录、代码、README、数据、图表、文件名、目录名和绝对路径中的身份信息；
+- 新增 MD5 Seal 状态机：`MD5_SUBMITTED → SEALED → EXACT_FILE_UPLOAD`，封存后禁止直接修改，任何修改都必须重新生成候选文件并重新提交 MD5。
 
 ## v2.1.2 增量升级
 
