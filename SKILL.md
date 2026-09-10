@@ -3,7 +3,7 @@ name: cumcm-rigorous-workflow
 description: Shared three-GPT evidence-driven workflow for CUMCM and similar mathematical-modeling competitions, covering modeling, coding, validation, handoffs, paper, figures, freezing and final submission.
 ---
 
-# CUMCM Rigorous Workflow v2.1.4 Dispatcher
+# CUMCM Rigorous Workflow v2.1.5 Dispatcher
 
 本仓库的 Runtime Skill 由 FYQ、XXT、CYQ 三套 GPT 共用。任何任务先执行 Shared Core，再加载当前 Role Profile；Profile 不得覆盖 Shared Core、官方材料、当前 `project_state.yaml` 或 Frozen Source of Truth。
 
@@ -72,7 +72,15 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 Hugging Face 的 Model Card、Dataset Card、Space、下载量、趋势或第三方 benchmark 只能作为候选发现和资产信息，**不能替代本题 local benchmark、独立复算或 Evidence Gate**。HF 插件/Hub 不可用时直接回退到原论文 + 学术/Web 检索 + GitHub + 本地实验，不阻塞比赛主线。
 
-## 5. Evidence before prose
+## 5. 外部资料参考与原创性边界
+
+允许检索和参考公开学术论文、教材、算法资料、标准、公开数据、开源实现与其他可核查来源，用于理解方法、形成候选模型、寻找参数先验、比较技术路线或辅助实现。
+
+**不得把他人的完整解题思路、整套模型结构、代码、文字、图表或结果直接作为本队成果照搬。** 若参考了外部模型或思路，应根据本题的 Question Contract 重新确定变量、目标、hard constraints、参数与求解流程，并在本题数据、评价口径和验证体系下独立求解、比较和核验；进入论文或正式代码的外部资料应按规则记录来源并规范引用。
+
+经典模型、通用算法或行业标准方法可以合理采用，不要求为了制造表面差异而刻意改名或改结构。判断重点是：团队是否真正完成了本题化建模、独立分析与验证，而不是把外部成品答案直接移植为本题结论。
+
+## 6. Evidence before prose
 
 每问先确定：输出、输入、分析单位、变量、目标、约束、baseline、正式模型、验证、关键结果、不确定性和下游接口。
 
@@ -80,13 +88,13 @@ Hugging Face 的 Model Card、Dataset Card、Space、下载量、趋势或第三
 
 非平凡求解必须有本题专属伪代码或算法流程，写出真实输入、关键变量、候选/循环、hard constraint、接受/停止条件、失败分支与输出复算。
 
-## 6. Freeze 与共同事实源
+## 7. Freeze 与共同事实源
 
 正式同步只认：`project_state.yaml`、Task、Interface、Handoff、Frozen Source of Truth、Figure Registry、Git commit / PR。
 
 聊天上下文不能覆盖这些来源。`FROZEN` 内容只有 P0 问题才能重开，并建立新版本后重跑依赖 Gate。
 
-## 7. Runtime Lite
+## 8. Runtime Lite
 
 日常 Skill 不携带大型论文 PDF/PNG。运行包只保留 dispatcher、Shared Core、三个 Profile、必要 workflow、templates、source index 与 provenance。全文证据按 `skills/cumcm-rigorous-workflow/references/SOURCE_INDEX.md` 检索。
 
