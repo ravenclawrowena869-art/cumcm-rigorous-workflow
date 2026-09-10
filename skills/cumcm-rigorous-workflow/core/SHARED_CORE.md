@@ -1,4 +1,4 @@
-# Shared Core v2.1.3
+# Shared Core v2.1.4
 
 本文件对 FYQ、XXT、CYQ 三套 GPT 同时生效。任何 Role Profile 都不得覆盖 Shared Core。
 
@@ -140,6 +140,18 @@ Model Card、Dataset Card、Space、下载量、趋势分数和第三方 benchma
 HF 插件、Hub、Jobs 或网络不可用时，标记 `HF_UNAVAILABLE`，立即回退到原论文 + 学术/Web 检索 + GitHub + 本地 baseline/challenger，不得阻塞比赛主线，也不得降低 Evidence Gate。
 
 详细协议：`02_开赛与拆题/05_HuggingFace研究资产协议.md`。
+
+## CORE-EXEC-ROUTING-001 执行资源必须显式路由
+
+每个正式 Task / Prompt 都必须写明推荐执行器、执行级别、选择原因、是否允许降级、降级条件和升级触发。执行器只允许 `CODEX_ASTRA`、`CODEX_SOL`、`GPT_EXECUTION`，执行级别只允许 `REQUIRED`、`PREFERRED`、`SUFFICIENT`。
+
+执行器不改变角色权限。更强执行器也不得覆盖 FYQ / XXT / CYQ 的职责边界、官方 Authority、Source of Truth、Mathematical Gate、Evidence Gate 或 Freeze 条件。Astra unavailable 时可以按协议 Block 化降级，但测试、独立复算和 Mathematical Review 不得降低。
+
+详细协议：`07_AI协作/05_执行资源路由协议.md`。
+
+## CORE-TASK-LANG-001 团队任务书默认中文
+
+面向团队成员的 Task、Authority 摘要、Handoff、Controller routing、Missing Evidence 与执行说明默认使用简体中文。文件名、路径、branch、commit、SHA、class/function/variable/enum/status code、命令、schema 字段、测试名及其他需要精确匹配的标识符保持原文。
 
 ## CORE-COLLAB-001 三人共同维护
 

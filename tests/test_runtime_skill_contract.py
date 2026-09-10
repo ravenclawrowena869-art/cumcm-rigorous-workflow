@@ -174,6 +174,13 @@ class RuntimeSkillContractTests(unittest.TestCase):
         for token in ("FYQ GPT → XXT GPT", "XXT GPT → FYQ GPT", "FYQ / XXT GPT → CYQ GPT", "CYQ GPT → FYQ / XXT GPT"):
             self.assertIn(token, text)
 
+    def test_runtime_manifest_includes_execution_routing_protocol(self):
+        manifest = json.loads((SKILL_DIR / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["version"], "2.1.5")
+        rel = "07_AI协作/05_执行资源路由协议.md"
+        self.assertIn(rel, manifest["canonical_sources"])
+        self.assertIn(rel, manifest["runtime_include"])
+
     def test_runtime_builder_produces_lite_package(self):
         with tempfile.TemporaryDirectory() as tmp:
             target = Path(tmp) / "runtime"
@@ -192,7 +199,9 @@ class RuntimeSkillContractTests(unittest.TestCase):
                 "skills/cumcm-rigorous-workflow/profiles/XXT_MATHEMATICAL.md",
                 "skills/cumcm-rigorous-workflow/profiles/CYQ_PAPER.md",
                 "04_验收冻结/05_模型证据充分性Gate.md",
+                "07_AI协作/05_执行资源路由协议.md",
                 "templates/Paper_Handoff模板.md",
+                "templates/任务单模板.md",
             ):
                 self.assertTrue((target / rel).exists(), rel)
             forbidden = {".pdf", ".png", ".jpg", ".jpeg"}

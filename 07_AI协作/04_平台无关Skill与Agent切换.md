@@ -1,4 +1,4 @@
-# 平台无关 Shared Skill 与 Agent 切换 v2.1
+# 平台无关 Shared Skill 与 Agent 切换 v2.2
 
 团队的长期能力必须沉淀在 GitHub repo，而不能只存在某一个 ChatGPT Project、Codex session 或 Claude session 中。
 
@@ -51,11 +51,27 @@ Primary Coding Agent
 → 继续原角色原任务
 ```
 
-## 4. 如何让规则真正约束 AI
+## 4. 能力档是资源，不是角色
+
+团队可同时使用：
+
+- `CODEX_ASTRA`
+- `CODEX_SOL`
+- `GPT_EXECUTION`
+
+能力档是资源，不是角色。选择 `CODEX_ASTRA` 只表示该任务使用更高性能的 Coding Agent，不改变 FYQ / XXT / CYQ 的角色绑定，也不能替代 Mathematical Gate、Evidence Gate、官方 Authority 或 Frozen Source of Truth。
+
+正式 Task / Prompt 的资源选择遵循：
+
+`07_AI协作/05_执行资源路由协议.md`
+
+如果 `ASTRA_REQUIRED` 但 Astra 临时不可用，可以在保持原 Task 权限和证据要求的前提下拆成更小 Frozen Blocks，再由 Sol 逐 Block 实现。降级必须保留原路由、实际使用执行器和原因；TDD、independent replay、XXT Review 与 Freeze 前置条件不降低。
+
+## 5. 如何让规则真正约束 AI
 
 ### 仓库内 Coding Agent
 
-读取 `AGENTS.md`、`SKILL.md`、Shared Core、当前 Profile 与任务相关 Gate。
+读取 `AGENTS.md`、`SKILL.md`、Shared Core、当前 Profile、执行资源路由协议与任务相关 Gate。
 
 ### 支持 Skill 的平台
 
@@ -66,24 +82,26 @@ Primary Coding Agent
 至少提供：
 - `ACTIVE_ROLE`；
 - 当前 `project_state.yaml` / Handoff；
-- 与任务相关的 Gate 或 Prompt 模板。
+- 与任务相关的 Gate 或 Prompt 模板；
+- 正式 Task 中的执行资源路由。
 
 只把 GitHub URL 发给 AI 但没有实际读取，不等于规则已经生效。
 
-## 5. Runtime Lite
+## 6. Runtime Lite
 
 日常 Runtime Skill 只携带：
 - dispatcher；
 - Shared Core；
 - 三个 Profile；
 - 必要 workflow / Gate；
+- execution routing protocol；
 - templates；
 - source index；
 - provenance / manifest。
 
 优秀论文 PDF、截图和大型 corpus 外置。Skill 规则更新不要求重新打包几十 MB 原文。
 
-## 6. 三方共同维护
+## 7. 三方共同维护
 
 任何人都可以通过 branch + PR 更新 Skill。正式规则只认 merge 后的 main。重要 Shared Core 改动至少由另一角色 Review，跨角色 Handoff 由输出方与消费方共同 Review。
 

@@ -63,7 +63,18 @@ def validate(root: Path) -> list[str]:
         errors,
         "dispatcher",
         dispatcher,
-        ("ACTIVE_ROLE", *ROLE_IDS, "role-neutral read-only", "SHARED_CORE.md", "逐问短导语", "05_参数选择协议.md"),
+        (
+            "ACTIVE_ROLE",
+            *ROLE_IDS,
+            "role-neutral read-only",
+            "SHARED_CORE.md",
+            "逐问短导语",
+            "05_参数选择协议.md",
+            "执行资源路由",
+            "CODEX_ASTRA",
+            "CODEX_SOL",
+            "GPT_EXECUTION",
+        ),
     )
 
     shared_core = _read(skill_dir / "core" / "SHARED_CORE.md")
@@ -81,11 +92,14 @@ def validate(root: Path) -> list[str]:
             "CORE-EVIDENCE-001",
             "CORE-PARAM-001",
             "CORE-AI-DISCLOSURE-001",
+            "CORE-EXEC-ROUTING-001",
+            "CORE-TASK-LANG-001",
             "CORE-COLLAB-001",
             "material surrogate fidelity",
             "G3_FREEZE",
             "G2_VALIDATION=PASS",
             "AI Disclosure Gate FAIL",
+            "执行器不改变角色权限",
         ),
     )
 
@@ -131,6 +145,66 @@ def validate(root: Path) -> list[str]:
             "mathematical_pass=true",
             "G2_VALIDATION=PASS",
             "旧 Mathematical PASS 失效",
+            "执行资源路由",
+            "推荐执行器",
+            "执行级别",
+            "降级条件",
+            "升级触发",
+        ),
+    )
+
+    execution_routing = _read(root / "07_AI协作" / "05_执行资源路由协议.md")
+    _require_tokens(
+        errors,
+        "execution routing protocol",
+        execution_routing,
+        (
+            "CODEX_ASTRA",
+            "CODEX_SOL",
+            "GPT_EXECUTION",
+            "REQUIRED",
+            "PREFERRED",
+            "SUFFICIENT",
+            "EXECUTION_ESCALATION = CODEX_ASTRA",
+            "ASTRA_REQUIRED",
+            "不得降低 Evidence Gate",
+            "执行器不改变角色权限",
+        ),
+    )
+
+    task_template = _read(root / "templates" / "任务单模板.md")
+    _require_tokens(
+        errors,
+        "task template",
+        task_template,
+        (
+            "【执行资源路由】",
+            "推荐执行器：",
+            "执行级别：",
+            "选择原因：",
+            "是否允许降级：",
+            "降级条件：",
+            "升级触发：",
+            "【任务语言】",
+            "中文",
+        ),
+    )
+
+    prompt_template = _read(root / "07_AI协作" / "02_AI_Prompt模板.md")
+    _require_tokens(
+        errors,
+        "AI prompt template",
+        prompt_template,
+        (
+            "【执行资源路由】",
+            "推荐执行器：",
+            "执行级别：",
+            "选择原因：",
+            "是否允许降级：",
+            "降级条件：",
+            "升级触发：",
+            "【任务语言】",
+            "代码标识符、路径、命令保持原文",
         ),
     )
 
@@ -317,8 +391,8 @@ def validate(root: Path) -> list[str]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if tuple(manifest.get("roles", [])) != ROLE_IDS:
                 errors.append("manifest roles do not match canonical role order")
-            if manifest.get("version") != "2.1.4":
-                errors.append("manifest version must be 2.1.4")
+            if manifest.get("version") != "2.1.5":
+                errors.append("manifest version must be 2.1.5")
             forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
             if forbidden != FORBIDDEN_BINARY:
                 errors.append("manifest forbidden binary extensions mismatch")
