@@ -1,4 +1,14 @@
-# Version 2.1.5 — Reference Boundary + Submission Hardening
+# Version 2.1.6 — Repository Write Gate Hardening
+
+## v2.1.6 增量升级
+
+- 新增 `CORE-GIT-WRITE-001 Repository Write Gate`；
+- 任何创建、修改、删除 Skill / Workflow / Gate / Profile / Template / README / VERSION 或其他团队正式文件的 GitHub 写操作，必须先读取 `06_协作与交接/06_三GPT协作与Skill共同维护.md`；
+- 默认写入路径强制为 `non-main branch → commit → PR → required review → merge`；
+- 明确“用户同意修改内容”不等于“授权直接写 main”，也不等于“授权 merge”；
+- 除非用户明确要求直接改 main / 不用 PR / 直接 merge，否则所有 create / update / delete 都必须显式指定非 main branch，禁止依赖 API 默认分支行为；
+- PR 创建后默认停在 Review 状态，不得自行 merge；
+- Shared Core、canonical Gate / Workflow / Profile 等正式文件继续执行原 Review Ownership。
 
 ## v2.1.5 增量升级
 

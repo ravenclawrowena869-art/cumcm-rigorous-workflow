@@ -1,4 +1,4 @@
-# Shared Core v2.1.3
+# Shared Core v2.1.4
 
 本文件对 FYQ、XXT、CYQ 三套 GPT 同时生效。任何 Role Profile 都不得覆盖 Shared Core。
 
@@ -140,6 +140,25 @@ Model Card、Dataset Card、Space、下载量、趋势分数和第三方 benchma
 HF 插件、Hub、Jobs 或网络不可用时，标记 `HF_UNAVAILABLE`，立即回退到原论文 + 学术/Web 检索 + GitHub + 本地 baseline/challenger，不得阻塞比赛主线，也不得降低 Evidence Gate。
 
 详细协议：`02_开赛与拆题/05_HuggingFace研究资产协议.md`。
+
+## CORE-GIT-WRITE-001 Repository Write Gate
+
+任何创建、修改、删除 Skill / Workflow / Gate / Profile / Template / README / VERSION 或其他团队正式仓库文件的任务，在执行 GitHub 写操作前，**必须读取**：
+
+`06_协作与交接/06_三GPT协作与Skill共同维护.md`
+
+默认且强制的写入路径是：
+
+`non-main branch → commit → PR → required review → merge`
+
+除非用户明确授权“直接改 main”“不用 PR”或“直接 merge”，否则：
+
+- 不得直接 create / update / delete 默认分支文件；
+- 不得自行 merge PR；
+- 所有写操作必须显式指定非 `main` branch，不能省略 `branch` 参数依赖 API 默认行为；
+- “把这个加进 Skill”“更新 GitHub”“做一个新 Skill”“我同意这个修改”等内容授权，只代表允许准备修改，不代表允许写 main 或 merge；
+- Shared Core、canonical Gate / Workflow / Profile 等改动仍须满足 Review Ownership；
+- 如果目标 branch、base branch 或授权范围不明确到足以安全写入，则先停止写操作并解析，不能猜测。
 
 ## CORE-COLLAB-001 三人共同维护
 

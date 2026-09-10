@@ -1,4 +1,4 @@
-# 三 GPT 协作与 Skill 共同维护 v2.1
+# 三 GPT 协作与 Skill 共同维护 v2.2
 
 ## 1. 单一正式源
 
@@ -54,18 +54,35 @@ FYQ、XXT、CYQ 三套 GPT 共用同一个 `cumcm-rigorous-workflow`。团队正
 - 需要解释的异常、边界、不可行情景；
 - consumer deadline / priority。
 
-## 3. Branch 规范
+## 3. Repository Write Gate
 
-推荐：
+任何涉及创建、修改、删除 Skill / Workflow / Gate / Profile / Template / README / VERSION 或其他团队正式仓库文件的操作，执行写入前必须先经过本节。
+
+默认写入流程为：
+
+`新建非 main 分支 → 在该分支修改/提交 → 创建 PR → 按 Review Ownership 审查 → merge`
+
+以下规则为硬约束：
+
+- 用户说“把这个加进 Skill”“更新 GitHub”“写一个新 Skill”“我同意这个修改”，只代表同意准备修改，不代表同意直接写 `main`，也不代表授权 merge；
+- 除非用户明确说“直接改 main”“不用 PR”或“直接 merge”，否则任何 create / update / delete 操作都必须显式指定非 `main` branch；
+- 不得省略 `branch` 参数并依赖 GitHub API 默认落到默认分支；
+- PR 创建后不得自行 merge，除非用户另行明确授权；
+- 如果 Shared Core、canonical Gate / Workflow / Profile 被修改，必须按 Review Ownership 完成所需 Review 后再 merge；
+- 若目标 branch、base branch 或授权边界不清楚，先停止写操作并确认，不能猜。
+
+## 4. Branch 规范
+
+默认：
 
 - `fyq/<topic>`
 - `xxt/<topic>`
 - `cyq/<topic>`
 - `shared/<topic>`
 
-任何人都可修改任何目录，但需遵守 Review Ownership。
+任何人都可修改任何目录，但需遵守 Review Ownership。团队正式文件原则上不得直接在 `main` 上编辑；只有用户显式授权跳过 PR 时例外。
 
-## 4. Review Ownership
+## 5. Review Ownership
 
 - Shared Core：至少一名其他角色 Review；
 - 数学 Gate / MODEL_SPEC：XXT 主审，FYQ 复核实现接口；
@@ -75,7 +92,7 @@ FYQ、XXT、CYQ 三套 GPT 共用同一个 `cumcm-rigorous-workflow`。团队正
 
 专项冻结任务中，如果 authority 明确只允许最小修复，Review 不能借机扩大范围。
 
-## 5. PR 必填字段
+## 6. PR 必填字段
 
 每个 Skill / Workflow PR 至少写：
 
@@ -90,19 +107,20 @@ FYQ、XXT、CYQ 三套 GPT 共用同一个 `cumcm-rigorous-workflow`。团队正
 
 如果规则来自比赛复盘、老师批注或评委反馈，应注明来源性质，避免把单次案例写成无条件全局规律。
 
-## 6. Rule ID
+## 7. Rule ID
 
 重要共享规则使用稳定 ID，例如：
 
 - `CORE-AUTH-001`
 - `CORE-FREEZE-001`
+- `CORE-GIT-WRITE-001`
 - `MATH-OPT-001`
 - `PAPER-PROSE-001`
 - `AI-DISCLOSURE-001`
 
 修改同一规则时更新原 Rule，不重复追加近义条目。
 
-## 7. Canonical 与 Proposal
+## 8. Canonical 与 Proposal
 
 正式规则位于 canonical workflow、`skills/.../core` 与 `skills/.../profiles`。
 
@@ -112,7 +130,7 @@ FYQ、XXT、CYQ 三套 GPT 共用同一个 `cumcm-rigorous-workflow`。团队正
 
 通过 Review 后再进入正式规则。
 
-## 8. 冲突处理
+## 9. 冲突处理
 
 三套 GPT 发生结论冲突时，不以“谁的 GPT 更强”裁决。先回到 authority：
 
