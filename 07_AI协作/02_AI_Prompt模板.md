@@ -1,4 +1,4 @@
-# AI Prompt 模板 v2.1
+# AI Prompt 模板 v2.2
 
 ## 通用复杂任务模板
 
@@ -7,6 +7,17 @@
 
 【ACTIVE_ROLE】
 FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
+
+【执行资源路由】
+推荐执行器：CODEX_ASTRA / CODEX_SOL / GPT_EXECUTION
+执行级别：REQUIRED / PREFERRED / SUFFICIENT
+选择原因：……
+是否允许降级：YES / NO
+降级条件：……
+升级触发：……
+
+【任务语言】
+中文；代码标识符、路径、命令保持原文。
 
 【任务背景】
 ...
@@ -17,6 +28,7 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 - 当前 project_state.yaml（若存在）
 - 当前 ACTIVE_ROLE 对应 Profile
 - 与本轮任务对应的 workflow / Gate
+- 07_AI协作/05_执行资源路由协议.md
 - ...
 
 【Source of Truth】
@@ -44,6 +56,7 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 - 不凭空生成实验、数字或图表
 - 不用通用语言掩盖证据缺失
 - 专项冻结任务不擅自扩展成新大模型
+- 不因使用更强执行器而绕过 Mathematical Review / Evidence Gate / Freeze 条件
 
 【验收标准】
 1. ...
@@ -61,16 +74,33 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 - 回滚方式
 - 未完成事项
 - 给下一角色的 Handoff
+- 实际使用的执行器；若发生降级/升级，记录原因
 
 先区分：代码确实缺少 / 代码已有但表达缺失 / 需要补实验，之后再进行最小必要修改。
 ```
+
+## 执行资源路由快速规则
+
+```text
+主要是读取、运行、复算、Review、Handoff、打包，且不长期改真实仓库
+→ GPT_EXECUTION / SUFFICIENT
+
+需要改真实仓库，但数学定义与接口已经冻结，工程实现为主
+→ CODEX_SOL / SUFFICIENT
+
+需要改核心算法、正式数学路径、复杂状态机，或错误可能 materially 改变正式结论
+→ CODEX_ASTRA / REQUIRED 或 PREFERRED
+```
+
+执行中出现 `EXECUTION_ESCALATION = CODEX_ASTRA` 触发项时，应更新 Task / Handoff；执行器升级不改变角色权限。
 
 ## FYQ Technical / Orchestrator 追加段
 
 ```text
 统一集成当前技术主线，防止生成第二套互不兼容版本。
 如果涉及数学目标、约束、单位或可行性，把待裁决项显式交给 XXT Mathematical Review。
-输出 FYQ/XXT Block、Codex Task、Missing Evidence、Freeze 条件和给 CYQ 的 Paper Handoff。
+输出 FYQ/XXT Block、Execution Route、Codex Task、Missing Evidence、Freeze 条件和给 CYQ 的 Paper Handoff。
+每份正式 Task 必须先给推荐执行器、执行级别、选择原因、降级条件和升级触发。
 ```
 
 ## XXT Mathematical 追加段
@@ -78,6 +108,7 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 ```text
 优先检查题意数学化、变量、目标、hard constraints、单位、参数范围、validator、exact anchor / bound 和独立复算。
 专项冻结任务中不另起第二套主模型；若发现 P0，提出最小替代或重开建议，由 FYQ 统一集成。
+执行器能力不改变 Mathematical Veto；Astra 也不能替代当前版本 Mathematical Review。
 ```
 
 ## CYQ Paper 追加段
