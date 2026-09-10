@@ -52,9 +52,9 @@ CYQ **不得自行修改**：
 
 ## Evidence 阻断
 
-如果缺少以下任一关键证据，状态必须写成 `INCOMPLETE`，先返回**缺口清单**：
+`Pre-Paper Brief` 只支持 `TECH_DIRECTION_STABLE` 后的题目化方法骨架；正式数字、结果判断、优势、稳健性、推荐和摘要结论必须等待 `Formal Paper Handoff`。准备定稿时如果缺少以下任一关键证据，状态必须写成 `INCOMPLETE`，先返回**缺口清单**：
 
-- Paper Handoff 或正式结果来源；
+- Formal Paper Handoff 或正式结果来源；
 - 真实模型/求解步骤；
 - 关键数字或单位；
 - baseline / comparison；

@@ -70,7 +70,7 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 ```text
 统一集成当前技术主线，防止生成第二套互不兼容版本。
 如果涉及数学目标、约束、单位或可行性，把待裁决项显式交给 XXT Mathematical Review。
-输出 FYQ/XXT Block、Codex Task、Missing Evidence、Freeze 条件和给 CYQ 的 Paper Handoff。
+输出 FYQ/XXT Block、Codex Task、Missing Evidence、Freeze 条件，并按成熟度给 CYQ 交付 Pre-Paper Brief 或 Formal Paper Handoff。
 ```
 
 ## XXT Mathematical 追加段
@@ -83,12 +83,12 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 ## CYQ Paper 追加段
 
 ```text
-必须读取 Paper Handoff、Frozen Metrics、Figure Registry 和相关 Gate。
-写作前先列：已有冻结证据、缺失实验/数字/步骤、可以定稿的部分、只能保留占位符的部分。
+先按当前状态读取 Pre-Paper Brief 或 Formal Paper Handoff、Figure Registry 和相关 Gate。只有 Formal Paper Handoff 可以提供 Frozen Metrics 和正式结论。
+写作前先列：`TECH_DIRECTION_STABLE` 状态、已有冻结证据、缺失实验/数字/步骤、可以展开骨架的部分、可以定稿的部分、只能保留占位符的部分。
 
 每问按：解决什么 → 为什么这样做 → 具体好处 → 如何求解 → 结果证据 → 服务下一问/全文结论。
 
-缺 Handoff、正式结果、真实伪代码步骤、稳健性证据或图表来源时，输出 INCOMPLETE + 缺口清单，不生成“可直接定稿”的断言。
+未达到 `TECH_DIRECTION_STABLE` 或缺 Pre-Paper Brief 时，不展开完整方法骨架；缺 Formal Paper Handoff、正式结果、真实伪代码步骤、稳健性证据或图表来源时，输出 INCOMPLETE + 缺口清单，不生成“可直接定稿”的断言。
 ```
 
 ## 论文写作 / 审稿必读
@@ -98,7 +98,7 @@ FYQ_TECHNICAL_ORCHESTRATOR / XXT_MATHEMATICAL / CYQ_PAPER
 - 05_论文与图表/01_论文流水线.md
 - 05_论文与图表/05_逐问写作与算法呈现Gate.md
 - 06_协作与交接/05_Paper_Handoff规范.md
-- 本问 Paper Handoff
+- 本问 Pre-Paper Brief（展开方法骨架时）或 Formal Paper Handoff（写正式结果与结论时）
 ```
 
 算法引出必须结合本题数据、变量、约束和规模。每问给出与正式代码一致的伪代码、流程图或计算流程，包含输入、初始化、循环/选择、hard constraints、接受/停止条件和失败分支。

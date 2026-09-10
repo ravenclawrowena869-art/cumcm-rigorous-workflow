@@ -188,6 +188,9 @@ def validate(root: Path) -> list[str]:
             "agent_bindings:",
             *ROLE_IDS,
             "authoritative_handoff:",
+            "technical_direction_status:",
+            "technical_direction_artifact:",
+            "pre_paper_brief:",
             "evidence_gate_status:",
             "mathematical_review_status:",
             "mathematical_review_artifact:",
@@ -195,6 +198,7 @@ def validate(root: Path) -> list[str]:
             "mathematical_veto_clear:",
             "dynamic_constraint_replay_status:",
             "surrogate_replay_status:",
+            "formal_paper_handoff_status:",
         ),
     )
 
@@ -229,6 +233,24 @@ def validate(root: Path) -> list[str]:
             "自然语言初稿",
             "正式来源",
             "论文禁区",
+            "Formal Paper Handoff",
+            "Validation PASS",
+            "FROZEN",
+        ),
+    )
+
+    pre_paper = _read(root / "templates" / "Pre_Paper_Brief模板.md")
+    _require_tokens(
+        errors,
+        "Pre-Paper Brief template",
+        pre_paper,
+        (
+            "Pre-Paper Brief",
+            "TECH_DIRECTION_STABLE",
+            "未冻结声明",
+            "已稳定的技术方向",
+            "图表与证据需求",
+            "待补与禁止定稿",
         ),
     )
 

@@ -1,4 +1,13 @@
-# Version 2.2.0 — Role Entry Navigation and Paper Framework
+# Version 2.2.1 — Role Entry Navigation and Paper Framework
+
+## v2.2.1 审查修订
+
+- 新增 `TECH_DIRECTION_STABLE` JIT Gate：只有 Question Contract、主模型方向、核心变量、目标与 hard constraints、information set、baseline/challenger、指标和验证方向稳定，且无结构性 Mathematical P0 时，才展开逐问题目化方法骨架；该 Gate 不等于 Mathematical PASS、Evidence PASS 或 Freeze。
+- 将论文交接拆为 `Pre-Paper Brief` 与 `Formal Paper Handoff`：前者只支持方法骨架和证据需求，后者在 Validation PASS 与 FROZEN 后承载正式数字、结果、优势、稳健性、推荐和摘要结论。
+- 将“显著提高精度”“避免陷入局部最优”等强句从表达素材移至高风险反例，避免先写结论、后找证据。
+- 本版本号预留给 PR #14 的 v2.2.0 之后；PR #14 未合并、rebase 与联合来源核验未完成前，本 PR 继续保持 Draft，不构成团队发布。
+
+## v2.2.0 原始提案
 
 ## v2.2.0 增量升级
 

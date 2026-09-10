@@ -1,4 +1,6 @@
-# Paper Handoff v2.1.1
+# Formal Paper Handoff v2.2
+
+仅在当前版本 `Validation PASS`、Evidence Gate 通过并进入 FROZEN 后填写。本模板承载正式数字与可定稿结论；不得用 `Pre-Paper Brief` 替代。
 
 **模块：**  
 **版本：**  
@@ -6,6 +8,8 @@
 **Technical PASS：**  
 **Mathematical PASS：**  
 **Evidence Gate：**
+
+**Freeze version / source：**
 
 ## 本问合同
 - 题目要求输出：

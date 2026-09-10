@@ -1,4 +1,4 @@
-# Role Entry / Paper Framework v2.2.0 — Draft Review
+# Role Entry / Paper Framework v2.2.1 — Draft Review
 
 ## Scope and authority
 
@@ -14,9 +14,9 @@ The existing shared core and role profiles already define responsibilities, but 
 
 ## Validation performed
 
-- `python3 -m unittest discover -s tests -v`: 36 tests passed, including the existing contract suite and six new navigation/release/behavior checks.
+- `python3 -m unittest discover -s tests -v`: 40 tests passed, including the existing contract suite and the new navigation, release, `TECH_DIRECTION_STABLE`, two-level handoff and role-entry boundary checks.
 - `python3 tools/validate_runtime_skill.py .`: PASS.
-- `python3 tools/build_runtime_skill.py`: PASS, 33 runtime files.
+- `python3 tools/build_runtime_skill.py`: PASS, 34 runtime files.
 - `python3 tools/validate_runtime_skill.py dist/cumcm-rigorous-workflow-runtime-lite`: PASS.
 - Skill Creator frontmatter validation on the built runtime: PASS.
 - `git diff --check`: PASS.
@@ -39,15 +39,24 @@ This is one bounded behavioral trial, not proof of general reliability or a subs
 
 ## Source limitation and remaining release gates
 
-The three project-mandated original archives could not be located in the current workspace or by exact and shortened Library title searches:
+The three project-mandated original archives could not be located in the PR author's current workspace or by exact and shortened Library title searches:
 
 - `write-update-math-modeling-paper-complete.zip`
 - `math-modeling-master-workflow-v2.2.0.zip`
 - `cumcm-rigorous-workflow-main (1).zip`
 
-The implementation was reviewed against the available canonical repository files and the user's visible, approved change requirements. No equivalence between those files and the three archives has been established. The archives' joint compliance check remains INCOMPLETE; the version number here does not identify the separate master-workflow archive.
+Two role reviews were received on 2026-09-10:
 
-Keep the PR in draft until the missing source check is resolved and the review ownership in `06_协作与交接/06_三GPT协作与Skill共同维护.md` is satisfied. FYQ reviews runtime/engineering; CYQ reviews paper/figure rules. Any cross-role interface concern also needs the relevant consumer's review. No approval or merge is recorded by this report.
+- FYQ technical review (`REQUEST_CHANGES / KEEP_DRAFT`), source ZIP SHA-256 `2143217b8f658ac923b08c9590583aa07c19037ceffeb3df4c3bc1f0ba2cf608`;
+- XXT joint PR #14/#15 review, source DOCX SHA-256 `fcc5a82daefe778e5bba75092f701adf67b1c8a2cd6f2ee89903dfe77eb955cc`.
+
+XXT's report states that it jointly checked the current PRs against all three archives and provides a high-level Gate crosswalk. This is evidence that the sources were reviewed by another role, but it does not include archive hashes, exact file readability records, or a complete source-diff/conflict disposition for the files changed by PR #15. Therefore `SOURCE_CONFORMANCE` advances from “no review evidence” to `PARTIAL / INCOMPLETE`, not PASS.
+
+The review-requested semantic patches are included in v2.2.1: `TECH_DIRECTION_STABLE`, separate `Pre-Paper Brief` and `Formal Paper Handoff`, and high-risk strong claims moved out of the expression library. These changes require a focused output/consumer re-review because the cross-role handoff interface changed.
+
+PR #14 remains unmerged. PR #15 reserves v2.2.1, stays Draft, and must be rebased onto the v2.2.0 main produced by PR #14 before release validation. Until then the current branch is not a deployable team release.
+
+Keep the PR in draft until source conformance, PR #14 integration, and the review ownership in `06_协作与交接/06_三GPT协作与Skill共同维护.md` are satisfied. FYQ reviews runtime/engineering; CYQ reviews paper/figure rules. The revised two-level handoff needs output-side and consumer-side confirmation. No approval or merge is recorded by this report.
 
 ## Migration
 

@@ -30,9 +30,11 @@ FYQ、XXT、CYQ 三套 GPT 共用同一个 `cumcm-rigorous-workflow`。团队正
 - 数学 Review 状态；
 - 若 P0，给出最小重开理由。
 
-### FYQ / XXT GPT → CYQ GPT：Paper Handoff
+### FYQ / XXT GPT → CYQ GPT：两级论文交接
 
-必须包含：
+达到 `TECH_DIRECTION_STABLE` 后先交 `Pre-Paper Brief`，至少包含：本问合同、稳定的技术方向、核心变量/目标/约束、information set、baseline/challenger、评价与验证方向、方法骨架和证据需求。它不承载正式数字或最终结论。
+
+当前版本 Validation PASS 并进入 FROZEN 后再交 `Formal Paper Handoff`，必须包含：
 - 本问合同；
 - 为什么选当前模型；
 - 核心数学；

@@ -1,4 +1,4 @@
-# 数模比赛全流程工作流 v2.2.0
+# 数模比赛全流程工作流 v2.2.1
 
 ## 从自己的角色开始
 
@@ -22,7 +22,7 @@ v2.1 的核心变化：
 - 通过 `ACTIVE_ROLE` 加载 FYQ / XXT / CYQ 不同 Profile；
 - GitHub main 作为 Skill、Workflow、Prompt、Template 的 Single Source of Truth；
 - 把华数杯 C 题三等奖评委反馈转化为 evidence Gate；
-- Paper Handoff 升级为可直接服务 CYQ 写作的正式接口；
+- Paper Handoff 升级为可直接服务 CYQ 写作的正式接口；v2.2.1 又增加前置的 Pre-Paper Brief；
 - Runtime Skill 与大型优秀论文 PDF/PNG corpus 解耦；
 - 三个人都可以通过 branch + PR 共同维护 Skill。
 
@@ -92,7 +92,7 @@ Profile 可以改变默认工作重点，不能覆盖 Shared Core。
 - Git、数据、接口、测试、版本；
 - Source of Truth、Freeze、clean replay；
 - 三层 Review 和 Missing Evidence；
-- 给 CYQ 的 Paper Handoff 初稿。
+- 给 CYQ 的 Pre-Paper Brief 与 Formal Paper Handoff。
 
 FYQ 统一集成主线，但不能越过 XXT 对数学目标、约束、单位和可行性的正式 Review。
 
@@ -119,7 +119,7 @@ FYQ 统一集成主线，但不能越过 XXT 对数学目标、约束、单位�
 - 结果解释、稳健性表达、摘要；
 - Figure Registry、图表叙事和版面；
 - AI 使用说明；
-- 将 Paper Handoff 转成自然、以结论为中心的论文初稿。
+- 将 Formal Paper Handoff 转成自然、以结论为中心的论文初稿，并依据 Pre-Paper Brief 提前搭方法骨架。
 
 证据不足时返回 `INCOMPLETE + 缺口清单`，不猜 Frozen 数字，不用通用算法介绍填空。
 
@@ -156,9 +156,10 @@ FYQ 统一集成主线，但不能越过 XXT 对数学目标、约束、单位�
 → Baseline
 → Targeted Upgrade
 → Cross-question Interface
+→ TECH_DIRECTION_STABLE / Pre-Paper Brief
 → Validation / Robustness
 → Freeze
-→ Paper Handoff
+→ Formal Paper Handoff
 → Paper / Figure QA
 → Final Submission Gate
 ```
@@ -195,13 +196,15 @@ FYQ 统一集成主线，但不能越过 XXT 对数学目标、约束、单位�
 
 ---
 
-## 7. Paper Handoff 与论文线
+## 7. 两级论文交接与论文线
 
-模型通过 Evidence Gate 后，技术数学线使用：
+某问达到 `TECH_DIRECTION_STABLE` 后，技术数学线先交 `Pre-Paper Brief`，让 CYQ 展开题目化方法骨架、公式/伪代码槽位和图表证据需求，但不写正式数字或效果结论。
+
+模型通过 Validation、Evidence Gate 并进入 FROZEN 后，再使用：
 
 `06_协作与交接/05_Paper_Handoff规范.md`
 
-向 CYQ 交付：
+向 CYQ 交付 `Formal Paper Handoff`：
 
 - 本问合同；
 - 本问中心逻辑；
@@ -277,7 +280,7 @@ Runtime Lite 包含 dispatcher、Shared Core、三个 Profile、必要 Gate、te
 - `cyq/<topic>`
 - `shared/<topic>`
 
-Shared Core 改动至少需要另一角色 Review。Paper Handoff 等跨角色接口至少由输出方和消费方各审一次。
+Shared Core 改动至少需要另一角色 Review。Pre-Paper Brief、Formal Paper Handoff 等跨角色接口至少由输出方和消费方各审一次。
 
 详细规则：
 

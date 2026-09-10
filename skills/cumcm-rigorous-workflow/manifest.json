@@ -1,6 +1,6 @@
 {
   "name": "cumcm-rigorous-workflow",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "roles": [
     "FYQ_TECHNICAL_ORCHESTRATOR",
     "XXT_MATHEMATICAL",
@@ -28,6 +28,7 @@
     "07_AI协作/04_平台无关Skill与Agent切换.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
+    "templates/Pre_Paper_Brief模板.md",
     "templates/任务单模板.md",
     "templates/Robustness_Plan模板.md",
     "templates/Figure_Registry模板.csv",
@@ -59,6 +60,7 @@
     "07_AI协作/04_平台无关Skill与Agent切换.md",
     "08_提交终检/01_FINAL_SUBMISSION_GATE.md",
     "templates/Paper_Handoff模板.md",
+    "templates/Pre_Paper_Brief模板.md",
     "templates/任务单模板.md",
     "templates/Robustness_Plan模板.md",
     "templates/Figure_Registry模板.csv",
