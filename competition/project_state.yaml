@@ -1,6 +1,6 @@
 competition:
-  name: ""
-  start_time: ""
+  name: "2026 CUMCM C"
+  start_time: "2026-09-10T18:00:00+08:00"
   deadline: ""
 
 roles:
@@ -15,26 +15,74 @@ roles:
     deputy: "FYQ"
 
 global:
-  current_phase: "P0_problem_reading_and_route_review"
-  route_review_completed: false
+  current_phase: "parallel_modeling_validation_and_paper"
+  route_review_completed: true
   interface_lock_target_hour: 10
   model_change_ban: false
-  paper_pipeline_started: false
+  paper_pipeline_started: true
   paper_locked: false
 
 agents:
   primary_coding_agent: ""
   secondary_coding_agent: ""
-  failover_tested: false
+  failover_tested: true
 
-# Add one mapping per actual subquestion or module. Owner and reviewers remain
-# blank until the first route review assigns them.
-modules: []
+modules:
+  - id: "Q1"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_reviewer: "CYQ"
+    state: "FROZEN"
+    technical_pass: true
+    mathematical_pass: true
+    evidence_gate: "PASS_WITH_LIMITATION"
+    result_frozen: true
+    paper_locked: false
+    source_of_truth: "CUMCM2026_C_Q1_FREEZE_R0_20260911"
+
+  - id: "Q2"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_reviewer: "CYQ"
+    state: "VALIDATING"
+    technical_core_status: "CORE_ENGINE_READY_FOR_FYQ_VALIDATION"
+    technical_pass: false
+    mathematical_pass: false
+    evidence_gate: "PENDING"
+    result_frozen: false
+    paper_locked: false
+    math_contract_id: "CUMCM2026_C_Q2_MATH_CONTRACT_R1"
+    open_blocker: "ONE_SLOT_DELAYED_ACTUAL reproduces S1_A_W_EXCEEDS_Q and requires XXT adjudication"
+
+  - id: "Q3"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_reviewer: "CYQ"
+    state: "BASELINE"
+    contract_preflight: "PASS_WITH_LIMITATION"
+    technical_pass: false
+    mathematical_pass: false
+    evidence_gate: "PENDING"
+    result_frozen: false
+    paper_locked: false
+    note: "0/6/12/18 rolling-design work may proceed; formal controller/result remain pending"
+
+  - id: "Q4"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_reviewer: "CYQ"
+    state: "BASELINE"
+    technical_pass: false
+    mathematical_pass: false
+    evidence_gate: "PENDING"
+    result_frozen: false
+    paper_locked: false
+    note: "dynamic-price causal interface and experiment pre-design may proceed; formal model/result remain pending"
 
 paper:
-  current_version: ""
+  current_version: "framework_in_progress"
   page_count: null
-  figure_registry_status: "IDEA"
+  figure_registry_status: "Q1_FROZEN_Q2_DRAFT_Q3_Q4_IDEA"
   abstract_status: "SKELETON"
 
 submission:
