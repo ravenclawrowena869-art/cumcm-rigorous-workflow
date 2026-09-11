@@ -1,6 +1,6 @@
 competition:
-  name: ""
-  start_time: ""
+  name: "2026 CUMCM C"
+  start_time: "2026-09-10T18:00:00+08:00"
   deadline: ""
 
 roles:
@@ -15,27 +15,86 @@ roles:
     deputy: "FYQ"
 
 global:
-  current_phase: "P0_problem_reading_and_route_review"
-  route_review_completed: false
+  current_phase: "P2_parallel_modeling_validation_and_paper"
+  route_review_completed: true
   interface_lock_target_hour: 10
   model_change_ban: false
-  paper_pipeline_started: false
+  paper_pipeline_started: true
   paper_locked: false
 
 agents:
-  primary_coding_agent: ""
-  secondary_coding_agent: ""
-  failover_tested: false
+  primary_coding_agent: "Codex"
+  secondary_coding_agent: "GPT execution window"
+  failover_tested: true
 
-# Add one mapping per actual subquestion or module. Owner and reviewers remain
-# blank until the first route review assigns them.
-modules: []
+modules:
+  - id: "Q1"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_owner: "CYQ"
+    current_gate: "G2_VALIDATION"
+    technical_pass: true
+    mathematical_pass: true
+    engineering_hold: true
+    evidence_sufficiency_pass: false
+    frozen: false
+    primary_model: "TWO_STAGE_CONTINUOUS_LP"
+    challenger_role: "MILP_STRUCTURAL_VALIDATION_ONLY"
+    result_template_status: "HOLD_PENDING_ENGINEERING_CLOSEOUT_READBACK"
+    current_task: "Q1_ENGINEERING_CLOSEOUT_R0"
+
+  - id: "Q2"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_owner: "CYQ"
+    current_gate: "G1_MODEL_SPEC"
+    forecast_layer_status: "PASS_WITH_DOWNSTREAM_GAPS"
+    january_bootstrap_status: "R14_CURRENT_IMPLEMENTATION_MATH_PASS"
+    full_causal_forecast_export_status: "NUMERIC_PASS_METADATA_HOLD"
+    mathematical_pass: false
+    frozen: false
+    current_task: "Q2_FORMAL_OPTIMIZATION_SPEC_R1"
+
+  - id: "Q3"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_owner: "CYQ"
+    current_gate: "ROUTE_STABLE_DETAIL_OPEN"
+    architecture: "0_6_12_18_ROLLING_REPLAN"
+    mathematical_pass: false
+    frozen: false
+    blockers:
+      - "hourly_forecast_to_10min_mapping"
+      - "adjustment_settlement_semantics"
+      - "full_rolling_replay"
+
+  - id: "Q4"
+    owner: "FYQ"
+    mathematical_reviewer: "XXT"
+    paper_owner: "CYQ"
+    current_gate: "ROUTE_STABLE_DETAIL_OPEN"
+    architecture: "CAUSAL_DYNAMIC_PRICE_POLICY_VS_ORACLE"
+    mathematical_pass: false
+    frozen: false
+    blockers:
+      - "q2_q3_contract_dependency"
+      - "intraday_price_reforecast_policy"
+      - "full_dynamic_price_replay"
 
 paper:
-  current_version: ""
+  current_version: "2026_CUMCM/论文/README.md"
   page_count: null
-  figure_registry_status: "IDEA"
+  figure_registry_status: "IN_PROGRESS"
   abstract_status: "SKELETON"
 
 submission:
   gate_passed: false
+
+controller_notes:
+  updated_at: "2026-09-11T09:48:00+08:00"
+  q1_freeze_forbidden_until:
+    - "engineering_closeout_pass"
+    - "official_result1_writer_and_independent_readback"
+    - "blind_red_team"
+    - "evidence_sufficiency_pass"
+  q2_formal_replay_not_started: true
