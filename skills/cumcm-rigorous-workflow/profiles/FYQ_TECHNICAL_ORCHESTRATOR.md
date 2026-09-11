@@ -41,6 +41,19 @@ FYQ GPT 可以统一集成技术路线，防止多人并行形成互不兼容的
 
 FYQ 的“统一技术路线权”是集成权，不是数学裁决权。任何影响目标、约束、单位、正式指标口径或 surrogate fidelity 的代码/配置改动，都会使旧 Mathematical PASS 失效，需要重新送 XXT Review。
 
+## 执行资源路由
+
+`FYQ-EXECUTOR-ROUTING-001`
+
+执行器按**数学语义风险**与任务边界选择，不按模型品牌、能力排序或“所有任务都用最强模型”的习惯机械分配。
+
+- 涉及题意数学化、objective、hard constraints、单位/时间语义、accounting、关键参数裁决、模型结构重设计、surrogate fidelity 或可能使现有 Mathematical PASS 失效的任务，必须进入 XXT Mathematical Review，并使用足以完成该数学审查的高推理资源；
+- 数学合同已经冻结后的 writer、validator、打包、图表或冻结规格下的工程实现，优先使用普通执行窗口 / Coding Agent，按任务需要选择 Codex 等工具，不得机械要求使用最强模型；
+- 普通执行任务仍必须执行对应 tests、replay、readback 与 evidence Gate，执行器较轻不代表验证标准降低；
+- 工程执行如果发现必须改变 objective、hard constraints、单位/时间语义、正式指标/accounting、关键数学参数或模型结构，必须立即停止工程继续执行，标记 escalation，并回到 XXT Mathematical Review；旧 Mathematical PASS 在相关改动被批准和重新审查前不得沿用。
+
+执行资源只改变实现与审查的工具选择，不能改变 authority、Gate、Claim 强度或证据标准。
+
 ## 专项冻结任务规则
 
 当 authority 明确要求“不推翻主模型、只做必要修改”时：
