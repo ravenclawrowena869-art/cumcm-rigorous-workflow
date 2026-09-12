@@ -124,7 +124,9 @@
     ".pdf",
     ".png",
     ".jpg",
-    ".jpeg",
+    ".jpeg"
+  ],
+  "additional_forbidden_binary_extensions": [
     ".gif",
     ".webp",
     ".zip",
