@@ -1,8 +1,8 @@
-# Version 2.2.0 — Multi-Agent Validation Hardening
+# Version 2.2.0 — Multi-Agent Validation + Code Execution Hardening
 
 ## v2.2.0 增量升级
 
-本次升级吸收外部数模自动化流水线中经过实践验证的**工程机制**，但不引入其特定模型、API、并发参数、评分阈值或科学 Gate 软放行规则。
+本次升级吸收外部数模自动化流水线中经过实践验证的**工程机制**，但不引入其特定模型、API、并发参数、评分阈值或科学 Gate 软放行规则；同时补齐代码执行链与 Runtime Lite 的工程闭环。
 
 - 新增 `07_AI协作/05_多Agent验证流水线与回流协议.md`：把多 Agent 定位为执行编排层，而不是新的科学裁决层；
 - 新增 `ORCH-STATE-001`：执行状态与科学验证状态分离，允许无依赖任务继续，但 FAIL 不得因重试/超时/预算耗尽自动转 PASS；
@@ -15,7 +15,12 @@
 - 新增返工台账、变化守卫、结构守卫、生产者—消费者契约核对与工作流 dry-run 场景；
 - 明确 `ORCH-NO-SOFTPASS-001`：红队未复算、hard constraint 未通过、关键指标不可追溯、Agent 失败或预算耗尽均不得自动科学放行；
 - 新增 `templates/红队独立复算报告模板.md` 与 `templates/结果换版影响清单模板.md`；
-- Runtime manifest / Source Index 同步纳入状态机、模型选择、独立验收、结果来源链、多 Agent 协议和新模板。
+- Runtime manifest / Source Index 同步纳入状态机、模型选择、独立验收、结果来源链、多 Agent 协议和新模板；
+- 新增 `03_建模与代码/06_代码执行与复现Gate.md`：冻结 Execution Contract，分离 solver/validator/export/plot，要求真实 smoke test、规模预算、时间因果审计、独立复算、官方输出 readback、clean replay 与换版影响传播；
+- Runtime Lite 改为代码执行自包含：加入 `README.md`、`VERSION.md`、MVP/实验循环/约束优先/敏感性、接口、冻结包、clean replay、AI/Codex 等运行时必需规则，消除“规则要求读取但 Runtime 未携带”的悬空引用；
+- Runtime builder 新增 `RUNTIME_BUILD_MANIFEST.json` 与 `SHA256SUMS.txt`，记录 source commit、Skill version、源 manifest SHA256、文件大小和文件哈希；
+- Runtime binary policy 扩展到常见图片、压缩包、Office、数组/列式数据文件，并增加单文件大小上限，避免把大型 corpus 或比赛数据误打进 Skill；
+- 新增 `tools/validate_code_execution_runtime.py` 与负面 contract tests：缺 required path、加入禁用二进制、篡改已封印文件时必须 FAIL；CI 同时验证 canonical repo 与 built Runtime Lite。
 
 ### 与既有严格规则的冲突处理
 
