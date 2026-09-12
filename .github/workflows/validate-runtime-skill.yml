@@ -25,19 +25,33 @@ jobs:
       - name: Validate canonical runtime contract
         run: python tools/validate_runtime_skill.py
 
+      - name: Validate canonical code execution contract
+        run: python tools/validate_code_execution_runtime.py
+
       - name: Build Runtime Lite
         run: python tools/build_runtime_skill.py
 
       - name: Validate built Runtime Lite
         run: python tools/validate_runtime_skill.py dist/cumcm-rigorous-workflow-runtime-lite
 
-      - name: Scan Runtime Lite for forbidden corpus binaries
+      - name: Validate built code execution closure
+        run: python tools/validate_code_execution_runtime.py dist/cumcm-rigorous-workflow-runtime-lite
+
+      - name: Verify Runtime Lite build seal
         run: |
           python - <<'PY'
+          import hashlib
           from pathlib import Path
           root = Path('dist/cumcm-rigorous-workflow-runtime-lite')
-          forbidden = {'.pdf', '.png', '.jpg', '.jpeg'}
-          bad = [str(p) for p in root.rglob('*') if p.is_file() and p.suffix.lower() in forbidden]
-          print(bad)
-          raise SystemExit(bool(bad))
+          seal = root / 'SHA256SUMS.txt'
+          assert seal.exists(), 'SHA256SUMS.txt missing'
+          for raw in seal.read_text(encoding='utf-8').splitlines():
+              if not raw.strip():
+                  continue
+              expected, rel = raw.split('  ', 1)
+              path = root / rel
+              assert path.exists(), rel
+              h = hashlib.sha256(path.read_bytes()).hexdigest()
+              assert h == expected, rel
+          print('PASS: runtime build seal')
           PY

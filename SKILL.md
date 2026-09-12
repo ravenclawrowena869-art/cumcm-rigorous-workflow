@@ -55,6 +55,7 @@ description: Shared three-GPT evidence-driven workflow for CUMCM and similar mat
 
 - 建模、实验、比较、敏感性、稳健性、不可行诊断：读取 `04_验收冻结/05_模型证据充分性Gate.md`。
 - **模型选择、baseline/challenger 比较、候选路线裁决：同时读取 `02_开赛与拆题/02_模型选择协议.md`；存在多条合理路线时可触发统一口径的小样锦标赛。**
+- **代码实现、修改 runner/solver、实际跑模型、数据处理、结果导出、图表数据生成或 clean replay：必须读取 `03_建模与代码/06_代码执行与复现Gate.md`；使用 Coding Agent 时同时读取 `07_AI协作/01_AI_Codex工作协议.md`。**
 - **独立验收、红队复算、核心数字复核：读取 `04_验收冻结/01_独立验收协议.md`；头条数字优先使用信息隔离式独立复算。**
 - **参数选取、阈值/权重/步长/每轮调整比例、Top-K、平滑系数、风险参数等调参任务：除 Evidence Gate 外，必须同时读取 `03_建模与代码/05_参数选择协议.md`。**
 - **多 Agent 自动化、子 Agent 编排、checkpoint/resume、自动返工、审稿回流、换版传播或工作流 dry-run：读取 `07_AI协作/05_多Agent验证流水线与回流协议.md`；并按需联读 `00_总览/03_状态机与冻结规则.md`、`04_验收冻结/01_独立验收协议.md`、`04_验收冻结/04_结果来源链.md`。**
@@ -120,7 +121,9 @@ Hugging Face 的 Model Card、Dataset Card、Space、下载量、趋势或第三
 
 ## 9. Runtime Lite
 
-日常 Skill 不携带大型论文 PDF/PNG。运行包只保留 dispatcher、Shared Core、三个 Profile、必要 workflow、templates、source index 与 provenance。全文证据按 `skills/cumcm-rigorous-workflow/references/SOURCE_INDEX.md` 检索。
+Runtime Lite 必须是**自包含的运行时规则包**：dispatcher、`README.md`、版本、Shared Core、三个 Profile、代码执行/验收/冻结所需 canonical workflow、templates、source index 与 provenance 均应真实存在。不得出现“SKILL / AGENTS 要求必须读取某规则，但 Runtime 没有携带该文件”的悬空引用。
+
+Runtime 不携带大型论文 corpus、比赛数据包或办公文档/图片等二进制资产。构建时必须按 manifest 执行扩展名与单文件大小限制，并生成 `RUNTIME_BUILD_MANIFEST.json`（source commit、版本、文件哈希）和 `SHA256SUMS.txt`。全文证据按 `skills/cumcm-rigorous-workflow/references/SOURCE_INDEX.md` 检索。
 
 ## Completion
 
