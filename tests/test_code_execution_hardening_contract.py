@@ -67,7 +67,9 @@ class CodeExecutionHardeningTests(unittest.TestCase):
         ):
             self.assertIn(rel, required)
         self.assertGreater(manifest.get("max_runtime_file_bytes", 0), 0)
-        forbidden = set(manifest["forbidden_binary_extensions"])
+        forbidden = set(manifest["forbidden_binary_extensions"]) | set(
+            manifest.get("additional_forbidden_binary_extensions", [])
+        )
         for suffix in (".pdf", ".zip", ".docx", ".pptx", ".xlsx", ".webp"):
             self.assertIn(suffix, forbidden)
 
@@ -102,10 +104,8 @@ class CodeExecutionHardeningTests(unittest.TestCase):
             path = target / "README.md"
             path.write_text(path.read_text(encoding="utf-8") + "\ncorruption\n", encoding="utf-8")
             errors = VALIDATOR.validate(target)
-            self.assertTrue(
-                any("sha256 mismatch: README.md" in x.lower() for x in errors),
-                errors,
-            )
+            lowered = [x.lower() for x in errors]
+            self.assertTrue(any("sha256 mismatch: readme.md" in x for x in lowered), errors)
 
 
 if __name__ == "__main__":
