@@ -69,7 +69,11 @@ def validate(root: Path) -> list[str]:
 
     include_paths = [str(x) for x in manifest.get("runtime_include", [])]
     required_paths = [str(x) for x in manifest.get("runtime_required_paths", [])]
-    forbidden = {str(x).lower() for x in manifest.get("forbidden_binary_extensions", [])}
+    forbidden = {
+        str(x).lower()
+        for key in ("forbidden_binary_extensions", "additional_forbidden_binary_extensions")
+        for x in manifest.get(key, [])
+    }
     max_file_bytes = int(manifest.get("max_runtime_file_bytes", 0) or 0)
 
     if not required_paths:
