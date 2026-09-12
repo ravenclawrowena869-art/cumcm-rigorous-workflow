@@ -51,7 +51,11 @@ def build(root: Path, target: Path) -> Path:
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     include_paths = manifest.get("runtime_include", [])
-    forbidden = {x.lower() for x in manifest.get("forbidden_binary_extensions", [])}
+    forbidden = {
+        str(x).lower()
+        for key in ("forbidden_binary_extensions", "additional_forbidden_binary_extensions")
+        for x in manifest.get(key, [])
+    }
     max_file_bytes = int(manifest.get("max_runtime_file_bytes", 0) or 0)
     if not include_paths:
         raise ValueError("manifest runtime_include is empty")
