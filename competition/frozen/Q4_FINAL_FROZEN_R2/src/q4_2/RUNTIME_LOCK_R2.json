@@ -1,0 +1,15 @@
+{
+  "formal_numeric_source": "Q4_2_Q80P2_EXECUTION_R1",
+  "formal_runtime": {
+    "python": "3.12",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "statsmodels": "0.14.6",
+    "openpyxl": "3.1.5"
+  },
+  "rule": "Formal annual numbers are the R1 Python-3.12 replay independently audited by CYQ. Solver-generated annual outputs from the Codex R2 Python-3.14 environment are environment-drift diagnostics only and are excluded.",
+  "codex_r2_environment_drift_detected": true,
+  "codex_r2_drift_causal_yuan": 4800.351603958756,
+  "codex_r2_drift_oracle_yuan": 2802.865660622716
+}
