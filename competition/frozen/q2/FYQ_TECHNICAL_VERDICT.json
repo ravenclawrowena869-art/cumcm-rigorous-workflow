@@ -1,0 +1,39 @@
+{
+  "verdict": "PASS WITH NON-MODEL PATCH",
+  "scope": "Independent fresh-unzip Q2 technical reproduction and Technical Review only",
+  "model_semantics_changed": false,
+  "model_reopen_required": false,
+  "controller_promotion_executed": false,
+  "promotion_ready_immediately": false,
+  "reason": "Primary Q80_P2 replay reproduced byte-identically and independent validator/readback pass after diagnostic completion, but packaged RUN.md cannot complete from a fresh unzip as written and workbook tooling is not fully declared/portable.",
+  "fresh_package": {
+    "zip_sha256": "f4328980d4ee20fad9bfca6c7e6705460fa1849b1ef3a7f691a471ffcd0d81ea",
+    "zip_crc": "PASS",
+    "internal_sha256sums": "PASS"
+  },
+  "checks": {
+    "days": 334,
+    "slots": 48096,
+    "forecast_sha256": "c91583954fbf3e9d388b08d82fc8e67c9a12e3684d22e38a9f1db7ce73b65ac0",
+    "forecast_expected_sha256": "c91583954fbf3e9d388b08d82fc8e67c9a12e3684d22e38a9f1db7ce73b65ac0",
+    "q80_margin_sha256": "b07c208bdd4537c3f328d650f5a8483accff775d5fd8af690fb70f3d00530cbf",
+    "q80_margin_matches_frozen": true,
+    "rebuilt_slot_replay_sha256": "73fec2334918f56fcf281716396f9c1c99b6eb6606779fa10f5b053c43c4951f",
+    "expected_slot_replay_sha256": "73fec2334918f56fcf281716396f9c1c99b6eb6606779fa10f5b053c43c4951f",
+    "slot_replay_byte_identity": true,
+    "annual_validator_verdict": "PASS_FOR_XXT_REVIEW",
+    "q80_independent_recompute_pass": true,
+    "p2_all_applicable_hard_pass": true,
+    "p2_failed_checks": [],
+    "max_balance_abs_kWh": 9.094947017729282e-13,
+    "max_soc_recursion_abs_kWh": 1.659827830735594e-11,
+    "cross_day_bridge_mismatch_count": 0,
+    "recomputed_total_cost_yuan": 18477285.370523974,
+    "year_end_soc_kWh": 1200.000000000011,
+    "fallback_count": 0,
+    "result2_readback_verdict": "PASS",
+    "result2_failed_checks": [],
+    "handoff_terminal_contract": "FREE_BOUNDED_YEAR_END",
+    "handoff_actual_year_end_soc_kWh": 1200.0
+  }
+}

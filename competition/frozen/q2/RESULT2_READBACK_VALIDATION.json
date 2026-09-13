@@ -1,0 +1,56 @@
+{
+  "verdict": "PASS",
+  "checks": {
+    "sheet_names": true,
+    "sheet1_header": true,
+    "sheet1_334x144": true,
+    "sheet1_dates": true,
+    "sheet1_slot_identity": true,
+    "sheet1_daily_totals": true,
+    "annual_normal_energy": true,
+    "annual_normal_cost": true,
+    "sheet2_rows": true,
+    "sheet2_period_identity": true,
+    "sheet2_charge_discharge_identity": true,
+    "sheet2_soc_identity": true,
+    "sheet3_row_count": true,
+    "sheet3_interval_identity": true,
+    "annual_emergency_energy": true,
+    "annual_emergency_cost_recompute": true,
+    "required_four_dates": true,
+    "annual_total_cost": true
+  },
+  "details": {
+    "sheet1_max_slot_abs_diff_kWh": 0.0,
+    "sheet1_max_daily_energy_abs_diff_kWh": 0.0,
+    "sheet1_max_daily_cost_abs_diff_yuan": 0.0,
+    "workbook_normal_purchase_kWh": 21873008.823406965,
+    "workbook_normal_cost_yuan": 13333405.79282625,
+    "sheet2_max_charge_discharge_abs_diff_kWh": 0.0,
+    "sheet2_max_soc_abs_diff_kWh": 0.0,
+    "sheet3_group_count": 1623,
+    "sheet3_max_emergency_abs_diff_kWh": 0.0,
+    "workbook_emergency_kWh": 1063979.2772653005,
+    "recomputed_emergency_cost_yuan": 5143879.5776977325,
+    "emergency_cost_schema_note": "Official result2 Sheet3 stores interval and energy only, not price/cost. Emergency cost is independently recomputed from the same clean slot replay; Sheet3 interval/energy identity links workbook back to that replay.",
+    "required_dates": {
+      "2025-03-20": {
+        "max_plan_abs_diff_kWh": 0.0,
+        "max_block_cd_abs_diff_kWh": 0.0
+      },
+      "2025-06-21": {
+        "max_plan_abs_diff_kWh": 0.0,
+        "max_block_cd_abs_diff_kWh": 0.0
+      },
+      "2025-09-23": {
+        "max_plan_abs_diff_kWh": 0.0,
+        "max_block_cd_abs_diff_kWh": 0.0
+      },
+      "2025-12-21": {
+        "max_plan_abs_diff_kWh": 0.0,
+        "max_block_cd_abs_diff_kWh": 0.0
+      }
+    },
+    "workbook_linked_total_cost_yuan": 18477285.37052398
+  }
+}

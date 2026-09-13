@@ -1,0 +1,13 @@
+{
+  "file": "result2.xlsx",
+  "source": "Q2_FINAL_FROZEN_R1/04_RESULT2/result2.xlsx",
+  "sha256": "6b1f9f7dcd3d58801ed1d6b68be22d7c0a311e8a6f67ed74cb53a310d77e3c1a",
+  "sheets": {
+    "计划购电量": "A1:EQ335",
+    "充放电量": "A1:F2005",
+    "紧急购电量": "A1:C1624"
+  },
+  "readback_verdict": "PASS",
+  "days": 334,
+  "slots": 48096
+}
