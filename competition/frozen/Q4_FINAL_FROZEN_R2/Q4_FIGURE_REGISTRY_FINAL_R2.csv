@@ -1,0 +1,14 @@
+﻿branch,figure_id,title,category,status,path,note
+Q4-2,F-Q4-03,波动电价下Q2购电—储能运行,C,READY_CANDIDATE,paper_handoff/figures/Q4-2/F-Q4-03,CYQ Q4-2 Phase B
+Q4-2,F-Q4-04,固定电价 vs 波动电价 Q2 结果接口,D,READY_CANDIDATE,paper_handoff/figures/Q4-2/F-Q4-04,Environment comparison; not controller superiority
+Q4-2,F-Q4-07,电价—购电—SOC联动典型日,C/D,READY_RECOMMENDED,paper_handoff/figures/Q4-2/F-Q4-07,Objective typical-day selection
+Q4-2,F-Q4-09a,Q4-2月度完美价格信息价值,D,READY_RECOMMENDED,paper_handoff/figures/Q4-2/F-Q4-09a_information_value,Oracle diagnostic only
+Q4-2,F-Q4-09b,Q2固定价 vs Q4-2动态价月度费用接口,D,READY_CANDIDATE,paper_handoff/figures/Q4-2/F-Q4-09b_fixed_dynamic,Environment interface
+Q4-3,F-Q4-05a,动态电价下Q3滚动运行,C,READY_RECOMMENDED,paper_handoff/figures/Q4-3/F-Q4-05a,Max information-gap date selected objectively
+Q4-3,F-Q4-05b,06/12/18计划调整曲线,C/D,READY_RECOMMENDED,paper_handoff/figures/Q4-3/F-Q4-05b,Signed stage deltas
+Q4-3,F-Q4-07a,动态电价—购电联动典型日,C/D,READY_RECOMMENDED,paper_handoff/figures/Q4-3/F-Q4-07a,High-price-tail exposure date selected objectively
+Q4-3,F-Q4-07b,动态电价—SOC联动典型日,C/D,READY_RECOMMENDED,paper_handoff/figures/Q4-3/F-Q4-07b,Companion to F-Q4-07a
+Q4-3,F-Q4-09a,Q4-3月度完美价格信息价值,D,READY_RECOMMENDED,paper_handoff/figures/Q4-3/F-Q4-09a_information_value,Oracle diagnostic only
+Q4-3,F-Q4-09b,Q3固定价 vs Q4-3动态价月度费用接口,D,READY_CANDIDATE,paper_handoff/figures/Q4-3/F-Q4-09b_fixed_dynamic,Environment interface
+Q4,F-Q4-06,固定/动态电价下S0/S1/S2/S3边际收益,D,NOT_RUN_NOT_REQUIRED,,Would require additional dynamic-price strategy family reruns; not justified by current freeze objective.
+Q4,F-Q4-10/11/12,额外敏感性/响应面,E,NOT_RUN_NOT_REQUIRED,,No evidence-based trigger; model-selection stop rule prevents mechanical extra runs.

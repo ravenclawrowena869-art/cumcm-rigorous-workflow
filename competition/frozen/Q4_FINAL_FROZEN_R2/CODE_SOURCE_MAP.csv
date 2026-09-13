@@ -1,0 +1,25 @@
+repo_path,source_package,source_path,role
+src/q4_2/compare_q4_2.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/compare_q4_2.py,Q4-2 comparison
+src/q4_2/generate_result4_2.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/generate_result4_2.py,Q4-2 workbook export
+src/q4_2/q4_2_runner.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/q4_2_runner.py,Q4-2 formal runner
+src/q4_2/q4_price_provider.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/q4_price_provider.py,price information contract
+src/q4_2/validate_q4_2.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/validate_q4_2.py,Q4-2 validator
+src/q4_2/validate_result4_2_readback.py,Q4_XXT_R2_FORMAT_FIXED.zip,Q4_XXT_R2_FORMAT_FIXED/src/validate_result4_2_readback.py,Q4-2 workbook readback
+src/q4_3/q4_price_provider.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q4_price_provider.py,price information contract
+src/q4_3/q4_engine.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q4_engine.py,Q4-3 rolling engine
+src/q4_3/run_q4_3.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/run_q4_3.py,Q4-3 formal runner
+src/q4_3/run_q4_3_chunk.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/run_q4_3_chunk.py,long-run chunk runner
+src/q4_3/reproduce_feb1.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/reproduce_feb1.py,Q3 anchor replay
+src/q4_3/replay_metadata_audit.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/replay_metadata_audit.py,replay metadata audit
+src/q4_3/diagnose_tertiary_fallbacks.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/diagnose_tertiary_fallbacks.py,numerical fallback diagnostic
+src/q4_3/test_price_provider.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/test_price_provider.py,price-provider test
+src/q4_3/q3/__init__.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/__init__.py,Q3 inherited frozen dependency
+src/q4_3/q3/common.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/common.py,Q3 inherited frozen dependency
+src/q4_3/q3/data.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/data.py,Q3 inherited frozen dependency
+src/q4_3/q3/annual_runner.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/annual_runner.py,Q3 inherited frozen dependency
+src/q4_3/q3/annual_validator.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/annual_validator.py,Q3 inherited frozen dependency
+src/q4_3/q3/engine.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/engine.py,Q3 inherited frozen dependency
+src/q4_3/q3/formal_lp.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/formal_lp.py,Q3 inherited frozen dependency
+src/q4_3/q3/interpolation.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/interpolation.py,Q3 inherited frozen dependency
+src/q4_3/q3/ledger.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/ledger.py,Q3 inherited frozen dependency
+src/q4_3/q3/validator.py,Q4_FYQ_FEEDBACK_R2_FIXED.zip,Q4_FYQ_FEEDBACK_R2_FIXED/src/q3/validator.py,Q3 inherited frozen dependency

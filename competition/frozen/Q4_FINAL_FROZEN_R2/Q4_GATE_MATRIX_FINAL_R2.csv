@@ -1,0 +1,12 @@
+﻿gate,name,status,evidence_or_note
+0,Rule Gate,PASS,Inherited official problem/rule contract; no conflicting external rule introduced.
+1,Contract Gate,PASS,Dual decision/settlement price contract; frozen Q2/Q3 inheritance; result interfaces locked.
+2,Diagnosis Gate,PASS,Simple LAG7 baseline plus Oracle diagnostic; complex price models explicitly not promoted without evidence.
+3,Data Gate,PASS,"Attachment4 identity/coverage, known_at, stage price causality and workbook source data audited."
+4,Mathematical Gate,PASS,"Q4-2/Q4-3 objectives, settlement and storage constraints inherited and independently recomputed."
+5,Model Selection Gate,PASS_STOP_EXPANSION,Both Oracle gaps <0.6%; price-model upgrade trigger not met.
+6,Code/Numerical Gate,PASS_WITH_NON_MODEL_PATCH_RESOLVED,Q4-2 runtime lock/reconciliation; Q4-3 clean replay + numerical tie-break diagnostics; full workbook readbacks pass.
+7,Claim-Evidence Gate,PASS,All formal claims in Q4_CLAIM_EVIDENCE_FINAL_R2 have explicit evidence/scope.
+8,Paper/Figure Gate (Q4 scope),PASS,"Q4-2 + Q4-3 candidate figure pools, number registry, argument map and paper handoff complete."
+9,Handoff/Freeze Gate,PASS,"Inputs/source packages, formal workbooks, validators, hashes, risks, status and paper interfaces bundled."
+10,Submission Gate (whole paper),DEFERRED,Requires final full-paper formatting/anonymity/AI statement/submission checks; not a blocker to Q4 result freeze.
