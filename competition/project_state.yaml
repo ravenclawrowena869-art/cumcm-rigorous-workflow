@@ -1,5 +1,5 @@
 competition:
-  name: ""
+  name: "CUMCM2026 C题"
   start_time: ""
   deadline: ""
 
@@ -14,28 +14,55 @@ roles:
     primary: "XXT"
     deputy: "FYQ"
 
+agent_bindings:
+  FYQ:
+    active_role: FYQ_TECHNICAL_ORCHESTRATOR
+  XXT:
+    active_role: XXT_MATHEMATICAL
+  CYQ:
+    active_role: CYQ_PAPER
+
 global:
-  current_phase: "P0_problem_reading_and_route_review"
-  route_review_completed: false
+  current_phase: "P6_Q4_FINAL_FROZEN_PAPER_INTEGRATION"
+  route_review_completed: true
   interface_lock_target_hour: 10
-  model_change_ban: false
-  paper_pipeline_started: false
+  model_change_ban: true
+  paper_pipeline_started: true
   paper_locked: false
+  authoritative_source_of_truth: "competition/frozen/Q4_FINAL_FROZEN_R2/"
+  authoritative_handoff: "competition/docs/paper_handoff/Q4_FINAL_FROZEN_R2/Q4_PAPER_HANDOFF_R2.md"
 
 agents:
   primary_coding_agent: ""
   secondary_coding_agent: ""
   failover_tested: false
 
-# Add one mapping per actual subquestion or module. Owner and reviewers remain
-# blank until the first route review assigns them.
-modules: []
+modules:
+  q4:
+    owner: "FYQ"
+    technical_reviewer: "FYQ"
+    mathematical_reviewer: "XXT"
+    state: "FROZEN"
+    version: "Q4_FINAL_FROZEN_R2"
+    source_of_truth: "competition/frozen/Q4_FINAL_FROZEN_R2/"
+    authoritative_handoff: "competition/docs/paper_handoff/Q4_FINAL_FROZEN_R2/Q4_PAPER_HANDOFF_R2.md"
+    evidence_gate_status: "PASS"
+    mathematical_review_status: "PASS"
+    mathematical_review_artifact: "competition/frozen/Q4_FINAL_FROZEN_R2/Q4_FINAL_FREEZE_DECISION_R2.md"
+    mathematical_review_commit: ""
+    mathematical_veto_clear: true
+    dynamic_constraint_replay_status: "PASS"
+    surrogate_replay_status: "NOT_APPLICABLE"
+    interface_version: "Q4_PRICE_CONTRACT_R1"
+    blocked_by: []
 
 paper:
   current_version: ""
   page_count: null
-  figure_registry_status: "IDEA"
+  figure_registry_status: "Q4_FINAL_FROZEN_R2_READY"
   abstract_status: "SKELETON"
+  paper_handoff_status: "Q4_FINAL_FROZEN_R2_READY"
+  evidence_gap_log: ""
 
 submission:
   gate_passed: false

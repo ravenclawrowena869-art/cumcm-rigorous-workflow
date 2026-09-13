@@ -1,0 +1,9 @@
+﻿claim_id,claim,status,evidence,scope_limit
+Q4-C1,LAG7 is adequate as the primary causal price baseline for the frozen Q4 controllers,SUPPORTED,Q4-2 Oracle gap 0.537214%; Q4-3 Oracle gap 0.488801%,Only under the frozen controller/data/settlement contract; not universal optimality.
+Q4-C2,Q4-2 formal causal result is valid,SUPPORTED,CYQ independent accounting + hard Gate + full workbook readback + XXT runtime reconciliation,Formal numerical source is runtime-locked R1.
+Q4-C3,Q4-3 formal causal result is valid,SUPPORTED,Independent R2 accounting + hard Gate + exact lambda identity + full workbook readback,Oracle remains diagnostic only.
+Q4-C4,Perfect future-price information has limited annual value under both frozen controllers,SUPPORTED,Q4-2 gap 105150.69 yuan (0.5372%); Q4-3 gap 77551.51 yuan (0.4888%),Localized high-price-tail effects may be larger than the annual net gap.
+Q4-C5,A more complex causal price model is necessary,NOT_SUPPORTED_FOR_UPGRADE,Both annual Oracle gaps <0.6%; no validated ranking instability,Do not claim complex models are useless outside this setting.
+Q4-C6,Q4-3 causal has lower annual cost than Q4-2 causal under the same LAG7 price baseline,SUPPORTED,19573328.55 vs 15865665.80; Q4-3 lower by 3707662.75 yuan (18.9424%),"Interpret as value of richer intraday PV information + rolling adjustment rights, not pure algorithm superiority."
+Q4-C7,Q4-3 reduces emergency-purchase burden relative to Q4-2 under the same causal price baseline,SUPPORTED,Emergency cost lower by 3195993.88 yuan (56.7583%); energy lower by 502637.42 kWh (47.7816%),Same information/action-set caveat as Q4-C6.
+Q4-C8,Dynamic-price Q4-3 costs more than fixed-price Q3 B1B,SUPPORTED_AS_ENVIRONMENT_INTERFACE,15052617.20 vs 15865665.80; +813048.60 yuan,Different price environments; not controller superiority/deterioration.

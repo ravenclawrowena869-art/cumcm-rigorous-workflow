@@ -1,0 +1,14 @@
+{
+  "schema": "Q4_FINAL_FROZEN_STATUS_R2_V1",
+  "status": "Q4_FINAL_FROZEN",
+  "freeze_id": "Q4_FINAL_FROZEN_R2",
+  "freeze_date": "2026-09-13",
+  "formal_period": {"start": "2025-02-01", "end": "2025-12-31", "days": 334, "slots_per_day": 144},
+  "price_baseline": "CAUSAL_PRICE_LAG7_R0",
+  "oracle_status": "DIAGNOSTIC_ONLY",
+  "q4_2": {"controller": "Q80_P2", "formal_cost_yuan": 19573328.548727922, "normal_cost_yuan": 13942442.588470452, "emergency_cost_yuan": 5630885.96025747, "emergency_energy_kwh": 1051947.2725126084, "terminal_soc_kwh": 1200.0, "oracle_cost_yuan": 19468177.855644293, "oracle_gap_yuan": 105150.69308362901, "oracle_gap_pct_of_causal": 0.5372141627411797, "hard_gate": "PASS", "price_leakage_count": 0},
+  "q4_3": {"controller": "B1B_PRIMARY_L1_MAE_W28_H14", "formal_cost_yuan": 15865665.795889169, "base_cost_yuan": 13050650.153093494, "adjustment_cost_yuan": 380123.5668109117, "emergency_cost_yuan": 2434892.075984764, "emergency_energy_kwh": 549309.8552363036, "terminal_soc_kwh": 1290.6538318518542, "oracle_cost_yuan": 15788114.285712428, "oracle_gap_yuan": 77551.51017674059, "oracle_gap_pct_of_causal": 0.48880085572478377, "hard_gate": "PASS", "price_leakage_count": 0, "lambda_identity": "PASS"},
+  "formal_comparison": {"q4_3_saving_vs_q4_2_yuan": 3707662.752838753, "q4_3_cost_reduction_vs_q4_2_pct": 18.94242332676583, "emergency_cost_reduction_yuan": 3195993.8842727058, "emergency_cost_reduction_pct": 56.75827759308005, "emergency_energy_reduction_kwh": 502637.4172763048, "emergency_energy_reduction_pct": 47.78161704585629, "interpretation": "Value of additional intraday PV information plus rolling adjustment rights under the same causal LAG7 price-information baseline; not a pure algorithm-only comparison."},
+  "model_selection": {"price_model_upgrade": "STOP_EXPANSION", "reason": "Both perfect-future-price Oracle gaps are below 0.6% of causal annual cost; no validated evidence justifies a more complex causal price model."},
+  "gates": {"rule_contract_data_math": "PASS", "model_selection": "PASS_STOP_EXPANSION", "code_numerical": "PASS_WITH_NON_MODEL_PATCH_RESOLVED", "claim_evidence": "PASS", "q4_paper_figure_integration": "PASS", "handoff_freeze": "PASS", "whole_paper_submission_gate": "DEFERRED_TO_FULL_PAPER"}
+}
