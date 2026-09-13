@@ -1,0 +1,18 @@
+﻿section,claim_id,metric_name,value,unit,source_file,source_locator,freeze_version,checked_by
+Q4,Q4-C2,Q4-2 formal total cost,19573328.548727922,yuan,source_packages/Q4_XXT_R2_FORMAT_FIXED.zip,results/causal/annual_summary.json:realized_total_cost_yuan,Q4_FINAL_FROZEN_R2,Master+CYQ
+Q4,Q4-C2,Q4-2 normal purchase cost,13942442.588470452,yuan,source_packages/Q4_XXT_R2_FORMAT_FIXED.zip,results/causal/annual_summary.json:normal_cost_yuan,Q4_FINAL_FROZEN_R2,Master+CYQ
+Q4,Q4-C2,Q4-2 emergency cost,5630885.96025747,yuan,source_packages/Q4_XXT_R2_FORMAT_FIXED.zip,results/causal/annual_summary.json:emergency_cost_yuan,Q4_FINAL_FROZEN_R2,Master+CYQ
+Q4,Q4-C2,Q4-2 emergency energy,1051947.2725126084,kWh,source_packages/Q4_XXT_R2_FORMAT_FIXED.zip,results/causal/annual_summary.json:emergency_kWh,Q4_FINAL_FROZEN_R2,Master+CYQ
+Q4,Q4-C4,Q4-2 Oracle gap,105150.69308362901,yuan,source_packages/Q4_CYQ_PHASE_B_Q4-2_AUDIT_R2.zip,Q4_2_INDEPENDENT_ACCOUNTING.json:causal_minus_oracle_gap_yuan,Q4_FINAL_FROZEN_R2,CYQ
+Q4,Q4-C4,Q4-2 Oracle gap percent,0.5372141627411797,percent causal cost,source_packages/Q4_CYQ_PHASE_B_Q4-2_AUDIT_R2.zip,Q4_2_INDEPENDENT_ACCOUNTING.json:causal_minus_oracle_gap_pct_of_causal,Q4_FINAL_FROZEN_R2,CYQ
+Q4,Q4-C3,Q4-3 formal total cost,15865665.795889169,yuan,source_packages/Q4_FYQ_FEEDBACK_R2_FIXED.zip,results/causal/annual.json:total_cost_yuan,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C3,Q4-3 base cost,13050650.153093494,yuan,source_packages/Q4_FYQ_FEEDBACK_R2_FIXED.zip,results/causal/annual.json:base_cost_yuan,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C3,Q4-3 adjustment cost,380123.5668109117,yuan,source_packages/Q4_FYQ_FEEDBACK_R2_FIXED.zip,results/causal/annual.json:adjustment_cost_yuan,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C3,Q4-3 emergency cost,2434892.075984764,yuan,source_packages/Q4_FYQ_FEEDBACK_R2_FIXED.zip,results/causal/annual.json:emergency_cost_yuan,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C3,Q4-3 emergency energy,549309.8552363036,kWh,source_packages/Q4_FYQ_FEEDBACK_R2_FIXED.zip,results/causal/annual.json:emergency_energy_kwh,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C4,Q4-3 Oracle gap,77551.51017674059,yuan,source_packages/Q4_CYQ_PHASE_B_Q4-3_AUDIT_R2.zip,Q4_3_INDEPENDENT_ACCOUNTING.json:comparison.causal_minus_oracle_yuan,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C4,Q4-3 Oracle gap percent,0.48880085572478377,percent causal cost,source_packages/Q4_CYQ_PHASE_B_Q4-3_AUDIT_R2.zip,Q4_3_INDEPENDENT_ACCOUNTING.json:comparison.gap_pct_of_causal,Q4_FINAL_FROZEN_R2,Master independent audit
+Q4,Q4-C6,Q4-3 saving vs Q4-2,3707662.752838753,yuan,freeze/Q4_FINAL_FROZEN_STATUS_R2.json,formal_comparison.q4_3_saving_vs_q4_2_yuan,Q4_FINAL_FROZEN_R2,Master
+Q4,Q4-C6,Q4-3 cost reduction vs Q4-2,18.94242332676583,percent Q4-2,freeze/Q4_FINAL_FROZEN_STATUS_R2.json,formal_comparison.q4_3_cost_reduction_vs_q4_2_pct,Q4_FINAL_FROZEN_R2,Master
+Q4,Q4-C7,Emergency cost reduction Q4-3 vs Q4-2,3195993.8842727058,yuan,freeze/Q4_FINAL_FROZEN_STATUS_R2.json,formal_comparison.emergency_cost_reduction_yuan,Q4_FINAL_FROZEN_R2,Master
+Q4,Q4-C7,Emergency energy reduction Q4-3 vs Q4-2,502637.4172763048,kWh,freeze/Q4_FINAL_FROZEN_STATUS_R2.json,formal_comparison.emergency_energy_reduction_kwh,Q4_FINAL_FROZEN_R2,Master
